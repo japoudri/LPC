@@ -253,6 +253,34 @@
       color: var(--accent);
     }
 
+    .upload-zone-action {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .upload-zone-sub {
+      font-size: 0.8125rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .hint-vidcast a {
+      color: var(--cisco-blue);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .hint-vidcast a:hover {
+      color: var(--cisco-blue-dark);
+    }
+
     .filter-block label {
       display: block;
       font-size: 0.8rem;
@@ -630,22 +658,20 @@
       color: var(--text-muted);
     }
 
-    /* No inner box — only the outer landing-lpc-block frame; upload is plain clickable text */
     .landing-lpc-block .upload-zone {
       margin-top: 0.25rem;
-      padding: 0.35rem 0 0.65rem;
-      border: none;
-      border-radius: 0;
-      background: transparent;
+      padding: 1rem 1rem 0.85rem;
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      background: color-mix(in srgb, var(--bg-sidebar) 65%, var(--bg-elevated));
       box-shadow: none;
       text-align: left;
     }
 
     .landing-lpc-block .upload-zone:hover,
     .landing-lpc-block .upload-zone.dragover {
-      border: none;
-      background: color-mix(in srgb, var(--cisco-blue) 7%, transparent);
-      border-radius: var(--radius);
+      border-color: var(--cisco-blue);
+      background: color-mix(in srgb, var(--cisco-blue) 10%, var(--bg-elevated));
     }
 
     .landing-lpc-block .upload-zone p {
@@ -870,17 +896,24 @@
     <div class="landing-inner">
       <div class="landing-lpc-block">
         <h2>List price change (required for both tools)</h2>
-        <label class="upload-zone" id="landingLpcUploadZone">
+        <label class="upload-zone" id="landingLpcUploadZone" aria-label="Upload list price change file">
           <input
             type="file"
             id="landingLpcFileInput"
             accept=".csv,.txt,.tsv,.xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/csv"
           />
-          <p><strong>Upload list price change</strong><br />Excel</p>
+          <p>
+            <span class="upload-zone-action">Click here to upload</span>
+            <span class="upload-zone-sub"><strong>List price change</strong> · Excel (.xlsx, .csv, …)</span>
+          </p>
           <span class="upload-file-name" id="landingLpcFileLabel"></span>
         </label>
         <p class="upload-hint">
           Use the <strong>.xlsx</strong> downloaded directly from <strong>LPC.Cisco.com</strong> (no re-save in Excel) when possible.
+        </p>
+        <p class="upload-hint hint-vidcast">
+          Review a quick video on how to access this file on Vidcast:
+          <a href="https://app.vidcast.io/share/47f3d8aa-c890-4a6e-a221-4be94663c623" target="_blank" rel="noopener noreferrer">open the walkthrough</a>.
         </p>
       </div>
       <p>Choose a workflow. You can return here anytime from the back link inside each tool. You can replace the list price file on this page or inside either tool.</p>
@@ -904,12 +937,20 @@
         <button type="button" class="btn-text-back" id="listPriceBackBtn">Back to home</button>
       </div>
       <h2>Data</h2>
-      <label class="upload-zone" id="uploadZone">
+      <label class="upload-zone" id="uploadZone" aria-label="Upload list price change file">
         <input type="file" id="fileInput" accept=".csv,.txt,.tsv,.xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/csv" />
-        <p><strong>List price change</strong><br />Excel</p>
+        <p>
+          <span class="upload-zone-action">Click here to upload</span>
+          <span class="upload-zone-sub"><strong>List price change</strong> · Excel (.xlsx, .csv, …)</span>
+        </p>
+        <span class="upload-file-name" id="listPriceFileLabel"></span>
       </label>
       <p class="field-hint" style="margin-top: 0.5rem">
         Prefer the <strong>.xlsx</strong> downloaded straight from <strong>LPC.Cisco.com</strong>. Replacing the file here also updates the quote tool (and the home upload).
+      </p>
+      <p class="field-hint hint-vidcast">
+        Review a quick video on how to access this file on Vidcast:
+        <a href="https://app.vidcast.io/share/47f3d8aa-c890-4a6e-a221-4be94663c623" target="_blank" rel="noopener noreferrer">open the walkthrough</a>.
       </p>
 
       <div class="kpi-card" aria-live="polite">
@@ -1028,31 +1069,45 @@
       </p>
       <div class="quote-uploads">
         <div class="quote-upload-col">
-          <label class="upload-zone" id="quoteLpcUploadZone">
+          <label class="upload-zone" id="quoteLpcUploadZone" aria-label="Upload list price change file">
             <input
               type="file"
               id="quoteLpcFileInput"
               accept=".csv,.txt,.tsv,.xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/csv"
             />
-            <p><strong>List price change</strong><br />Excel</p>
+            <p>
+              <span class="upload-zone-action">Click here to upload</span>
+              <span class="upload-zone-sub"><strong>List price change</strong> · Excel (.xlsx, .csv, …)</span>
+            </p>
             <span class="upload-file-name" id="quoteLpcFileLabel"></span>
           </label>
           <p class="quote-upload-hint">
             Prefer the <strong>.xlsx</strong> downloaded straight from <strong>LPC.Cisco.com</strong>. Same file as home / list-price upload.
           </p>
+          <p class="quote-upload-hint hint-vidcast">
+            Review a quick video on how to access this file on Vidcast:
+            <a href="https://app.vidcast.io/share/47f3d8aa-c890-4a6e-a221-4be94663c623" target="_blank" rel="noopener noreferrer">open the walkthrough</a>.
+          </p>
         </div>
         <div class="quote-upload-col">
-          <label class="upload-zone" id="quoteCcwUploadZone">
+          <label class="upload-zone" id="quoteCcwUploadZone" aria-label="Upload CCW quote export">
             <input
               type="file"
               id="quoteCcwFileInput"
               accept=".xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
             />
-            <p><strong>CCW quote export</strong><br />.xlsx or .xls</p>
+            <p>
+              <span class="upload-zone-action">Click here to upload</span>
+              <span class="upload-zone-sub"><strong>CCW quote export</strong> · .xlsx or .xls</span>
+            </p>
             <span class="upload-file-name" id="quoteCcwFileLabel"></span>
           </label>
           <p class="quote-upload-hint">
             Export an existing quote as <strong>XLSX — CCW Standard Format</strong> and ensure <strong>Line Level Discounts</strong> is checked in the export options.
+          </p>
+          <p class="quote-upload-hint hint-vidcast">
+            Review a quick video on how to access this export on Vidcast:
+            <a href="https://app.vidcast.io/share/09baffb5-a936-46c6-af0d-e88a40053923" target="_blank" rel="noopener noreferrer">open the walkthrough</a>.
           </p>
         </div>
       </div>
@@ -1121,7 +1176,7 @@
        *
        * Current value is advanced by +0.1 per edit to this file (see workspace rule).
        */
-      const APP_VERSION_DECIMAL = 6.6;
+      const APP_VERSION_DECIMAL = 6.7;
       const APP_VERSION = "Beta " + APP_VERSION_DECIMAL.toFixed(1);
       const root = document.documentElement;
       const themeSwitch = document.getElementById("themeSwitch");
@@ -2303,6 +2358,8 @@
         if (ll) ll.textContent = "";
         var ql = document.getElementById("quoteLpcFileLabel");
         if (ql) ql.textContent = "";
+        var lp = document.getElementById("listPriceFileLabel");
+        if (lp) lp.textContent = "";
         var fi = document.getElementById("fileInput");
         if (fi) fi.value = "";
         var li = document.getElementById("landingLpcFileInput");
@@ -2506,6 +2563,8 @@
         if (ll) ll.textContent = dn;
         var ql = document.getElementById("quoteLpcFileLabel");
         if (ql) ql.textContent = dn;
+        var lp = document.getElementById("listPriceFileLabel");
+        if (lp) lp.textContent = dn;
         invalidateQuoteCalcOutput();
         updateQuoteCalcButtonState();
       }
