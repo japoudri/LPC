@@ -1,0 +1,1 @@
+This Dashboard is for internal use by Cisco Employees only.  For the Dashboard to function you need a List Price Change File from LPC.cisco.com and an XLS export of a CCW Quote both in US GPL Pricing.
