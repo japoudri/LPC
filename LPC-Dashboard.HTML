@@ -224,6 +224,12 @@
     }
 
     .upload-zone {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+      box-sizing: border-box;
+      min-width: 0;
       border: 2px dashed var(--border);
       border-radius: var(--radius);
       padding: 1.25rem;
@@ -245,6 +251,7 @@
 
     .upload-zone p {
       margin: 0;
+      min-width: 0;
       font-size: 0.875rem;
       color: var(--text-muted);
     }
@@ -734,6 +741,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.35rem;
+      min-width: 0;
     }
 
     .quote-upload-hint {
@@ -755,6 +763,7 @@
       font-size: 0.78rem;
       color: var(--text-muted);
       word-break: break-all;
+      min-width: 0;
     }
 
     .quote-actions {
@@ -904,13 +913,10 @@
           />
           <p>
             <span class="upload-zone-action">Click here to upload</span>
-            <span class="upload-zone-sub"><strong>List price change</strong> · Excel (.xlsx, .csv, …)</span>
+            <span class="upload-zone-sub"><strong>List price change</strong> · Excel</span>
           </p>
           <span class="upload-file-name" id="landingLpcFileLabel"></span>
         </label>
-        <p class="upload-hint">
-          Use the <strong>.xlsx</strong> downloaded directly from <strong>LPC.Cisco.com</strong> (no re-save in Excel) when possible.
-        </p>
         <p class="upload-hint hint-vidcast">
           Review a quick video on how to access this file on Vidcast:
           <a href="https://app.vidcast.io/share/47f3d8aa-c890-4a6e-a221-4be94663c623" target="_blank" rel="noopener noreferrer">open the walkthrough</a>.
@@ -941,13 +947,10 @@
         <input type="file" id="fileInput" accept=".csv,.txt,.tsv,.xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/csv" />
         <p>
           <span class="upload-zone-action">Click here to upload</span>
-          <span class="upload-zone-sub"><strong>List price change</strong> · Excel (.xlsx, .csv, …)</span>
+          <span class="upload-zone-sub"><strong>List price change</strong> · Excel</span>
         </p>
         <span class="upload-file-name" id="listPriceFileLabel"></span>
       </label>
-      <p class="field-hint" style="margin-top: 0.5rem">
-        Prefer the <strong>.xlsx</strong> downloaded straight from <strong>LPC.Cisco.com</strong>. Replacing the file here also updates the quote tool (and the home upload).
-      </p>
       <p class="field-hint hint-vidcast">
         Review a quick video on how to access this file on Vidcast:
         <a href="https://app.vidcast.io/share/47f3d8aa-c890-4a6e-a221-4be94663c623" target="_blank" rel="noopener noreferrer">open the walkthrough</a>.
@@ -1077,13 +1080,10 @@
             />
             <p>
               <span class="upload-zone-action">Click here to upload</span>
-              <span class="upload-zone-sub"><strong>List price change</strong> · Excel (.xlsx, .csv, …)</span>
+              <span class="upload-zone-sub"><strong>List price change</strong> · Excel</span>
             </p>
             <span class="upload-file-name" id="quoteLpcFileLabel"></span>
           </label>
-          <p class="quote-upload-hint">
-            Prefer the <strong>.xlsx</strong> downloaded straight from <strong>LPC.Cisco.com</strong>. Same file as home / list-price upload.
-          </p>
           <p class="quote-upload-hint hint-vidcast">
             Review a quick video on how to access this file on Vidcast:
             <a href="https://app.vidcast.io/share/47f3d8aa-c890-4a6e-a221-4be94663c623" target="_blank" rel="noopener noreferrer">open the walkthrough</a>.
@@ -1098,7 +1098,7 @@
             />
             <p>
               <span class="upload-zone-action">Click here to upload</span>
-              <span class="upload-zone-sub"><strong>CCW quote export</strong> · .xlsx or .xls</span>
+              <span class="upload-zone-sub"><strong>CCW quote export</strong></span>
             </p>
             <span class="upload-file-name" id="quoteCcwFileLabel"></span>
           </label>
