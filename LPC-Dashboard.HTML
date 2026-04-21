@@ -658,6 +658,24 @@
       color: var(--accent);
     }
 
+    .landing-lpc-block .landing-vidcast-link {
+      margin: 0 0 0.65rem 0;
+      font-size: 0.8125rem;
+      line-height: 1.45;
+      color: var(--text-muted);
+    }
+
+    .landing-lpc-block .landing-vidcast-link a {
+      color: var(--cisco-blue);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .landing-lpc-block .landing-vidcast-link a:hover {
+      color: var(--cisco-blue-dark);
+    }
+
     .landing-lpc-block .upload-hint {
       margin: 0.5rem 0 0 0;
       font-size: 0.8125rem;
@@ -923,6 +941,10 @@
     <div class="landing-inner">
       <div class="landing-lpc-block">
         <h2>List price change (required for both tools)</h2>
+        <p class="landing-vidcast-link">
+          <a href="https://app.vidcast.io/pages/61d8e2d3-661a-476b-a66b-c11ec36294f3" target="_blank" rel="noopener noreferrer">Vidcast tutorials</a>
+          — how to obtain both files and how to use this tool.
+        </p>
         <label class="upload-zone" id="landingLpcUploadZone" aria-label="Upload list price change file">
           <input
             type="file"
@@ -935,10 +957,6 @@
           </p>
           <span class="upload-file-name" id="landingLpcFileLabel"></span>
         </label>
-        <p class="upload-hint hint-vidcast">
-          Review a quick video on how to access this file on Vidcast:
-          <a href="https://app.vidcast.io/share/47f3d8aa-c890-4a6e-a221-4be94663c623" target="_blank" rel="noopener noreferrer">open the walkthrough</a>.
-        </p>
       </div>
       <p>Choose a workflow. You can return here anytime from the back link inside each tool. You can replace the list price file on this page or inside either tool.</p>
       <div class="landing-cards">
