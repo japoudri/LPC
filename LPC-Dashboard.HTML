@@ -1,0 +1,2829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cisco pricing tools</title>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" crossorigin="anonymous"></script>
+  <script type="application/json" id="productFamilyBeMap">{"700":{"be":"Routing","subBe":"EN Routing"},"1000":{"be":"Routing","subBe":"EN Routing"},"1400":{"be":"Routing","subBe":"EN Routing"},"1516":{"be":"Switching","subBe":"EN Switching"},"1600":{"be":"Routing","subBe":"EN Routing"},"1700":{"be":"Routing","subBe":"EN Routing"},"1800":{"be":"Routing","subBe":"EN Routing"},"1841":{"be":"Routing","subBe":"EN Routing"},"1900":{"be":"Switching","subBe":"EN Switching"},"2500":{"be":"Routing","subBe":"EN Routing"},"2600":{"be":"Routing","subBe":"EN Routing"},"2800":{"be":"Routing","subBe":"EN Routing"},"2801":{"be":"Routing","subBe":"EN Routing"},"2821":{"be":"Routing","subBe":"EN Routing"},"2851":{"be":"Routing","subBe":"EN Routing"},"3200":{"be":"Routing","subBe":"IIoT Routing"},"3300":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"3560":{"be":"Switching","subBe":"EN Switching"},"3600":{"be":"Routing","subBe":"EN Routing"},"3700":{"be":"Routing","subBe":"EN Routing"},"3750":{"be":"Switching","subBe":"EN Switching"},"3800":{"be":"Routing","subBe":"EN Routing"},"4000":{"be":"Routing","subBe":"EN Routing"},"5200":{"be":"Routing","subBe":"EN Routing"},"5300":{"be":"Routing","subBe":"EN Routing"},"5350":{"be":"Routing","subBe":"EN Routing"},"5400":{"be":"Routing","subBe":"EN Routing"},"5850":{"be":"Routing","subBe":"EN Routing"},"5900":{"be":"Routing","subBe":"IIoT Routing"},"6160":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"6400":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"6700":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"7100":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"7200":{"be":"Routing","subBe":"EN Routing"},"7300":{"be":"Routing","subBe":"EN Routing"},"7304":{"be":"Routing","subBe":"EN Routing"},"7400":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"7500":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Core Routing"},"7600":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"8000":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Core Routing"},"8010":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"8100":{"be":"Routing","subBe":"EN Routing"},"8510":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"8540":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"15200":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"15216":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"15300":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"15302":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"15305":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"15310":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"15327":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"15365":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"15400":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"15454":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"15501":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"15516":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"15530":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"15540":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"15600":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"15800":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"15808":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"15900":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"10BB":{"be":"Routing","subBe":"EN Routing"},"15310E":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"15327E":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"15454DI":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"15454E":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"15454W":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"1545WDI":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"1545WPA":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"1800FIX":{"be":"Routing","subBe":"EN Routing"},"1900ISR":{"be":"Routing","subBe":"EN Routing"},"2800DI":{"be":"Routing","subBe":"EN Routing"},"2900IDI":{"be":"Routing","subBe":"EN Routing"},"2900ISR":{"be":"Routing","subBe":"EN Routing"},"3650X":{"be":"Switching","subBe":"EN Switching"},"3750X":{"be":"Switching","subBe":"EN Switching"},"3800DI":{"be":"Routing","subBe":"EN Routing"},"3900IDI":{"be":"Routing","subBe":"EN Routing"},"3900ISR":{"be":"Routing","subBe":"EN Routing"},"3KAGG":{"be":"Switching","subBe":"EN Switching"},"3KAGGNF":{"be":"Switching","subBe":"EN Switching"},"3PHW":{"be":"Cisco Compute","subBe":"Servers"},"3PRTYEM":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"3PRTYMI":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"3PRTYSC":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"3PRTYSW":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"3Y SSPT PLUS":{"be":"SOLUTION SUPPORT SVC","subBe":"SOLUTION SUPPORT SVC"},"3YELA SWSS E":{"be":"SWSS ENHANCED-PREMIUM SVC","subBe":"SWSS EN-PR OTHER SVC"},"3YELA SWSS P":{"be":"SWSS ENHANCED-PREMIUM SVC","subBe":"SWSS EN-PR OTHER SVC"},"3YENH ADD ON":{"be":"SWSS ENHANCED-PREMIUM SVC","subBe":"SWSS EN-PR SECURITY SVC"},"3YPRE ADD ON":{"be":"SWSS ENHANCED-PREMIUM SVC","subBe":"SWSS EN-PR SECURITY SVC"},"3YR ETSP":{"be":"SOLUTION SUPPORT SVC","subBe":"SOLUTION SUPPORT SVC"},"3YR RMA ONLY":{"be":"CX OTHER SVC","subBe":"CX MERAKI NOW SVC"},"3YR SWSS E":{"be":"SWSS ENHANCED-PREMIUM SVC","subBe":"SWSS EN-PR OTHER SVC"},"3YR SWSS P":{"be":"SWSS ENHANCED-PREMIUM SVC","subBe":"SWSS EN-PR OTHER SVC"},"400REVN":{"be":"Routing","subBe":"EN Routing"},"4200ISR":{"be":"Routing","subBe":"EN Routing"},"4300ISR":{"be":"Routing","subBe":"EN Routing"},"4400ISR":{"be":"Routing","subBe":"EN Routing"},"5G3PNET":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"5G3PRTY":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"5GSA":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"5GSANET":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"5Y SSPT PLUS":{"be":"SOLUTION SUPPORT SVC","subBe":"SOLUTION SUPPORT SVC"},"7000CMN":{"be":"Routing","subBe":"EN Routing"},"7000OLD":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"7200DI":{"be":"Routing","subBe":"EN Routing"},"7400VPN":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"7600DI":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"8000E":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"8000SW":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"8000WPA":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Core Routing"},"800BB":{"be":"Routing","subBe":"EN Routing"},"800BBDI":{"be":"Routing","subBe":"EN Routing"},"800BBJP":{"be":"Routing","subBe":"EN Routing"},"800DSL":{"be":"Routing","subBe":"EN Routing"},"800TRAD":{"be":"Routing","subBe":"EN Routing"},"8500CW3":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Core Routing"},"8510MSR":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"8KADDON":{"be":"Routing","subBe":"EN Routing"},"8KSEC":{"be":"Routing","subBe":"EN Routing"},"8KSWP":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"900ISR":{"be":"Routing","subBe":"EN Routing"},"AABU_ADJ_PF":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"AAS":{"be":"Switching","subBe":"EN Switching"},"ABLOFLX":{"be":"SPLUNK","subBe":"Splunk Observability"},"ABLSFLX":{"be":"SPLUNK","subBe":"Splunk Observability"},"ABUMOD":{"be":"Routing","subBe":"EN Routing"},"ACANO":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"ACCREG":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"ACCS":{"be":"Wireless","subBe":"EN Wireless"},"ACCWPA":{"be":"Switching","subBe":"EN Switching"},"ACCXCAT":{"be":"Switching","subBe":"EN Switching"},"ACEMBED":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Acacia Optics"},"ACIABU_ADJ_PF":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Acacia Optics"},"ACNOHW":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"ACNOSER":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"ACNOSW":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"ACNOSWS":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"ACPOLCY":{"be":"Security","subBe":"Sec-SSE"},"ACSEMIS":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Acacia Optics"},"ACTPRB":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"AD120SW":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"AD120UX":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"ADAPTER":{"be":"Switching","subBe":"EN Switching"},"ADBU_FUTURE_PF":{"be":"Routing","subBe":"EN Routing"},"ADE":{"be":"Security","subBe":"Sec-SSE"},"ADFEDSA":{"be":"SPLUNK","subBe":"Splunk Observability"},"ADOLD":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"ADVALL":{"be":"Security","subBe":"Sec-TIDR"},"ADVAMP":{"be":"Security","subBe":"Sec-TIDR"},"ADVI":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"ADVMAIL":{"be":"Security","subBe":"Sec-TIDR"},"ADVNTG":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"ADVTGD":{"be":"Security","subBe":"Sec-TIDR"},"ADVWEB":{"be":"Security","subBe":"Sec-SSE"},"AGOTHER":{"be":"Routing","subBe":"EN Routing"},"AGR":{"be":"Security","subBe":"Sec-TIDR"},"AGRA":{"be":"Security","subBe":"Sec-TIDR"},"AI110DI":{"be":"Wireless","subBe":"EN Wireless"},"AIAG":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"AIAGT":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"AIAS":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"AIASSNT":{"be":"Other","subBe":"AI Solutions"},"AIAST":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"AIDFNSE":{"be":"Other","subBe":"AI Solutions"},"AIDFWPA":{"be":"Other","subBe":"AI Solutions"},"AIM":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"AIR":{"be":"Wireless","subBe":"EN Wireless"},"AIR100":{"be":"Wireless","subBe":"EN Wireless"},"AIR1000":{"be":"Wireless","subBe":"EN Wireless"},"AIR100U":{"be":"Wireless","subBe":"EN Wireless"},"AIR1040":{"be":"Wireless","subBe":"EN Wireless"},"AIR10U":{"be":"Wireless","subBe":"EN Wireless"},"AIR1100":{"be":"Wireless","subBe":"EN Wireless"},"AIR110A":{"be":"Wireless","subBe":"EN Wireless"},"AIR110U":{"be":"Wireless","subBe":"EN Wireless"},"AIR11A":{"be":"Wireless","subBe":"EN Wireless"},"AIR11DI":{"be":"Wireless","subBe":"EN Wireless"},"AIR11U":{"be":"Wireless","subBe":"EN Wireless"},"AIR1200":{"be":"Wireless","subBe":"EN Wireless"},"AIR120A":{"be":"Wireless","subBe":"EN Wireless"},"AIR120R":{"be":"Wireless","subBe":"EN Wireless"},"AIR120U":{"be":"Wireless","subBe":"EN Wireless"},"AIR12A":{"be":"Wireless","subBe":"EN Wireless"},"AIR12DI":{"be":"Wireless","subBe":"EN Wireless"},"AIR12U":{"be":"Wireless","subBe":"EN Wireless"},"AIR1300":{"be":"Wireless","subBe":"EN Wireless"},"AIR130A":{"be":"Wireless","subBe":"EN Wireless"},"AIR130U":{"be":"Wireless","subBe":"EN Wireless"},"AIR13A":{"be":"Wireless","subBe":"EN Wireless"},"AIR13U":{"be":"Wireless","subBe":"EN Wireless"},"AIR1400":{"be":"Wireless","subBe":"EN Wireless"},"AIR140A":{"be":"Wireless","subBe":"EN Wireless"},"AIR14U":{"be":"Wireless","subBe":"EN Wireless"},"AIR1500":{"be":"Wireless","subBe":"EN Wireless"},"AIR150U":{"be":"Wireless","subBe":"EN Wireless"},"AIR1540":{"be":"Wireless","subBe":"EN Wireless"},"AIR1560":{"be":"Wireless","subBe":"EN Wireless"},"AIR1570":{"be":"Wireless","subBe":"EN Wireless"},"AIR15U":{"be":"Wireless","subBe":"EN Wireless"},"AIR1700":{"be":"Wireless","subBe":"EN Wireless"},"AIR1800":{"be":"Wireless","subBe":"EN Wireless"},"AIR1810":{"be":"Wireless","subBe":"EN Wireless"},"AIR1815":{"be":"Wireless","subBe":"EN Wireless"},"AIR1830":{"be":"Wireless","subBe":"EN Wireless"},"AIR1840":{"be":"Wireless","subBe":"EN Wireless"},"AIR1850":{"be":"Wireless","subBe":"EN Wireless"},"AIR1900":{"be":"Wireless","subBe":"EN Wireless"},"AIR2000":{"be":"Wireless","subBe":"EN Wireless"},"AIR2700":{"be":"Wireless","subBe":"EN Wireless"},"AIR2800":{"be":"Wireless","subBe":"EN Wireless"},"AIR2900":{"be":"Wireless","subBe":"EN Wireless"},"AIR3000":{"be":"Wireless","subBe":"EN Wireless"},"AIR340":{"be":"Wireless","subBe":"EN Wireless"},"AIR350":{"be":"Wireless","subBe":"EN Wireless"},"AIR3500":{"be":"Wireless","subBe":"EN Wireless"},"AIR35CE":{"be":"Wireless","subBe":"EN Wireless"},"AIR35CI":{"be":"Wireless","subBe":"EN Wireless"},"AIR35DI":{"be":"Wireless","subBe":"EN Wireless"},"AIR35S":{"be":"Wireless","subBe":"EN Wireless"},"AIR35SE":{"be":"Wireless","subBe":"EN Wireless"},"AIR35SI":{"be":"Wireless","subBe":"EN Wireless"},"AIR35U":{"be":"Wireless","subBe":"EN Wireless"},"AIR3700":{"be":"Wireless","subBe":"EN Wireless"},"AIR3800":{"be":"Wireless","subBe":"EN Wireless"},"AIR4800":{"be":"Wireless","subBe":"EN Wireless"},"AIR500A":{"be":"Wireless","subBe":"EN Wireless"},"AIR500U":{"be":"Wireless","subBe":"EN Wireless"},"AIR750":{"be":"Wireless","subBe":"EN Wireless"},"AIR9150":{"be":"Wireless","subBe":"EN Wireless"},"AIR9200":{"be":"Wireless","subBe":"EN Wireless"},"AIR9250":{"be":"Wireless","subBe":"EN Wireless"},"AIR9300":{"be":"Wireless","subBe":"EN Wireless"},"AIR9400":{"be":"Wireless","subBe":"EN Wireless"},"AIRANT":{"be":"Wireless","subBe":"EN Wireless"},"AIRAP":{"be":"Wireless","subBe":"EN Wireless"},"AIRAPRW":{"be":"Wireless","subBe":"EN Wireless"},"AIRASCT":{"be":"Wireless","subBe":"EN Wireless"},"AIRBLE":{"be":"Wireless","subBe":"EN Wireless"},"AIRBNDL":{"be":"Wireless","subBe":"EN Wireless"},"AIRBR":{"be":"Wireless","subBe":"EN Wireless"},"AIRC1":{"be":"Wireless","subBe":"EN Wireless"},"AIRC1A":{"be":"Wireless","subBe":"EN Wireless"},"AIRC1F":{"be":"Wireless","subBe":"EN Wireless"},"AIRCA":{"be":"Wireless","subBe":"EN Wireless"},"AIRCELL":{"be":"Wireless","subBe":"EN Wireless"},"AIRCI":{"be":"Wireless","subBe":"IIoT Wireless"},"AIRCMN":{"be":"Wireless","subBe":"EN Wireless"},"AIRCTA":{"be":"Wireless","subBe":"EN Wireless"},"AIRCTA2":{"be":"Wireless","subBe":"EN Wireless"},"AIRCTA3":{"be":"Wireless","subBe":"EN Wireless"},"AIRCTA5":{"be":"Wireless","subBe":"EN Wireless"},"AIRCTB":{"be":"Wireless","subBe":"EN Wireless"},"AIRCTB2":{"be":"Wireless","subBe":"EN Wireless"},"AIRCTB3":{"be":"Wireless","subBe":"EN Wireless"},"AIRCTB5":{"be":"Wireless","subBe":"EN Wireless"},"AIRCTC5":{"be":"Wireless","subBe":"EN Wireless"},"AIRCTDI":{"be":"Wireless","subBe":"EN Wireless"},"AIRCTI":{"be":"Wireless","subBe":"EN Wireless"},"AIRCTI2":{"be":"Wireless","subBe":"EN Wireless"},"AIRCTI3":{"be":"Wireless","subBe":"EN Wireless"},"AIRCTI4":{"be":"Wireless","subBe":"EN Wireless"},"AIRCTI5":{"be":"Wireless","subBe":"EN Wireless"},"AIRCTU":{"be":"Wireless","subBe":"EN Wireless"},"AIRDCL":{"be":"Wireless","subBe":"EN Wireless"},"AIRDNA":{"be":"Wireless","subBe":"EN Wireless"},"AIRDNAC":{"be":"Wireless","subBe":"EN Wireless"},"AIRDNC1":{"be":"Wireless","subBe":"EN Wireless"},"AIRDNCT":{"be":"Wireless","subBe":"EN Wireless"},"AIRDNMS":{"be":"Wireless","subBe":"EN Wireless"},"AIRHOST":{"be":"Wireless","subBe":"EN Wireless"},"AIRIA":{"be":"Wireless","subBe":"IIoT Wireless"},"AIRINFA":{"be":"Wireless","subBe":"EN Wireless"},"AIRINFE":{"be":"Wireless","subBe":"EN Wireless"},"AIRINFR":{"be":"Wireless","subBe":"EN Wireless"},"AIRINFU":{"be":"Wireless","subBe":"EN Wireless"},"AIRIW":{"be":"Wireless","subBe":"IIoT Wireless"},"AIRLAPS":{"be":"Wireless","subBe":"EN Wireless"},"AIRMESH":{"be":"Wireless","subBe":"IIoT Wireless"},"AIRMGMA":{"be":"Wireless","subBe":"EN Wireless"},"AIRMGMT":{"be":"Wireless","subBe":"EN Wireless"},"AIRMGMU":{"be":"Wireless","subBe":"EN Wireless"},"AIRMHW":{"be":"Wireless","subBe":"EN Wireless"},"AIRMHW2":{"be":"Wireless","subBe":"EN Wireless"},"AIRMHW3":{"be":"Wireless","subBe":"EN Wireless"},"AIRMHW4":{"be":"Wireless","subBe":"EN Wireless"},"AIRMHW5":{"be":"Wireless","subBe":"EN Wireless"},"AIRMOD":{"be":"Wireless","subBe":"EN Wireless"},"AIRMOPI":{"be":"Wireless","subBe":"EN Wireless"},"AIRMSE":{"be":"Wireless","subBe":"EN Wireless"},"AIRMSHW":{"be":"Wireless","subBe":"EN Wireless"},"AIRMSTH":{"be":"Wireless","subBe":"EN Wireless"},"AIRMSTI":{"be":"Wireless","subBe":"EN Wireless"},"AIRMSTS":{"be":"Wireless","subBe":"EN Wireless"},"AIRMSW":{"be":"Wireless","subBe":"EN Wireless"},"AIRMSWS":{"be":"Wireless","subBe":"EN Wireless"},"AIRNCS":{"be":"Wireless","subBe":"EN Wireless"},"AIROLD":{"be":"Wireless","subBe":"EN Wireless"},"AIRPHUN":{"be":"Wireless","subBe":"EN Wireless"},"AIRPWR":{"be":"Wireless","subBe":"EN Wireless"},"AIRRIFI":{"be":"Wireless","subBe":"EN Wireless"},"AIRSNSR":{"be":"Wireless","subBe":"EN Wireless"},"AIRUCS":{"be":"Security","subBe":"Sec-Net-Security"},"AIRWAN":{"be":"Wireless","subBe":"IIoT Wireless"},"AISECBU_ADJ_PF":{"be":"Other","subBe":"AI Solutions"},"AMMOBMC":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"AMP":{"be":"Security","subBe":"Sec-TIDR"},"AMP4EPA":{"be":"Security","subBe":"Sec-TIDR"},"AMP4WPA":{"be":"Security","subBe":"Sec-TIDR"},"AMPAPPS":{"be":"Security","subBe":"Sec-Net-Security"},"AMPASAS":{"be":"Security","subBe":"Sec-Net-Security"},"AMPCNTA":{"be":"Security","subBe":"Sec-TIDR"},"AMPCONT":{"be":"Security","subBe":"Sec-TIDR"},"AMPEML":{"be":"Security","subBe":"Sec-TIDR"},"AMPEPTS":{"be":"Security","subBe":"Sec-TIDR"},"AMPFPR":{"be":"Security","subBe":"Sec-Net-Security"},"AMPMERK":{"be":"Security","subBe":"Sec-SSE"},"AMPMWPA":{"be":"Security","subBe":"Sec-SSE"},"AMPOUMB":{"be":"Security","subBe":"Sec-SSE"},"AMPWEB":{"be":"Security","subBe":"Sec-SSE"},"AMPWPA":{"be":"Security","subBe":"Sec-TIDR"},"AMS":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"ANA":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"ANALYTICBU_ADJ_PF":{"be":"SPLUNK","subBe":"Splunk Observability"},"ANR":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"ANTG_ADJ_PF":{"be":"SPLUNK","subBe":"Splunk Observability"},"ANYCONN":{"be":"Security","subBe":"Sec-SSE"},"ANYWPA":{"be":"Security","subBe":"Sec-SSE"},"AON":{"be":"Security","subBe":"Sec-SSE"},"AON_ADJ_PF":{"be":"Switching","subBe":"EN Switching"},"AONBU_ADJ_PF":{"be":"Security","subBe":"Sec-SSE"},"AONBU_FUTURE_PF":{"be":"Switching","subBe":"EN Switching"},"AONBUN":{"be":"Switching","subBe":"EN Switching"},"AONHC":{"be":"Security","subBe":"Sec-SSE"},"AONMOD":{"be":"Switching","subBe":"EN Switching"},"APA":{"be":"Security","subBe":"Sec-SSE"},"APDFLEX":{"be":"SPLUNK","subBe":"Splunk Observability"},"APDUMMY":{"be":"Wireless","subBe":"EN Wireless"},"APE":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"APIC":{"be":"Data Center Networking","subBe":"NX9K"},"APICCC":{"be":"Data Center Networking","subBe":"NX9K"},"APICCCC":{"be":"Data Center Networking","subBe":"NX9K"},"APICPRP":{"be":"Data Center Networking","subBe":"NX9K"},"APICTRM":{"be":"Data Center Networking","subBe":"NX9K"},"APLFSO":{"be":"SPLUNK","subBe":"Splunk Observability"},"APM":{"be":"SPLUNK","subBe":"Splunk Observability"},"APMBIZ":{"be":"SPLUNK","subBe":"Splunk Observability"},"APMFEDT":{"be":"SPLUNK","subBe":"Splunk Observability"},"APMSAAS":{"be":"SPLUNK","subBe":"Splunk Observability"},"APMTERM":{"be":"SPLUNK","subBe":"Splunk Observability"},"APP":{"be":"Routing","subBe":"EN Routing"},"APPDBU_ADJ_PF":{"be":"SPLUNK","subBe":"Splunk Observability"},"APPDCLD":{"be":"SPLUNK","subBe":"Splunk Observability"},"APPS":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"APPSNRE":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"AR":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"ARMRBLX":{"be":"Security","subBe":"Sec-TIDR"},"ARTBU_ADJ_PF":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"ARTBU_FUTURE_PF":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"AS SOA USAGE":{"be":"LIFECYCLE SVC","subBe":"LIFECYCLE LEGACY BCS SVC"},"ASA":{"be":"Security","subBe":"Sec-Net-Security"},"ASAHIDI":{"be":"Security","subBe":"Sec-Net-Security"},"ASAHIGH":{"be":"Security","subBe":"Sec-Net-Security"},"ASALOW":{"be":"Security","subBe":"Sec-Net-Security"},"ASAMD2":{"be":"Security","subBe":"Sec-Net-Security"},"ASAMID":{"be":"Security","subBe":"Sec-Net-Security"},"ASAMIDI":{"be":"Security","subBe":"Sec-Net-Security"},"ASM":{"be":"Routing","subBe":"EN Routing"},"ASNGW":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"ASR1000":{"be":"Routing","subBe":"EN Routing"},"ASR14K":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Core Routing"},"ASR1KDI":{"be":"Routing","subBe":"EN Routing"},"ASR5000":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"ASR5500":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"ASR5KDI":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"ASR5KSW":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"ASR900":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"ASR9000":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"ASR901":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"ASR901S":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"ASR903":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"ASR920":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"ASR921":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"ASR941":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"ASR9KDI":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"ASR9KFM":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"ASR9WPA":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"ASRIOT":{"be":"Routing","subBe":"IIoT Routing"},"ASRWPA":{"be":"Routing","subBe":"EN Routing"},"ASSISTT":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"ASSTWX":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"ASSUR":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"ATA":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"ATSBU_ADJ_PF":{"be":"Security","subBe":"Sec-TIDR"},"AUDIO":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"AUDITOR":{"be":"Security","subBe":"Sec-Net-Security"},"AUDUSG":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"AVM":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"AWSMP":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"B100L":{"be":"Data Center Networking","subBe":"DCN - Optics Allocation"},"BAC":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"BBWPA":{"be":"Switching","subBe":"EN Switching"},"BBXCAT":{"be":"Switching","subBe":"EN Switching"},"BCBSFT":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"BCBSFTX":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"BCLDFD":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"BECEHW":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"BEMRBU_ADJ_PF":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"BEMRBU_FUTURE_PF":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"BEMROTH":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"BESPOKE":{"be":"COLLABORATION","subBe":"CPAAS"},"BESPOKS":{"be":"COLLABORATION","subBe":"CPAAS"},"BIQ":{"be":"SPLUNK","subBe":"Splunk Observability"},"BIQBD":{"be":"SPLUNK","subBe":"Splunk Observability"},"BIQEA":{"be":"SPLUNK","subBe":"Splunk Observability"},"BIQEAP":{"be":"SPLUNK","subBe":"Splunk Observability"},"BIQEAS":{"be":"SPLUNK","subBe":"Splunk Observability"},"BIQEAT":{"be":"SPLUNK","subBe":"Splunk Observability"},"BIQOWPA":{"be":"SPLUNK","subBe":"Splunk Observability"},"BIQPERP":{"be":"SPLUNK","subBe":"Splunk Observability"},"BIQPWPA":{"be":"SPLUNK","subBe":"Splunk Observability"},"BIQSAAS":{"be":"SPLUNK","subBe":"Splunk Observability"},"BIQSASR":{"be":"SPLUNK","subBe":"Splunk Observability"},"BIQSP":{"be":"SPLUNK","subBe":"Splunk Observability"},"BIQSP2":{"be":"SPLUNK","subBe":"Splunk Observability"},"BIQSP2A":{"be":"SPLUNK","subBe":"Splunk Observability"},"BIQSPA":{"be":"SPLUNK","subBe":"Splunk Observability"},"BIQSPNA":{"be":"SPLUNK","subBe":"Splunk Observability"},"BIQSPON":{"be":"SPLUNK","subBe":"Splunk Observability"},"BIQTEMR":{"be":"SPLUNK","subBe":"Splunk Observability"},"BIQTERM":{"be":"SPLUNK","subBe":"Splunk Observability"},"BIQTWPA":{"be":"SPLUNK","subBe":"Splunk Observability"},"BIQWPA":{"be":"SPLUNK","subBe":"Splunk Observability"},"BLINQ":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"BLKR":{"be":"Security","subBe":"Sec-Net-Security"},"BPA":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"BPX":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"BQM":{"be":"Switching","subBe":"EN Switching"},"BSABU_FUTURE_PF":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"BSFTBU_ADJ_PF":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"BSFTTG_ADJ_PF":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"BSUITE":{"be":"Security","subBe":"Sec-Other"},"BTS":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"BV AS FIXED":{"be":"PROFESSIONAL SVC","subBe":"PROF NETWORKING SVC"},"BWAAUTO":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"BWAUX":{"be":"Switching","subBe":"EN Switching"},"BWBSFT":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"BWBSFTX":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"BWBTS":{"be":"Switching","subBe":"EN Switching"},"BWBU_ADJ_PF":{"be":"Switching","subBe":"EN Switching"},"BWBU_FUTURE_PF":{"be":"Switching","subBe":"EN Switching"},"BWCBL":{"be":"Switching","subBe":"EN Switching"},"BWCPE":{"be":"Switching","subBe":"EN Switching"},"BWFLTR":{"be":"Switching","subBe":"EN Switching"},"BWKCALL":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"BWNAUTO":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"BWRFS":{"be":"Switching","subBe":"EN Switching"},"BWSAUTO":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"BWSUBA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"BWSUBAX":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"BWSUBT":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"BWSUBTX":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"BWSW":{"be":"Switching","subBe":"EN Switching"},"BWUAUTO":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"BYONO":{"be":"COLLABORATION","subBe":"CPAAS"},"C1000":{"be":"Switching","subBe":"EN Switching"},"C1100":{"be":"Switching","subBe":"EN Switching"},"C1105AX":{"be":"Wireless","subBe":"EN Wireless"},"C1115AX":{"be":"Wireless","subBe":"EN Wireless"},"C1200":{"be":"Switching","subBe":"EN Switching"},"C1200OE":{"be":"Switching","subBe":"EN Switching"},"C1300":{"be":"Switching","subBe":"EN Switching"},"C1400":{"be":"Switching","subBe":"EN Switching"},"C1600":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"C1700":{"be":"Switching","subBe":"EN Switching"},"C1800BB":{"be":"Routing","subBe":"EN Routing"},"C1900":{"be":"Switching","subBe":"EN Switching"},"C193XF3":{"be":"Data Center Networking","subBe":"NX9K"},"C1A1000":{"be":"Routing","subBe":"EN Routing"},"C1A9000":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"C1AIRA":{"be":"Wireless","subBe":"EN Wireless"},"C1AIRF":{"be":"Wireless","subBe":"EN Wireless"},"C1BD":{"be":"Cisco Compute","subBe":"Intersight"},"C1C296X":{"be":"Switching","subBe":"EN Switching"},"C1C356X":{"be":"Switching","subBe":"EN Switching"},"C1C3650":{"be":"Switching","subBe":"EN Switching"},"C1C3850":{"be":"Switching","subBe":"EN Switching"},"C1C4500":{"be":"Switching","subBe":"EN Switching"},"C1C450X":{"be":"Switching","subBe":"EN Switching"},"C1C68FD":{"be":"Switching","subBe":"EN Switching"},"C1C68MD":{"be":"Switching","subBe":"EN Switching"},"C1C9300":{"be":"Switching","subBe":"EN Switching"},"C1C9400":{"be":"Switching","subBe":"EN Switching"},"C1C9500":{"be":"Switching","subBe":"EN Switching"},"C1I1900":{"be":"Routing","subBe":"EN Routing"},"C1I2900":{"be":"Routing","subBe":"EN Routing"},"C1I3900":{"be":"Routing","subBe":"EN Routing"},"C1I4300":{"be":"Routing","subBe":"EN Routing"},"C1I4400":{"be":"Routing","subBe":"EN Routing"},"C1IAAS":{"be":"Cisco Compute","subBe":"Intersight"},"C1IOTGW":{"be":"Routing","subBe":"IIoT Routing"},"C1IOTSW":{"be":"Switching","subBe":"IIoT Switching"},"C1ITSM":{"be":"Cisco Compute","subBe":"Intersight"},"C1MDS9K":{"be":"Data Center Networking","subBe":"SAN"},"C1N3000":{"be":"Data Center Networking","subBe":"NX3K"},"C1N3500":{"be":"Data Center Networking","subBe":"NX3K"},"C1N5000":{"be":"Data Center Networking","subBe":"NX2/4/5/6K"},"C1N6000":{"be":"Data Center Networking","subBe":"NX2/4/5/6K"},"C1N7000":{"be":"Data Center Networking","subBe":"NX7K"},"C1N9300":{"be":"Data Center Networking","subBe":"NX9K"},"C1N9500":{"be":"Data Center Networking","subBe":"NX9K"},"C1N9800":{"be":"Data Center Networking","subBe":"NX9K"},"C1UCS":{"be":"Cisco Compute","subBe":"Intersight"},"C1UCSC":{"be":"Cisco Compute","subBe":"Intersight"},"C2100":{"be":"Switching","subBe":"EN Switching"},"C2350":{"be":"Switching","subBe":"EN Switching"},"C2360":{"be":"Switching","subBe":"EN Switching"},"C2600":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"C2800":{"be":"Switching","subBe":"EN Switching"},"C2900":{"be":"Switching","subBe":"EN Switching"},"C2900XL":{"be":"Switching","subBe":"EN Switching"},"C2918":{"be":"Switching","subBe":"EN Switching"},"C2928":{"be":"Switching","subBe":"EN Switching"},"C2940":{"be":"Switching","subBe":"EN Switching"},"C2948":{"be":"Switching","subBe":"EN Switching"},"C2950":{"be":"Switching","subBe":"EN Switching"},"C2960":{"be":"Switching","subBe":"EN Switching"},"C2960C":{"be":"Switching","subBe":"EN Switching"},"C2960CX":{"be":"Switching","subBe":"EN Switching"},"C2960DI":{"be":"Switching","subBe":"EN Switching"},"C2960L":{"be":"Switching","subBe":"EN Switching"},"C2960P":{"be":"Switching","subBe":"EN Switching"},"C2960S":{"be":"Switching","subBe":"EN Switching"},"C2960SF":{"be":"Switching","subBe":"EN Switching"},"C2960X":{"be":"Switching","subBe":"EN Switching"},"C2960XR":{"be":"Switching","subBe":"EN Switching"},"C296SDI":{"be":"Switching","subBe":"EN Switching"},"C296XED":{"be":"Switching","subBe":"EN Switching"},"C2970":{"be":"Switching","subBe":"EN Switching"},"C2975":{"be":"Switching","subBe":"EN Switching"},"C3":{"be":"Cisco Compute","subBe":"Servers"},"C3000":{"be":"Switching","subBe":"EN Switching"},"C3500":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"C3500XL":{"be":"Switching","subBe":"EN Switching"},"C3550":{"be":"Switching","subBe":"EN Switching"},"C3560":{"be":"Switching","subBe":"EN Switching"},"C3560C":{"be":"Switching","subBe":"EN Switching"},"C3560CX":{"be":"Switching","subBe":"EN Switching"},"C3560DI":{"be":"Switching","subBe":"EN Switching"},"C3560E":{"be":"Switching","subBe":"EN Switching"},"C3560X":{"be":"Switching","subBe":"EN Switching"},"C356XDI":{"be":"Switching","subBe":"EN Switching"},"C3650":{"be":"Switching","subBe":"EN Switching"},"C3650ED":{"be":"Switching","subBe":"EN Switching"},"C3700":{"be":"Switching","subBe":"EN Switching"},"C3750":{"be":"Switching","subBe":"EN Switching"},"C3750DI":{"be":"Switching","subBe":"EN Switching"},"C3750E":{"be":"Switching","subBe":"EN Switching"},"C3750X":{"be":"Switching","subBe":"EN Switching"},"C375EDI":{"be":"Switching","subBe":"EN Switching"},"C375XDI":{"be":"Switching","subBe":"EN Switching"},"C3850":{"be":"Switching","subBe":"EN Switching"},"C3850ED":{"be":"Switching","subBe":"EN Switching"},"C3850X":{"be":"Switching","subBe":"EN Switching"},"C385WPA":{"be":"Switching","subBe":"EN Switching"},"C3900":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"C3A":{"be":"Cisco Compute","subBe":"Servers"},"C3WPA":{"be":"Cisco Compute","subBe":"Servers"},"C4000":{"be":"Switching","subBe":"EN Switching"},"C4500":{"be":"Switching","subBe":"EN Switching"},"C4500DI":{"be":"Switching","subBe":"EN Switching"},"C4500X":{"be":"Switching","subBe":"EN Switching"},"C45KWPA":{"be":"Switching","subBe":"EN Switching"},"C45XWPA":{"be":"Switching","subBe":"EN Switching"},"C4900M":{"be":"Switching","subBe":"EN Switching"},"C4912":{"be":"Switching","subBe":"EN Switching"},"C4K_FXD":{"be":"Switching","subBe":"EN Switching"},"C4KFXD":{"be":"Switching","subBe":"EN Switching"},"C4KFXDI":{"be":"Switching","subBe":"EN Switching"},"C4KTOR":{"be":"Switching","subBe":"EN Switching"},"C5000":{"be":"Switching","subBe":"EN Switching"},"C6000":{"be":"Switching","subBe":"EN Switching"},"C6000DI":{"be":"Switching","subBe":"EN Switching"},"C6000G":{"be":"Routing","subBe":"EN Routing"},"C6800FD":{"be":"Switching","subBe":"EN Switching"},"C6800IA":{"be":"Switching","subBe":"EN Switching"},"C6800MD":{"be":"Switching","subBe":"EN Switching"},"C6KWPA":{"be":"Switching","subBe":"EN Switching"},"C8100G":{"be":"Routing","subBe":"EN Routing"},"C8200G":{"be":"Routing","subBe":"EN Routing"},"C8300":{"be":"Routing","subBe":"EN Routing"},"C8300G":{"be":"Routing","subBe":"EN Routing"},"C8400G":{"be":"Routing","subBe":"EN Routing"},"C8500":{"be":"Switching","subBe":"EN Switching"},"C8500G":{"be":"Routing","subBe":"EN Routing"},"C8540":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"C8KPCM":{"be":"Routing","subBe":"EN Routing"},"C9105AX":{"be":"Wireless","subBe":"EN Wireless"},"C9110AX":{"be":"Wireless","subBe":"EN Wireless"},"C9115AX":{"be":"Wireless","subBe":"EN Wireless"},"C9117AX":{"be":"Wireless","subBe":"EN Wireless"},"C9120AX":{"be":"Wireless","subBe":"EN Wireless"},"C9124AX":{"be":"Wireless","subBe":"EN Wireless"},"C9130AX":{"be":"Wireless","subBe":"EN Wireless"},"C9136AX":{"be":"Wireless","subBe":"EN Wireless"},"C9140AX":{"be":"Wireless","subBe":"EN Wireless"},"C91DNA":{"be":"Wireless","subBe":"EN Wireless"},"C91DNAE":{"be":"Wireless","subBe":"EN Wireless"},"C91DNAS":{"be":"Wireless","subBe":"EN Wireless"},"C9200":{"be":"Switching","subBe":"EN Switching"},"C9200C":{"be":"Switching","subBe":"EN Switching"},"C9200CX":{"be":"Switching","subBe":"EN Switching"},"C9200L":{"be":"Switching","subBe":"EN Switching"},"C9200LM":{"be":"Switching","subBe":"Meraki Switching"},"C9200R":{"be":"Switching","subBe":"EN Switching"},"C92CXED":{"be":"Switching","subBe":"EN Switching"},"C92EDU":{"be":"Switching","subBe":"EN Switching"},"C92LEDU":{"be":"Switching","subBe":"EN Switching"},"C9300":{"be":"Switching","subBe":"EN Switching"},"C9300AG":{"be":"Switching","subBe":"EN Switching"},"C9300AM":{"be":"Switching","subBe":"Meraki Switching"},"C9300ED":{"be":"Switching","subBe":"EN Switching"},"C9300L":{"be":"Switching","subBe":"EN Switching"},"C9300LM":{"be":"Switching","subBe":"Meraki Switching"},"C9300TE":{"be":"Switching","subBe":"EN Switching"},"C9300XM":{"be":"Switching","subBe":"Meraki Switching"},"C9350":{"be":"Switching","subBe":"EN Switching"},"C9350AG":{"be":"Switching","subBe":"EN Switching"},"C9350L":{"be":"Switching","subBe":"EN Switching"},"C93AGED":{"be":"Switching","subBe":"EN Switching"},"C93KWPA":{"be":"Switching","subBe":"EN Switching"},"C93LEDU":{"be":"Switching","subBe":"EN Switching"},"C93XFP":{"be":"Data Center Networking","subBe":"NX9K"},"C9400":{"be":"Switching","subBe":"EN Switching"},"C9400ED":{"be":"Switching","subBe":"EN Switching"},"C9400TE":{"be":"Switching","subBe":"EN Switching"},"C9500":{"be":"Switching","subBe":"EN Switching"},"C9500ED":{"be":"Switching","subBe":"EN Switching"},"C9500H":{"be":"Switching","subBe":"EN Switching"},"C9550":{"be":"Switching","subBe":"EN Switching"},"C95KWPA":{"be":"Switching","subBe":"EN Switching"},"C9600":{"be":"Switching","subBe":"EN Switching"},"C9600ED":{"be":"Switching","subBe":"EN Switching"},"C9610":{"be":"Switching","subBe":"EN Switching"},"C980005":{"be":"Wireless","subBe":"EN Wireless"},"C980010":{"be":"Wireless","subBe":"EN Wireless"},"C980040":{"be":"Wireless","subBe":"EN Wireless"},"C980080":{"be":"Wireless","subBe":"EN Wireless"},"C9800AC":{"be":"Wireless","subBe":"EN Wireless"},"C9800CL":{"be":"Wireless","subBe":"EN Wireless"},"C9800L":{"be":"Wireless","subBe":"EN Wireless"},"C9800SW":{"be":"Wireless","subBe":"EN Wireless"},"C9800XH":{"be":"Wireless","subBe":"EN Wireless"},"C9800XL":{"be":"Wireless","subBe":"EN Wireless"},"C9800XM":{"be":"Wireless","subBe":"EN Wireless"},"C9CHC":{"be":"Switching","subBe":"EN Switching"},"CA-TRANSACT":{"be":"PROFESSIONAL SVC","subBe":"PROF COLLAB SVC"},"CAAPL":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CAAS":{"be":"Cisco Compute","subBe":"Servers"},"CAASC":{"be":"Cisco Compute","subBe":"Servers"},"CAASPCC":{"be":"COLLABORATION","subBe":"CC-PREM"},"CAASPTP":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CAASPU":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CAASWL":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CALHOUN":{"be":"Switching","subBe":"EN Switching"},"CALLINGTG_ADJ_PF":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CALLMGR":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CAM":{"be":"Switching","subBe":"EN Switching"},"CAM3P":{"be":"Routing","subBe":"IIoT Routing"},"CAMG1":{"be":"Security","subBe":"Sec-SSE"},"CAMPAGN":{"be":"COLLABORATION","subBe":"CPAAS"},"CAMPAGS":{"be":"COLLABORATION","subBe":"CPAAS"},"CAMPBUN":{"be":"Switching","subBe":"EN Switching"},"CAPMWPA":{"be":"Routing","subBe":"Meraki SDWAN"},"CAREBU_ADJ_PF":{"be":"Routing","subBe":"IIoT Routing"},"CAREBU_FDM_ADJ_PF":{"be":"Routing","subBe":"IIoT Routing"},"CARRIERSYSTEMS_TASK_PF":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"CAS":{"be":"Switching","subBe":"EN Switching"},"CASCWS":{"be":"Security","subBe":"Sec-SSE"},"CASSUR":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CAT8100":{"be":"Routing","subBe":"EN Routing"},"CAT8200":{"be":"Routing","subBe":"EN Routing"},"CAT8230":{"be":"Routing","subBe":"EN Routing"},"CAT8300":{"be":"Routing","subBe":"EN Routing"},"CAT8330":{"be":"Routing","subBe":"EN Routing"},"CAT8500":{"be":"Routing","subBe":"EN Routing"},"CAT8530":{"be":"Routing","subBe":"EN Routing"},"CAT8KV":{"be":"Routing","subBe":"EN Routing"},"CATALOG":{"be":"Cisco Compute","subBe":"Servers"},"CATGTWY":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CBABU_ADJ_PF":{"be":"COLLABORATION","subBe":"CC-PREM"},"CBABU_FDM_ADJ_PF":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CBCSSOL":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CBMPLUG":{"be":"Data Center Networking","subBe":"DCN - Acacia Optics Allocation"},"CBS100":{"be":"Switching","subBe":"EN Switching"},"CBS200":{"be":"Switching","subBe":"EN Switching"},"CBS200L":{"be":"Switching","subBe":"EN Switching"},"CBS300":{"be":"Switching","subBe":"EN Switching"},"CBW05":{"be":"Wireless","subBe":"EN Wireless"},"CBW06":{"be":"Wireless","subBe":"EN Wireless"},"CCA":{"be":"Security","subBe":"Sec-TIDR"},"CCADDON":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"CCADDOT":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"CCAR":{"be":"Switching","subBe":"IIoT Switching"},"CCARBU_ADJ_PF":{"be":"Switching","subBe":"IIoT Switching"},"CCASOL":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CCATG_ADJ_PF":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CCBSFT":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"CCBSFTX":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"CCBU_ADJ_PF":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CCBUSVR":{"be":"COLLABORATION","subBe":"CC-PREM"},"CCGWPA":{"be":"Routing","subBe":"Meraki SDWAN"},"CCHRYBU_ADJ_PF":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"CCIAC":{"be":"Data Center Networking","subBe":"NX9K"},"CCIAM":{"be":"Data Center Networking","subBe":"NX9K"},"CCIBU_ADJ_PF":{"be":"Switching","subBe":"EN Switching"},"CCMSBU_ADJ_PF":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"CCMSBU_FUTURE_PF":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CCPAAS":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CCPBU_ADJ_PF":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CCPVRS":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CCS":{"be":"Security","subBe":"Sec-SSE"},"CCSOTHR":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"CCSPLUS":{"be":"COLLABORATION","subBe":"CC-PREM"},"CCTG_ADJ_PF":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CCTI":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CCTISEC":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CCV":{"be":"Switching","subBe":"IIoT Switching"},"CCVAPPL":{"be":"Switching","subBe":"IIoT Switching"},"CCWFOA":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"CCWFOT":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"CDB":{"be":"Switching","subBe":"EN Switching"},"CDIC_ADJ_PF":{"be":"Switching","subBe":"EN Switching"},"CDIC_FUTURE_PF":{"be":"Switching","subBe":"EN Switching"},"CDICG_ADJ_PF":{"be":"Switching","subBe":"EN Switching"},"CDICG_FUTURE_PF":{"be":"Switching","subBe":"EN Switching"},"CDICOLD":{"be":"Switching","subBe":"EN Switching"},"CDN":{"be":"Switching","subBe":"EN Switching"},"CDNSEC":{"be":"Routing","subBe":"EN Routing"},"CDO":{"be":"Security","subBe":"Sec-Net-Security"},"CDOA":{"be":"Security","subBe":"Sec-Net-Security"},"CDOFED":{"be":"Security","subBe":"Sec-Net-Security"},"CDP":{"be":"Routing","subBe":"IIoT Routing"},"CDP3P":{"be":"Routing","subBe":"IIoT Routing"},"CDPSW":{"be":"Routing","subBe":"IIoT Routing"},"CE500":{"be":"Switching","subBe":"EN Switching"},"CE520":{"be":"Switching","subBe":"EN Switching"},"CEM":{"be":"COLLABORATION","subBe":"CC-PREM"},"CEMF":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CEMMWPA":{"be":"Wireless","subBe":"Meraki Sys Manager"},"CENBU_ADJ_PF":{"be":"Switching","subBe":"IIoT Switching"},"CENBU_FDM_ADJ_PF":{"be":"Switching","subBe":"IIoT Switching"},"CENTERS":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CENTRAL":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CENTRI":{"be":"Security","subBe":"Sec-Net-Security"},"CENTWPA":{"be":"Wireless","subBe":"EN Wireless"},"CENUSG":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CES":{"be":"Security","subBe":"Sec-TIDR"},"CESWPA":{"be":"Security","subBe":"Sec-TIDR"},"CETG_ADJ_PF":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"CGE":{"be":"Routing","subBe":"IIoT Routing"},"CGNMS":{"be":"Routing","subBe":"IIoT Routing"},"CGPON":{"be":"Switching","subBe":"EN Switching"},"CGR1000":{"be":"Routing","subBe":"IIoT Routing"},"CGR2000":{"be":"Routing","subBe":"IIoT Routing"},"CGS":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"CGS1000":{"be":"Switching","subBe":"IIoT Switching"},"CGS2500":{"be":"Switching","subBe":"IIoT Switching"},"CHAT":{"be":"COLLABORATION","subBe":"CPAAS"},"CHATS":{"be":"COLLABORATION","subBe":"CPAAS"},"CHMSG":{"be":"COLLABORATION","subBe":"CPAAS"},"CHMSGEO":{"be":"COLLABORATION","subBe":"CPAAS"},"CHMSGNO":{"be":"COLLABORATION","subBe":"CPAAS"},"CHMSGO":{"be":"COLLABORATION","subBe":"CPAAS"},"CHMWPA":{"be":"COLLABORATION","subBe":"CPAAS"},"CHOPENG":{"be":"COLLABORATION","subBe":"CPAAS"},"CHOPT":{"be":"COLLABORATION","subBe":"CPAAS"},"CHOPTN":{"be":"COLLABORATION","subBe":"CPAAS"},"CHOPTU":{"be":"COLLABORATION","subBe":"CPAAS"},"CHOPWPA":{"be":"COLLABORATION","subBe":"CPAAS"},"CHUWPA":{"be":"COLLABORATION","subBe":"CPAAS"},"CIBRAS":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CIBU_ADJ_PF":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CIBU_FDM_ADJ_PF":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CIC":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CIGBU_ADJ_PF":{"be":"Switching","subBe":"IIoT Switching"},"CIGBU_FDM_ADJ_PF":{"be":"Switching","subBe":"IIoT Switching"},"CILIUM":{"be":"Security","subBe":"Sec-Net-Security"},"CINTWPA":{"be":"COLLABORATION","subBe":"VIDEO DEVICES"},"CIOTWPA":{"be":"Other Networking","subBe":"Meraki IOT"},"CIPM":{"be":"Switching","subBe":"EN Switching"},"CIRBAS":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CIS":{"be":"COLLABORATION","subBe":"CC-PREM"},"CISCO90":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"CISE":{"be":"Security","subBe":"Sec-Net-Security"},"CISEWPA":{"be":"Security","subBe":"Sec-Net-Security"},"CISLIC":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CISMCS":{"be":"Routing","subBe":"IIoT Routing"},"CISPRO":{"be":"Switching","subBe":"EN Switching"},"CITG_ADJ_PF":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CITYBU_ADJ_PF":{"be":"Routing","subBe":"IIoT Routing"},"CITYBU_FDM_ADJ_PF":{"be":"Routing","subBe":"IIoT Routing"},"CIUS":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"CKCCL":{"be":"Routing","subBe":"IIoT Routing"},"CKCCLA":{"be":"Routing","subBe":"IIoT Routing"},"CKCOP":{"be":"Routing","subBe":"IIoT Routing"},"CKCSPCL":{"be":"Routing","subBe":"IIoT Routing"},"CKCSPHW":{"be":"Routing","subBe":"IIoT Routing"},"CKCSPOP":{"be":"Routing","subBe":"IIoT Routing"},"CLD APP SUP":{"be":"SWSS ENHANCED-PREMIUM SVC","subBe":"SWSS EN-PR SECURITY SVC"},"CLDAPL":{"be":"SPLUNK","subBe":"Splunk Observability"},"CLDAUTO":{"be":"Cisco Compute","subBe":"Servers"},"CLDCALL":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CLDCALT":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CLDCC":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"CLDCCT":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"CLDCHRY":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"CLDCP":{"be":"SPLUNK","subBe":"Splunk Platform"},"CLDCWPA":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"CLDENC":{"be":"SPLUNK","subBe":"Splunk Platform"},"CLDEWPA":{"be":"SPLUNK","subBe":"Splunk Platform"},"CLDFA":{"be":"SPLUNK","subBe":"Splunk Platform"},"CLDFS":{"be":"SPLUNK","subBe":"Splunk Platform"},"CLDING":{"be":"SPLUNK","subBe":"Splunk Platform"},"CLDIP":{"be":"SPLUNK","subBe":"Splunk Platform"},"CLDIWPA":{"be":"SPLUNK","subBe":"Splunk Platform"},"CLDKARR":{"be":"Security","subBe":"Sec-SSE"},"CLDKWPA":{"be":"Security","subBe":"Sec-SSE"},"CLDLK":{"be":"Security","subBe":"Sec-SSE"},"CLDNRE":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CLDPWPA":{"be":"SPLUNK","subBe":"Splunk Platform"},"CLDSIGN":{"be":"Routing","subBe":"IIoT Routing"},"CLDSTRG":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CLDSVC":{"be":"SPLUNK","subBe":"Splunk Platform"},"CLDSWPA":{"be":"SPLUNK","subBe":"Splunk Platform"},"CLFAWPA":{"be":"SPLUNK","subBe":"Splunk Platform"},"CLFSWPA":{"be":"SPLUNK","subBe":"Splunk Platform"},"CLIPWPA":{"be":"SPLUNK","subBe":"Splunk Platform"},"CLM":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CLOUD M SVC":{"be":"CMS MANAGED SVC","subBe":"CMS MANAGED SVC"},"CLOUDCALLINGBU_ADJ_PF":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CLOUDCONTCENTERBU_ADJ_PF":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"CLOUDMP":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CLOUDPP":{"be":"Security","subBe":"Sec-SSE"},"CLOUDUC":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CLWS":{"be":"Security","subBe":"Sec-SSE"},"CM":{"be":"Routing","subBe":"IIoT Routing"},"CMBU_ADJ_PF":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CMBU_FDM_ADJ_PF":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CMD":{"be":"Security","subBe":"Sec-TIDR"},"CMDPCM":{"be":"Security","subBe":"Sec-TIDR"},"CMDWPA":{"be":"Security","subBe":"Sec-TIDR"},"CMFG":{"be":"Routing","subBe":"IIoT Routing"},"CMICR":{"be":"Switching","subBe":"EN Switching"},"CMM":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CMRA":{"be":"Security","subBe":"Sec-Net-Security"},"CMSPLUS":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CN12000":{"be":"Data Center Networking","subBe":"NX7K"},"CN12900":{"be":"Data Center Networking","subBe":"NX9K"},"CN3000":{"be":"Data Center Networking","subBe":"NX2/4/5/6K"},"CN6000":{"be":"Data Center Networking","subBe":"NX3K"},"CN8000":{"be":"Data Center Networking","subBe":"NX2/4/5/6K"},"CN9300":{"be":"Data Center Networking","subBe":"NX9K"},"CNAPM":{"be":"Routing","subBe":"Meraki SDWAN"},"CNBETA":{"be":"Wireless","subBe":"Meraki Wireless"},"CNCG":{"be":"Routing","subBe":"Meraki SDWAN"},"CNCLD":{"be":"Routing","subBe":"Meraki SDWAN"},"CNCOMM":{"be":"Routing","subBe":"Meraki SDWAN"},"CNCW9XI":{"be":"Wireless","subBe":"Meraki Wireless"},"CNCW9XO":{"be":"Wireless","subBe":"Meraki Wireless"},"CNCWMCG":{"be":"Wireless","subBe":"Meraki Wireless"},"CNEMM":{"be":"Wireless","subBe":"Meraki Sys Manager"},"CNGBU_ADJ_PF":{"be":"Routing","subBe":"Meraki SDWAN"},"CNGBU_FDM_ADJ_PF":{"be":"Routing","subBe":"Meraki SDWAN"},"CNI":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CNIOT":{"be":"Wireless","subBe":"Meraki Wireless"},"CNISEC":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CNMOD":{"be":"Routing","subBe":"Meraki SDWAN"},"CNO":{"be":"Switching","subBe":"EN Switching"},"CNOTE":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CNOTHER":{"be":"Routing","subBe":"Meraki SDWAN"},"CNR":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CNS":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CNSBU_ADJ_PF":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"CNSCW":{"be":"Wireless","subBe":"EN Wireless"},"CNSEC":{"be":"Routing","subBe":"Meraki SDWAN"},"CNSECCM":{"be":"Routing","subBe":"Meraki SDWAN"},"CNSNFC":{"be":"Switching","subBe":"EN Switching"},"CNSW935":{"be":"Switching","subBe":"Meraki Switching"},"CNSWC9K":{"be":"Switching","subBe":"Meraki Switching"},"CNSWCM":{"be":"Switching","subBe":"Meraki Switching"},"CNSWTCH":{"be":"Routing","subBe":"Meraki SDWAN"},"CNVSN":{"be":"Routing","subBe":"Meraki SDWAN"},"CNVSNG2":{"be":"Other Networking","subBe":"Meraki Vision"},"CNWRL":{"be":"Switching","subBe":"Meraki Switching"},"CNWRLCM":{"be":"Wireless","subBe":"Meraki Wireless"},"CNWRLO":{"be":"Wireless","subBe":"Meraki Wireless"},"CO":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"COBOBU_ADJ_PF":{"be":"Switching","subBe":"EN Switching"},"COE":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"COISW":{"be":"COLLABORATION","subBe":"CC-PREM"},"COLLAB":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"COLLABBU_ADJ_PF":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"COLLABBU_FDM_ADJ_PF":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"COMB":{"be":"Routing","subBe":"EN Routing"},"CONTENT":{"be":"Routing","subBe":"EN Routing"},"CORE ASFIXED":{"be":"PROFESSIONAL SVC","subBe":"PROF NETWORKING SVC"},"CPAK100":{"be":"Data Center Networking","subBe":"DCN - Optics Allocation"},"CPS AS FIXED":{"be":"PROFESSIONAL SVC","subBe":"PROF NETWORKING SVC"},"CPSENDE":{"be":"Routing","subBe":"IIoT Routing"},"CPSIPC":{"be":"Routing","subBe":"IIoT Routing"},"CPSIPCA":{"be":"Routing","subBe":"IIoT Routing"},"CPSSMHW":{"be":"Routing","subBe":"IIoT Routing"},"CPSSMOD":{"be":"Routing","subBe":"IIoT Routing"},"CPSSMSW":{"be":"Routing","subBe":"IIoT Routing"},"CPSVSSW":{"be":"Routing","subBe":"IIoT Routing"},"CRBU_ADJ_PF":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Core Routing"},"CRS":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Core Routing"},"CSACS":{"be":"Security","subBe":"Sec-TIDR"},"CSBU_FUTURE_PF":{"be":"Routing","subBe":"EN Routing"},"CSF1200":{"be":"Security","subBe":"Sec-Net-Security"},"CSHAASM":{"be":"COLLABORATION","subBe":"VIDEO DEVICES"},"CSMGR":{"be":"Security","subBe":"Sec-Net-Security"},"CSMPG_FUTURE_PF":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CSP2100":{"be":"Routing","subBe":"EN Routing"},"CSR1KV":{"be":"Routing","subBe":"EN Routing"},"CSRPCM":{"be":"Routing","subBe":"EN Routing"},"CTM":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CTSACC":{"be":"COLLABORATION","subBe":"VIDEO DEVICES"},"CTSCHAS":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CTSCONF":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CTSDX":{"be":"COLLABORATION","subBe":"VIDEO DEVICES"},"CTSGW":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CTSIMS":{"be":"COLLABORATION","subBe":"VIDEO DEVICES"},"CTSINT":{"be":"COLLABORATION","subBe":"VIDEO DEVICES"},"CTSKIT":{"be":"COLLABORATION","subBe":"VIDEO DEVICES"},"CTSMPS":{"be":"COLLABORATION","subBe":"VIDEO DEVICES"},"CTSPLUS":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CTSPMP":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CTSPS":{"be":"COLLABORATION","subBe":"VIDEO DEVICES"},"CTSQS":{"be":"COLLABORATION","subBe":"VIDEO DEVICES"},"CTSREC":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CTSSOL":{"be":"COLLABORATION","subBe":"VIDEO DEVICES"},"CTSSPB":{"be":"COLLABORATION","subBe":"VIDEO DEVICES"},"CTSUCS":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CUCMS":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CUVC":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CUWP":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CVCLOUD":{"be":"Routing","subBe":"IIoT Routing"},"CVP":{"be":"COLLABORATION","subBe":"CC-PREM"},"CW9163":{"be":"Wireless","subBe":"EN Wireless"},"CW9164":{"be":"Wireless","subBe":"EN Wireless"},"CW9166":{"be":"Wireless","subBe":"EN Wireless"},"CWAU":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CWAUA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CWAUCC":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CWAUCCU":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CWCMR":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CWCTRS":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CWCTRSU":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CWEE":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CWEEUSG":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CWEIM":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CWFEE":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CWMC":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CWMCFED":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CWMCUSG":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CWOTH":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CWPLAN":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"CWRSUSG":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CWSTG":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CWSTUSG":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CWUSGF":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CWUSGFA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"CWWIN":{"be":"Switching","subBe":"EN Switching"},"CXS":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"CXSECUR":{"be":"Security","subBe":"Sec-Net-Security"},"CYBER":{"be":"Security","subBe":"Sec-TIDR"},"DCASSUR":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"DCMSAAS":{"be":"Cisco Compute","subBe":"Intersight"},"DCSS":{"be":"Security","subBe":"Sec-Net-Security"},"DCV AS-FIXED":{"be":"PROFESSIONAL SVC","subBe":"PROF CAI SVC"},"DDI":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"DDINET":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"DGTLCH":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"DGTLCHT":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"DLCPLUS":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"DLU":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"DMI_FUTURE_PF":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"DNACONT":{"be":"Routing","subBe":"EN Routing"},"DNAHW":{"be":"Switching","subBe":"EN Switching"},"DNAMSP":{"be":"Wireless","subBe":"EN Wireless"},"DNAOPS":{"be":"Routing","subBe":"EN Routing"},"DNASP":{"be":"Wireless","subBe":"Cisco Spaces"},"DNASUB":{"be":"Routing","subBe":"EN Routing"},"DNASW":{"be":"Switching","subBe":"EN Switching"},"DNETCAG":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"DNETCAT":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"DNETCC":{"be":"COLLABORATION","subBe":"CC-PREM"},"DNETCCA":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"DNETCCI":{"be":"Routing","subBe":"EN Routing"},"DNETCCL":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"DNETCCO":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"DNETCLA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"DNETCMS":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"DNETCNA":{"be":"Other Networking","subBe":"Meraki Vision"},"DNETDUO":{"be":"Security","subBe":"Sec-IA-Mgmt"},"DNETEMA":{"be":"Security","subBe":"Sec-TIDR"},"DNETEN":{"be":"Routing","subBe":"EN Routing"},"DNETGGL":{"be":"Cisco Compute","subBe":"Servers"},"DNETINS":{"be":"Data Center Networking","subBe":"NX9K"},"DNETIP":{"be":"Routing","subBe":"IIoT Routing"},"DNETNSO":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"DNETOPA":{"be":"Security","subBe":"Sec-SSE"},"DNETOPB":{"be":"Security","subBe":"Sec-SSE"},"DNETSA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"DNETSPK":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"DNETSR":{"be":"Routing","subBe":"EN Routing"},"DNETUCE":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"DNETUCI":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"DNETUCS":{"be":"Cisco Compute","subBe":"Servers"},"DNETUIA":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"DNETXDR":{"be":"Security","subBe":"Sec-TIDR"},"DSBU_FUTURE_PF":{"be":"Switching","subBe":"EN Switching"},"DSBUOTH":{"be":"Switching","subBe":"EN Switching"},"DUOPROD":{"be":"Security","subBe":"Sec-IA-Mgmt"},"E340":{"be":"Switching","subBe":"EN Switching"},"E980080":{"be":"Wireless","subBe":"EN Wireless"},"EACC":{"be":"COLLABORATION","subBe":"CC-PREM"},"EACOLAB":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"EAUC":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"EDUCLD":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"EMBRANE":{"be":"Data Center Networking","subBe":"NX9K"},"EMBUNAM":{"be":"Switching","subBe":"EN Switching"},"ENCS":{"be":"Routing","subBe":"EN Routing"},"ENTATA":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"EPNCORE":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"EPNMNET":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"ERBU_FUTURE_PF":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"ERBUOLD":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"ESA":{"be":"Security","subBe":"Sec-TIDR"},"ESG AS FIXED":{"be":"PROFESSIONAL SVC","subBe":"PROF NETWORKING SVC"},"ESR":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"EWMGMT":{"be":"Routing","subBe":"IIoT Routing"},"EWMGMTA":{"be":"Routing","subBe":"IIoT Routing"},"EXPY":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"EXPYHW":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"F1KLOW":{"be":"Security","subBe":"Sec-Net-Security"},"F2KMID":{"be":"Security","subBe":"Sec-Net-Security"},"F3KMID":{"be":"Security","subBe":"Sec-Net-Security"},"F4KHIGH":{"be":"Security","subBe":"Sec-Net-Security"},"FABAHW":{"be":"Data Center Networking","subBe":"NX9K"},"FASTPAD":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"FLXAGMT":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"FLXAUA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"FLXCC":{"be":"COLLABORATION","subBe":"CC-PREM"},"FLXHSTD":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"FLXMTA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"FLXPKA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"FLXPRM":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"FLXPRMA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"FPHIGH":{"be":"Security","subBe":"Sec-Net-Security"},"FPMID":{"be":"Security","subBe":"Sec-Net-Security"},"FPRHIGH":{"be":"Security","subBe":"Sec-Net-Security"},"FPRLOW":{"be":"Security","subBe":"Sec-Net-Security"},"FPRMID":{"be":"Security","subBe":"Sec-Net-Security"},"FPRMID3":{"be":"Security","subBe":"Sec-Net-Security"},"FPRUHI":{"be":"Security","subBe":"Sec-Net-Security"},"FSIGHT":{"be":"Security","subBe":"Sec-Net-Security"},"FULFILL":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"FXPSTN":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"FXPSTNA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"GATEWAY":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"GBIC":{"be":"Switching","subBe":"Optics Allocation"},"GSR":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"GTWYHW":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"HCARE":{"be":"Routing","subBe":"IIoT Routing"},"HCI6HW":{"be":"Cisco Compute","subBe":"Hyper Converged"},"HCIHW":{"be":"Cisco Compute","subBe":"Hyper Converged"},"HCLDCC":{"be":"COLLABORATION","subBe":"CC-PREM"},"HCS":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"HCSD":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"HCSFED":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"HCSGWX":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"HOSTESA":{"be":"Security","subBe":"Sec-TIDR"},"HOSTWS":{"be":"Security","subBe":"Sec-SSE"},"HSS_ADJ_PF":{"be":"Switching","subBe":"EN Switching"},"HSTDCC":{"be":"COLLABORATION","subBe":"CC-PREM"},"IAD240":{"be":"Routing","subBe":"EN Routing"},"IAD880":{"be":"Routing","subBe":"EN Routing"},"IBLOFLX":{"be":"SPLUNK","subBe":"Splunk Observability"},"IBLSFLX":{"be":"SPLUNK","subBe":"Splunk Observability"},"ICEACHW":{"be":"Routing","subBe":"IIoT Routing"},"ICEACSW":{"be":"Routing","subBe":"IIoT Routing"},"ICEVSHW":{"be":"Routing","subBe":"IIoT Routing"},"ICEVSSW":{"be":"Routing","subBe":"IIoT Routing"},"ICF":{"be":"Data Center Networking","subBe":"NX2/4/5/6K"},"ICM":{"be":"COLLABORATION","subBe":"CC-PREM"},"ICV":{"be":"Routing","subBe":"EN Routing"},"ICVSW":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"ICVSWC1":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"IDS":{"be":"Security","subBe":"Sec-Net-Security"},"IE1000":{"be":"Switching","subBe":"IIoT Switching"},"IE2000":{"be":"Switching","subBe":"IIoT Switching"},"IE3000":{"be":"Switching","subBe":"IIoT Switching"},"IE3100":{"be":"Switching","subBe":"IIoT Switching"},"IE4000":{"be":"Switching","subBe":"IIoT Switching"},"IE5000":{"be":"Switching","subBe":"IIoT Switching"},"IE9300":{"be":"Switching","subBe":"IIoT Switching"},"IEACCS":{"be":"Switching","subBe":"IIoT Switching"},"IEP":{"be":"COLLABORATION","subBe":"CC-PREM"},"INACTIV":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"INDAPPL":{"be":"Security","subBe":"Sec-Net-Security"},"INFRA":{"be":"Wireless","subBe":"EN Wireless"},"INS":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"INSECSW":{"be":"Security","subBe":"Sec-Net-Security"},"IOG":{"be":"Switching","subBe":"EN Switching"},"IOSXRSW":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Core Routing"},"IOSXRV":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Edge Routing"},"IOTAVHW":{"be":"Wireless","subBe":"IIoT Wireless"},"IOTCLD":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Control Center"},"IOTDC":{"be":"Routing","subBe":"IIoT Routing"},"IOTMGMT":{"be":"Routing","subBe":"IIoT Routing"},"IOTSYS":{"be":"Wireless","subBe":"IIoT Wireless"},"IPACCES":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"IPCBU_FDM_ADJ_PF":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"IPCCE":{"be":"COLLABORATION","subBe":"CC-PREM"},"IPCCX":{"be":"COLLABORATION","subBe":"CC-PREM"},"IPCUCHW":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"IPCUCS":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"IPICS":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"IPICSHW":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"IPIVR":{"be":"COLLABORATION","subBe":"CC-PREM"},"IPPHONE":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"IR1000":{"be":"Routing","subBe":"IIoT Routing"},"IR1100":{"be":"Routing","subBe":"IIoT Routing"},"IR8100":{"be":"Routing","subBe":"IIoT Routing"},"IS":{"be":"Routing","subBe":"EN Routing"},"ISA500":{"be":"Security","subBe":"Sec-Net-Security"},"ISBU_FUTURE_PF":{"be":"Switching","subBe":"EN Switching"},"ISR1K":{"be":"Routing","subBe":"EN Routing"},"ISR900":{"be":"Routing","subBe":"EN Routing"},"ISVT":{"be":"Security","subBe":"Sec-Net-Security"},"IW9165":{"be":"Wireless","subBe":"IIoT Wireless"},"IW9167":{"be":"Wireless","subBe":"IIoT Wireless"},"IWOA":{"be":"Cisco Compute","subBe":"Intersight"},"KT":{"be":"PROFESSIONAL SVC","subBe":"PROF NETWORKING SVC"},"L1010":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"LEGCYI":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"M2M800":{"be":"Routing","subBe":"IIoT Routing"},"MCEBU_FUTURE_PF":{"be":"Routing","subBe":"EN Routing"},"MDS9000":{"be":"Data Center Networking","subBe":"SAN"},"ME1200":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"ME3400":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"ME3600X":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"ME3800X":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"MGX":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"MOBGW":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"MOBLITY":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"MRBU_FUTURE_PF":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"MTGADDA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"MTPLACE":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"N1000":{"be":"Data Center Networking","subBe":"NX2/4/5/6K"},"N2000":{"be":"Data Center Networking","subBe":"NX2/4/5/6K"},"N3000":{"be":"Data Center Networking","subBe":"NX3K"},"N3500":{"be":"Data Center Networking","subBe":"NX3K"},"N3550":{"be":"Data Center Networking","subBe":"NX3K"},"N4000":{"be":"Data Center Networking","subBe":"NX2/4/5/6K"},"N5000":{"be":"Data Center Networking","subBe":"NX2/4/5/6K"},"N6000":{"be":"Data Center Networking","subBe":"NX2/4/5/6K"},"N6700":{"be":"Data Center Networking","subBe":"NX7K"},"N7000":{"be":"Data Center Networking","subBe":"NX7K"},"N8500":{"be":"Data Center Networking","subBe":"NX9K"},"N9300":{"be":"Data Center Networking","subBe":"NX9K"},"N93PERP":{"be":"Data Center Networking","subBe":"NX9K"},"N9500":{"be":"Data Center Networking","subBe":"NX9K"},"N95PERP":{"be":"Data Center Networking","subBe":"NX9K"},"N9800":{"be":"Data Center Networking","subBe":"NX9K"},"N9KFXDP":{"be":"Data Center Networking","subBe":"NX9K"},"N9KMODP":{"be":"Data Center Networking","subBe":"NX9K"},"NCS1000":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"NCS1KFC":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"NCS4000":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"NCS4200":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"NCS540":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"NCS5500":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Core Routing"},"NCS55FC":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Core Routing"},"NCS560":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"NCS6000":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Core Routing"},"NFVI":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"NIA":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"NS1000":{"be":"Data Center Networking","subBe":"NX2/4/5/6K"},"NSFC":{"be":"Cisco Compute","subBe":"Servers"},"NSO":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"OEM":{"be":"Security","subBe":"Sec-Net-Security"},"OLDRIBU":{"be":"Routing","subBe":"EN Routing"},"ONG_FUTURE_PF":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"ONPREMCONTCENTERBU_ADJ_PF":{"be":"COLLABORATION","subBe":"CC-PREM"},"ONS":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"ONT1000":{"be":"Switching","subBe":"EN Switching"},"OPENSDN":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"OS":{"be":"Switching","subBe":"EN Switching"},"OTBU_FDM_ADJ_PF":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"OTHER-TRANSACTION":{"be":"PROFESSIONAL SVC","subBe":"PROF COLLAB SVC"},"PABUSWP":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"PANUA":{"be":"Switching","subBe":"EN Switching"},"PCBU_FUTURE_PF":{"be":"Routing","subBe":"EN Routing"},"PDI":{"be":"PROFESSIONAL SVC","subBe":"PROF CAI SVC"},"PGW":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"PH3HAAS":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"PHCONF":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"PHHDST1":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"PHHSCWL":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"PHON3PC":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"PHONCOL":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"PHONE":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"PHONVID":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"PHONVOC":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"PHSPARK":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"PHSPLUS":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"PIX":{"be":"Security","subBe":"Sec-Net-Security"},"PMBU_FDM_ADJ_PF":{"be":"Security","subBe":"Sec-SSE"},"POLICY":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"PRESNCE":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"PRIMTDR":{"be":"Routing","subBe":"IIoT Routing"},"PROAUTO":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"PRTCC":{"be":"COLLABORATION","subBe":"CC-PREM"},"PS TRANSACTION":{"be":"PROFESSIONAL SVC","subBe":"PROF NETWORKING SVC"},"PSBU_FUTURE_PF":{"be":"Switching","subBe":"IIoT Switching"},"PSFC":{"be":"Cisco Compute","subBe":"Servers"},"PZ58":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"Q100":{"be":"Data Center Networking","subBe":"DCN - Optics Allocation"},"Q400":{"be":"Data Center Networking","subBe":"DCN - Optics Allocation"},"Q400COH":{"be":"Data Center Networking","subBe":"DCN - Acacia Optics Allocation"},"Q400DCO":{"be":"Data Center Networking","subBe":"DCN - Acacia Optics Allocation"},"QDD400G":{"be":"Data Center Networking","subBe":"DCN - Optics Allocation"},"QMOG":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"QNFV":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"QPOLBH":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"QPOLICY":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"QSF100L":{"be":"Data Center Networking","subBe":"DCN - Optics Allocation"},"QSFP100":{"be":"Data Center Networking","subBe":"DCN - Optics Allocation"},"QSFP40G":{"be":"Data Center Networking","subBe":"DCN - Optics Allocation"},"QSON":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"R4300":{"be":"Routing","subBe":"EN Routing"},"RANTRAN":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"RDWR":{"be":"Security","subBe":"Sec-Net-Security"},"RFBUNSA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"ROBOT":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"SACAC":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"SACACA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"SAFSEC":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"SAHCS":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"SBCSW":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"SBNM":{"be":"Switching","subBe":"EN Switching"},"SBTPFAM":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"SCC":{"be":"Routing","subBe":"IIoT Routing"},"SCCSW":{"be":"Routing","subBe":"IIoT Routing"},"SCH":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"SCP":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"SDNMGMT":{"be":"Wireless","subBe":"EN Wireless"},"SEA":{"be":"Switching","subBe":"IIoT Switching"},"SEC":{"be":"Routing","subBe":"EN Routing"},"SECELA":{"be":"Security","subBe":"Sec-Other"},"SECWBXA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"SERNODE":{"be":"Switching","subBe":"EN Switching"},"SERVER":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"SERVICE":{"be":"PROFESSIONAL SVC","subBe":"PROF NETWORKING SVC"},"SESG ASFIXED":{"be":"PROFESSIONAL SVC","subBe":"PROF NETWORKING SVC"},"SF8100":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Core Routing"},"SFP10G":{"be":"Data Center Networking","subBe":"DCN - Optics Allocation"},"SFP25G":{"be":"Data Center Networking","subBe":"DCN - Optics Allocation"},"SFPFE":{"be":"Data Center Networking","subBe":"DCN - Optics Allocation"},"SFPGE":{"be":"Data Center Networking","subBe":"DCN - Optics Allocation"},"SFPHSTD":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"SFS":{"be":"Data Center Networking","subBe":"NX2/4/5/6K"},"SFTAPP":{"be":"Switching","subBe":"EN Switching"},"SFTCLNT":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"SHSITE":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"SHSITEA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"SKYHW":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Provider Connectivity Assurance"},"SLDOGPL":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"SMA":{"be":"Security","subBe":"Sec-TIDR"},"SMBU_FDM_ADJ_PF":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"SMBUOLD":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"SME":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"SP AS FIXED":{"be":"PROFESSIONAL SVC","subBe":"PROF NETWORKING SVC"},"SPA":{"be":"Routing","subBe":"EN Routing"},"SPASSUR":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"SPBDSUB":{"be":"COLLABORATION","subBe":"VIDEO DEVICES"},"SPBOARD":{"be":"COLLABORATION","subBe":"VIDEO DEVICES"},"SPFIRE":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Optical"},"SPG CCA":{"be":"PROFESSIONAL SVC","subBe":"PROF COLLAB SVC"},"SPKAUD":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"SPKCARE":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"SPKCAUA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"SPKCAUD":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"SPKCLD":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"SPKCMR":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"SPKCSB":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"SPKCTRS":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"SPKDESK":{"be":"COLLABORATION","subBe":"VIDEO DEVICES"},"SPKFEE":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"SPKFREE":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"SPKHYBR":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"SPKITHW":{"be":"COLLABORATION","subBe":"VIDEO DEVICES"},"SPKONL":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"SPKPRMP":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"SPKPRUC":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"SPKRMHW":{"be":"COLLABORATION","subBe":"VIDEO DEVICES"},"SPKRMSA":{"be":"COLLABORATION","subBe":"VIDEO DEVICES"},"SPKRMSW":{"be":"COLLABORATION","subBe":"VIDEO DEVICES"},"SPKSTG":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"SPMABU_FDM_ADJ_PF":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"SPMAOLD":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"SPSCRMS":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"SRP500":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"SRVRHW":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"STBU_ADJ_PF":{"be":"Security","subBe":"Sec-Net-Security"},"STBU_FUTURE_PF":{"be":"Security","subBe":"Sec-Net-Security"},"STO ASC":{"be":"PROFESSIONAL SVC","subBe":"PROF IandMI SVC"},"SUBHCS":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"SUITEA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"SUITES":{"be":"Security","subBe":"Sec-Other"},"SV":{"be":"Data Center Networking","subBe":"NX2/4/5/6K"},"SVACAG":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Access Routing"},"SVCGRID AS-F":{"be":"PROFESSIONAL SVC","subBe":"PROF NETWORKING SVC"},"SVCLOUD":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"SVISION":{"be":"Routing","subBe":"IIoT Routing"},"SWATCH":{"be":"Security","subBe":"Sec-TIDR"},"SWATCHC":{"be":"Security","subBe":"Sec-TIDR"},"SWSMRT":{"be":"Switching","subBe":"EN Switching"},"SWSS CLOUD":{"be":"SWSS ENHANCED-PREMIUM SVC","subBe":"SWSS EN-PR OTHER SVC"},"TA":{"be":"Security","subBe":"Sec-Net-Security"},"TAC":{"be":"Security","subBe":"Sec-Net-Security"},"TACHI":{"be":"Security","subBe":"Sec-Net-Security"},"TACLOW":{"be":"Security","subBe":"Sec-Net-Security"},"TACMID":{"be":"Security","subBe":"Sec-Net-Security"},"TAF7K":{"be":"Security","subBe":"Sec-Net-Security"},"TAHI":{"be":"Security","subBe":"Sec-Net-Security"},"TALOW":{"be":"Security","subBe":"Sec-Net-Security"},"TAM":{"be":"Security","subBe":"Sec-Net-Security"},"TAMC":{"be":"Security","subBe":"Sec-Net-Security"},"TAMCHI":{"be":"Security","subBe":"Sec-Net-Security"},"TAMCLOW":{"be":"Security","subBe":"Sec-Net-Security"},"TAMCMID":{"be":"Security","subBe":"Sec-Net-Security"},"TAMHI":{"be":"Security","subBe":"Sec-Net-Security"},"TAMID":{"be":"Security","subBe":"Sec-Net-Security"},"TAMLOW":{"be":"Security","subBe":"Sec-Net-Security"},"TAMMID":{"be":"Security","subBe":"Sec-Net-Security"},"TAS":{"be":"PROFESSIONAL SVC","subBe":"PROF NETWORKING SVC"},"TBA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"TCS":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"TEFLEX":{"be":"ThousandEyes","subBe":"TE-Cisco GPL-OTHERS"},"TELPRES":{"be":"COLLABORATION","subBe":"VIDEO DEVICES"},"TEPROD":{"be":"ThousandEyes","subBe":"TE-Cisco GPL-OTHERS"},"TETR":{"be":"Security","subBe":"Sec-Net-Security"},"TETRAAS":{"be":"Security","subBe":"Sec-Net-Security"},"TETRSW":{"be":"Security","subBe":"Sec-Net-Security"},"THRGRD":{"be":"Security","subBe":"Sec-TIDR"},"THRGRDA":{"be":"Security","subBe":"Sec-TIDR"},"TMG_FUTURE_PF":{"be":"Data Center Networking","subBe":"DCN - Optics Allocation"},"TPAAS":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"TRXABL":{"be":"SPLUNK","subBe":"Splunk Observability"},"TRXDEM":{"be":"SPLUNK","subBe":"Splunk Observability"},"TRXHSTA":{"be":"SPLUNK","subBe":"Splunk Observability"},"TRXHSTI":{"be":"SPLUNK","subBe":"Splunk Observability"},"TRXIBL":{"be":"SPLUNK","subBe":"Splunk Observability"},"TRXOABL":{"be":"SPLUNK","subBe":"Splunk Observability"},"TRXODEM":{"be":"SPLUNK","subBe":"Splunk Observability"},"TRXOIBL":{"be":"SPLUNK","subBe":"Splunk Observability"},"TRXSTOR":{"be":"SPLUNK","subBe":"Splunk Observability"},"TSDNA":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"UC500":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"UC500HW":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"UCL":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"UCMB4HW":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"UCMB6HW":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"UCMBE":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"UCMBE4":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"UCMBE4A":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"UCMBE6":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"UCMBHW":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"UCMCLD":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"UCMGR":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"UCMGRHW":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"UCS":{"be":"Cisco Compute","subBe":"Servers"},"UCS AS FIXED":{"be":"PROFESSIONAL SVC","subBe":"PROF CAI SVC"},"UCS3PSC":{"be":"Cisco Compute","subBe":"Servers"},"UCS3PSW":{"be":"Cisco Compute","subBe":"Servers"},"UCSAI":{"be":"Cisco Compute","subBe":"Servers"},"UCSAIM":{"be":"Cisco Compute","subBe":"Servers"},"UCSAIN":{"be":"Cisco Compute","subBe":"Servers"},"UCSB":{"be":"Cisco Compute","subBe":"Servers"},"UCSBDI":{"be":"Cisco Compute","subBe":"Servers"},"UCSBFC":{"be":"Cisco Compute","subBe":"Servers"},"UCSC":{"be":"Cisco Compute","subBe":"Servers"},"UCSCC":{"be":"Cisco Compute","subBe":"Servers"},"UCSCPUC":{"be":"Cisco Compute","subBe":"Servers"},"UCSCR":{"be":"Cisco Compute","subBe":"Servers"},"UCSE":{"be":"Cisco Compute","subBe":"Servers"},"UCSHX":{"be":"Cisco Compute","subBe":"Hyper Converged"},"UCSM":{"be":"Cisco Compute","subBe":"Intersight"},"UCSMC":{"be":"Cisco Compute","subBe":"Intersight"},"UCSME":{"be":"Cisco Compute","subBe":"Servers"},"UCSMKT":{"be":"Cisco Compute","subBe":"Intersight"},"UCSP":{"be":"Cisco Compute","subBe":"Servers"},"UCSS":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"UCSSEAC":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"UCSSMOB":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"UCSSMSG":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"UCSSSD":{"be":"Cisco Compute","subBe":"Servers"},"UCSSWMS":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"UCST":{"be":"Cisco Compute","subBe":"Servers"},"UCSTC":{"be":"Cisco Compute","subBe":"Servers"},"UCSV":{"be":"Cisco Compute","subBe":"Servers"},"UCSW":{"be":"Cisco Compute","subBe":"Servers"},"UCSX":{"be":"Cisco Compute","subBe":"Servers"},"UCSXC":{"be":"Cisco Compute","subBe":"Servers"},"UCSXE":{"be":"Cisco Compute","subBe":"Servers"},"UMBRLLA":{"be":"Security","subBe":"Sec-SSE"},"UMBSIG":{"be":"Security","subBe":"Sec-SSE"},"UNICONN":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"UNITY":{"be":"COLLABORATION","subBe":"UC-PREM-WX-SUITE"},"UNMNGSW":{"be":"Switching","subBe":"EN Switching"},"USCELL":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"UWLC":{"be":"COLLABORATION","subBe":"CC-PREM"},"UWLI":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"UWLU":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"VACS":{"be":"Data Center Networking","subBe":"NX2/4/5/6K"},"VDCASTS":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"VIPTELA":{"be":"Routing","subBe":"EN Routing"},"VIRTPCM":{"be":"Security","subBe":"Sec-Net-Security"},"VIRTSEC":{"be":"Security","subBe":"Sec-Net-Security"},"VMSSOL":{"be":"Routing","subBe":"EN Routing"},"VOIPACC":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"VPCSW":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"VXC":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"VXCSW":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"VZVBA":{"be":"COLLABORATION","subBe":"CPAAS"},"VZVBO":{"be":"COLLABORATION","subBe":"CPAAS"},"WAAS":{"be":"Routing","subBe":"EN Routing"},"WAE":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"WAENET":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"WANLAN":{"be":"Routing","subBe":"EN Routing"},"WANORCH":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Automation"},"WBE SERVICES":{"be":"PROFESSIONAL SVC","subBe":"PROF COLLAB SVC"},"WBX AS FIXED":{"be":"PROFESSIONAL SVC","subBe":"PROF COLLAB SVC"},"WBXADV":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WBXAU":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WBXAUCC":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WBXCALL":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WBXCALT":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WBXCC":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"WBXCCAD":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"WBXCCAT":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"WBXCCEA":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"WBXCCET":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"WBXCCT":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"WBXCMR":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WBXEE":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WBXEIM":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WBXGOA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WBXGOT":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WBXMC":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WBXONET":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WBXXM":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"WBXXMA":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"WCAGCYA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WCAGCYT":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WCCADD":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"WCCADDA":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"WDM":{"be":"Data Center Networking","subBe":"DCN - Optics Allocation"},"WLAP":{"be":"Wireless","subBe":"EN Wireless"},"WNBU_FUTURE_PF":{"be":"Wireless","subBe":"EN Wireless"},"WPHONE":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"WSA":{"be":"Security","subBe":"Sec-SSE"},"WSPSTNT":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WWHOLE":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WWHOLEA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WXASIST":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WXAST":{"be":"COLLABORATION","subBe":"CPAAS"},"WXASTA":{"be":"COLLABORATION","subBe":"CPAAS"},"WXBWKS":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WXBWKST":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WXBWKSX":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WXCACA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WXCACT":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WXCAMP":{"be":"COLLABORATION","subBe":"CPAAS"},"WXCCE":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"WXCCEA":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"WXCDIA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WXCEXP":{"be":"COLLABORATION","subBe":"CC-CLOUD"},"WXCLASA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WXCLAST":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WXCWSA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WXCWST":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WXEVNTS":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WXEVTAO":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WXEVTOS":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WXEVTOT":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WXEVTS":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WXEVUSG":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WXMTSVR":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WXNTFY":{"be":"COLLABORATION","subBe":"CPAAS"},"WXNTFYO":{"be":"COLLABORATION","subBe":"CPAAS"},"WXVINTA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WXWORK":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"WXWORKA":{"be":"COLLABORATION","subBe":"UC-CLOUD-WX-SUITE"},"X2":{"be":"Switching","subBe":"Optics Allocation"},"XENPAK":{"be":"Switching","subBe":"Optics Allocation"},"XNC":{"be":"Data Center Networking","subBe":"NX9K"},"XPACC":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"XPACCMS":{"be":"COLLABORATION","subBe":"PHONE DEVICES"},"ZEA":{"be":"Security","subBe":"Sec-TIDR"},"ZENOSS":{"be":"Internet and Mass-Scale Infrastructure","subBe":"IMI Mobility"},"CTSBAR":{"be":"COLLABORATION","subBe":"VIDEO DEVICES"},"PHONDP1":{"be":"COLLABORATION","subBe":"PHONE DEVICES"}}</script>
+  <style>
+    :root {
+      --cisco-blue: #049fd9;
+      --cisco-blue-dark: #0378a3;
+      --cisco-teal: #00bceb;
+      --cisco-navy: #1b1464;
+      --rf-highlight: #e8c547;
+      --rf-highlight-border: #c9a227;
+      --radius: 10px;
+      --font: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f1419;
+      --bg-elevated: #1a222c;
+      --bg-sidebar: #151c24;
+      --text: #e8eef4;
+      --text-muted: #8b9bab;
+      --border: #2a3544;
+      --accent: var(--cisco-teal);
+    }
+
+    [data-theme="light"] {
+      --bg: #f0f4f8;
+      --bg-elevated: #ffffff;
+      --bg-sidebar: #ffffff;
+      --text: #1a1a2e;
+      --text-muted: #5c6b7a;
+      --border: #d4dde6;
+      --accent: var(--cisco-blue);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      transition: background 0.2s ease, color 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .view {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    .view[hidden] {
+      display: none !important;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      grid-template-rows: 1fr;
+      flex: 1;
+      min-height: 0;
+    }
+
+    @media (max-width: 900px) {
+      .app {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+      }
+    }
+
+    header {
+      flex-shrink: 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      background: linear-gradient(135deg, var(--cisco-navy) 0%, #0d3a5c 50%, var(--cisco-blue-dark) 100%);
+      color: #fff;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--cisco-teal);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 0.65rem;
+      letter-spacing: -0.02em;
+      color: var(--cisco-navy);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .header-credit {
+      font-size: 0.875rem;
+      opacity: 0.9;
+      white-space: nowrap;
+    }
+
+    .header-version {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      opacity: 0.88;
+      white-space: nowrap;
+      color: var(--text-muted);
+    }
+
+    .app-disclaimer {
+      margin: 0;
+      padding: 1rem 1.5rem;
+      font-size: calc(1.625rem * 0.75);
+      line-height: 1.4;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: var(--text);
+      text-align: center;
+      text-wrap: balance;
+      background: color-mix(in srgb, var(--cisco-blue) 14%, var(--bg-elevated));
+      border-bottom: 2px solid color-mix(in srgb, var(--cisco-blue) 45%, var(--border));
+      box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 12%, transparent);
+      flex-shrink: 0;
+    }
+
+    [data-theme="light"] .app-disclaimer {
+      background: color-mix(in srgb, var(--cisco-blue) 10%, var(--bg-elevated));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+    }
+
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      opacity: 0.95;
+    }
+
+    .theme-toggle label {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .switch {
+      position: relative;
+      width: 48px;
+      height: 26px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 13px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .switch::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.2s ease;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    [data-theme="light"] .switch::after {
+      transform: translateX(22px);
+    }
+
+    aside {
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    @media (max-width: 900px) {
+      aside {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+    }
+
+    aside h2 {
+      margin: 0;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    .upload-zone {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      background: var(--bg-elevated);
+    }
+
+    .upload-zone:hover,
+    .upload-zone.dragover {
+      border-color: var(--cisco-blue);
+      background: color-mix(in srgb, var(--cisco-blue) 8%, var(--bg-elevated));
+    }
+
+    .upload-zone input {
+      display: none;
+    }
+
+    .upload-zone p {
+      margin: 0;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .upload-zone strong {
+      color: var(--accent);
+    }
+
+    .filter-block label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    select {
+      width: 100%;
+      padding: 0.6rem 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      color: var(--text);
+      font-size: 0.9rem;
+      font-family: inherit;
+    }
+
+    select:focus {
+      outline: 2px solid var(--cisco-blue);
+      outline-offset: 2px;
+    }
+
+    .filter-block input[type="text"] {
+      width: 100%;
+      padding: 0.6rem 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      color: var(--text);
+      font-size: 0.9rem;
+      font-family: inherit;
+    }
+
+    .filter-block input[type="text"]:focus {
+      outline: 2px solid var(--cisco-blue);
+      outline-offset: 2px;
+    }
+
+    .filter-block input[type="text"]:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .filter-block .field-hint {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+      line-height: 1.35;
+    }
+
+    .legend-rf {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      padding: 0.5rem 0.75rem;
+      background: var(--bg-elevated);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .legend-rf span {
+      width: 14px;
+      height: 14px;
+      background: var(--rf-highlight);
+      border: 1px solid var(--rf-highlight-border);
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    main {
+      padding: 1.25rem 1.5rem 2rem;
+      overflow: auto;
+    }
+
+    .status {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .status.error {
+      color: #e85d4c;
+    }
+
+    .main-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.75rem 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .main-toolbar .status {
+      margin-bottom: 0;
+      flex: 1;
+      min-width: 12rem;
+    }
+
+    .btn-export-csv {
+      flex-shrink: 0;
+      padding: 0.45rem 0.95rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      font-family: inherit;
+      color: #fff;
+      background: var(--cisco-blue);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .btn-export-csv:hover:not(:disabled) {
+      background: var(--cisco-blue-dark);
+    }
+
+    .btn-export-csv:disabled {
+      opacity: 0.42;
+      cursor: not-allowed;
+    }
+
+    .btn-export-csv:focus-visible {
+      outline: 2px solid var(--cisco-blue);
+      outline-offset: 2px;
+    }
+
+    .table-wrap {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0;
+      overflow: auto;
+      max-height: min(70vh, 900px);
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .data-table th,
+    .data-table td {
+      padding: 0.65rem 0.85rem;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    .data-table thead th {
+      background: color-mix(in srgb, var(--cisco-blue) 14%, var(--bg-elevated));
+      color: var(--text);
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      box-shadow: 0 1px 0 var(--border);
+      padding: 0;
+      vertical-align: bottom;
+    }
+
+    .data-table .sort-btn {
+      width: 100%;
+      margin: 0;
+      padding: 0.65rem 0.85rem;
+      border: none;
+      background: transparent;
+      font: inherit;
+      font-weight: 600;
+      color: inherit;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.4rem;
+      box-sizing: border-box;
+    }
+
+    .data-table .sort-btn:hover {
+      background: color-mix(in srgb, var(--cisco-blue) 22%, var(--bg-elevated));
+    }
+
+    .data-table .sort-btn:focus-visible {
+      outline: 2px solid var(--cisco-blue);
+      outline-offset: -2px;
+    }
+
+    .data-table thead th.num .sort-btn {
+      justify-content: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    .data-table .sort-btn .sort-arrow {
+      font-size: 0.65rem;
+      opacity: 0;
+      flex-shrink: 0;
+    }
+
+    .data-table .sort-btn.sorted-asc .sort-arrow,
+    .data-table .sort-btn.sorted-desc .sort-arrow {
+      opacity: 1;
+    }
+
+    .data-table .sort-btn.sorted-asc .sort-arrow::after {
+      content: "▲";
+    }
+
+    .data-table .sort-btn.sorted-desc .sort-arrow::after {
+      content: "▼";
+    }
+
+    .data-table .num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .data-table tbody tr:hover {
+      background: color-mix(in srgb, var(--text) 5%, transparent);
+    }
+
+    .data-table tbody tr.rf-row {
+      background: var(--rf-highlight);
+    }
+
+    .data-table tbody tr.rf-row:hover {
+      background: color-mix(in srgb, var(--rf-highlight-border) 35%, var(--rf-highlight));
+    }
+
+    .data-table .pct-pos {
+      color: #2ecc71;
+    }
+
+    [data-theme="light"] .data-table .pct-pos {
+      color: #1a7f4c;
+    }
+
+    .data-table .pct-neg {
+      color: #e85d4c;
+    }
+
+    .empty-table {
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .kpi-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.1rem;
+    }
+
+    .kpi-card .kpi-label {
+      margin: 0 0 0.35rem 0;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+    }
+
+    .kpi-card .kpi-value {
+      margin: 0;
+      font-size: 1.45rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .kpi-card .kpi-value.pct-pos {
+      color: #2ecc71;
+    }
+
+    [data-theme="light"] .kpi-card .kpi-value.pct-pos {
+      color: #1a7f4c;
+    }
+
+    .kpi-card .kpi-value.pct-neg {
+      color: #e85d4c;
+    }
+
+    .view-landing {
+      padding: 2rem 1.5rem 3rem;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .landing-inner {
+      max-width: 720px;
+      width: 100%;
+    }
+
+    .landing-inner > p {
+      margin: 0 0 1.5rem 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .landing-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 640px) {
+      .landing-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .landing-card {
+      display: block;
+      text-align: left;
+      padding: 1.35rem 1.25rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      cursor: pointer;
+      font-family: inherit;
+      color: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .landing-card:hover {
+      border-color: var(--cisco-blue);
+      box-shadow: 0 4px 20px rgba(4, 159, 217, 0.15);
+    }
+
+    .landing-card:focus-visible {
+      outline: 2px solid var(--cisco-blue);
+      outline-offset: 2px;
+    }
+
+    .landing-card h2 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .landing-card p {
+      margin: 0;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .landing-lpc-block {
+      margin: 0 0 1.5rem 0;
+      padding: 1rem 1.1rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+    }
+
+    .landing-lpc-block h2 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .landing-lpc-block .upload-hint {
+      margin: 0.5rem 0 0 0;
+      font-size: 0.8125rem;
+      line-height: 1.45;
+      color: var(--text-muted);
+    }
+
+    /* No inner box — only the outer landing-lpc-block frame; upload is plain clickable text */
+    .landing-lpc-block .upload-zone {
+      margin-top: 0.25rem;
+      padding: 0.35rem 0 0.65rem;
+      border: none;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      text-align: left;
+    }
+
+    .landing-lpc-block .upload-zone:hover,
+    .landing-lpc-block .upload-zone.dragover {
+      border: none;
+      background: color-mix(in srgb, var(--cisco-blue) 7%, transparent);
+      border-radius: var(--radius);
+    }
+
+    .landing-lpc-block .upload-zone p {
+      line-height: 1.55;
+    }
+
+    .btn-text-back {
+      align-self: flex-start;
+      margin-bottom: 1rem;
+      padding: 0.35rem 0;
+      border: none;
+      background: none;
+      color: var(--accent);
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .btn-text-back:hover {
+      color: var(--cisco-blue-dark);
+    }
+
+    .btn-text-back:focus-visible {
+      outline: 2px solid var(--cisco-blue);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    .quote-shell {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1.25rem 1.5rem 2.5rem;
+      width: 100%;
+    }
+
+    .quote-heading {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .quote-intro {
+      margin: 0 0 1.25rem 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .quote-uploads {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .quote-upload-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .quote-upload-hint {
+      margin: 0;
+      font-size: 0.8125rem;
+      line-height: 1.45;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 700px) {
+      .quote-uploads {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .upload-file-name {
+      display: block;
+      margin-top: 0.65rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      word-break: break-all;
+    }
+
+    .quote-actions {
+      margin-bottom: 0.75rem;
+    }
+
+    .quote-status {
+      margin: 0 0 1rem 0;
+    }
+
+    .quote-result-panel {
+      margin-top: 0.5rem;
+    }
+
+    .quote-result-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 720px) {
+      .quote-result-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .quote-result-note {
+      margin: 1rem 0 0 0;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .quote-table-wrap {
+      margin-top: 1.25rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0;
+      overflow: auto;
+      max-height: min(55vh, 640px);
+    }
+
+    .quote-table-title {
+      margin: 0;
+      padding: 0.85rem 1rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-bottom: 1px solid var(--border);
+      background: color-mix(in srgb, var(--cisco-blue) 10%, var(--bg-elevated));
+    }
+
+    .quote-table-legend {
+      margin: 0;
+      padding: 0.55rem 1rem 0.75rem;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-elevated);
+    }
+
+    .quote-table-legend .legend-red {
+      color: #e85d4c;
+      font-weight: 600;
+    }
+
+    [data-theme="light"] .quote-table-legend .legend-red {
+      color: #c03428;
+    }
+
+    .quote-detail-table tbody tr.quote-line-high-increase td {
+      color: #e85d4c;
+      font-weight: 600;
+    }
+
+    [data-theme="light"] .quote-detail-table tbody tr.quote-line-high-increase td {
+      color: #c03428;
+    }
+
+    .quote-detail-table {
+      font-size: 0.82rem;
+    }
+
+    .quote-detail-table th,
+    .quote-detail-table td {
+      white-space: nowrap;
+    }
+
+    .quote-detail-table td.text-wrap {
+      white-space: normal;
+      max-width: 14rem;
+    }
+
+    .quote-detail-table .num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .quote-detail-table tfoot td {
+      font-weight: 600;
+      border-top: 2px solid var(--border);
+      background: color-mix(in srgb, var(--bg-elevated) 92%, var(--border));
+    }
+
+    .quote-detail-table tfoot td.quote-detail-total-label {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .aside-nav-top {
+      margin-bottom: 0.25rem;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">CISCO</div>
+      <h1 id="headerTitle">Cisco pricing tools</h1>
+    </div>
+    <div class="header-actions">
+      <span class="header-version" id="headerVersion" aria-label="App version"></span>
+      <span class="header-credit">Created by japoudri</span>
+      <div class="theme-toggle">
+        <span>Dark</span>
+        <div class="switch" id="themeSwitch" role="switch" aria-checked="true" tabindex="0" aria-label="Toggle light theme"></div>
+        <span>Light</span>
+      </div>
+    </div>
+  </header>
+
+  <p class="app-disclaimer" role="note" id="appDisclaimer">
+    This tool is provided as a rough guide only. If you find errors, please reach out to Jason Poudrier via Webex.
+  </p>
+
+  <div id="viewLanding" class="view view-landing">
+    <div class="landing-inner">
+      <div class="landing-lpc-block">
+        <h2>List price change (required for both tools)</h2>
+        <label class="upload-zone" id="landingLpcUploadZone">
+          <input
+            type="file"
+            id="landingLpcFileInput"
+            accept=".csv,.txt,.tsv,.xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/csv"
+          />
+          <p><strong>Upload list price change</strong><br />Excel</p>
+          <span class="upload-file-name" id="landingLpcFileLabel"></span>
+        </label>
+        <p class="upload-hint">
+          Use the <strong>.xlsx</strong> downloaded directly from <strong>LPC.Cisco.com</strong> (no re-save in Excel) when possible.
+        </p>
+      </div>
+      <p>Choose a workflow. You can return here anytime from the back link inside each tool. You can replace the list price file on this page or inside either tool.</p>
+      <div class="landing-cards">
+        <button type="button" class="landing-card" id="landingChooseListPrice">
+          <h2>Review list price change</h2>
+          <p>Filter by BE and product, export or review % change. Use the list price file from the top of this page or replace it in the tool.</p>
+        </button>
+        <button type="button" class="landing-card" id="landingChooseQuote">
+          <h2>Estimate new quote cost</h2>
+          <p>Combine the list price change with a CCW quote export (.xlsx) to estimate line and total cost after future list prices.</p>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="viewListPrice" class="view view-list-price" hidden>
+    <div class="app">
+    <aside>
+      <div class="aside-nav-top">
+        <button type="button" class="btn-text-back" id="listPriceBackBtn">Back to home</button>
+      </div>
+      <h2>Data</h2>
+      <label class="upload-zone" id="uploadZone">
+        <input type="file" id="fileInput" accept=".csv,.txt,.tsv,.xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/csv" />
+        <p><strong>List price change</strong><br />Excel</p>
+      </label>
+      <p class="field-hint" style="margin-top: 0.5rem">
+        Prefer the <strong>.xlsx</strong> downloaded straight from <strong>LPC.Cisco.com</strong>. Replacing the file here also updates the quote tool (and the home upload).
+      </p>
+
+      <div class="kpi-card" aria-live="polite">
+        <p class="kpi-label">Average % change</p>
+        <p class="kpi-value" id="kpiAvgPct">—</p>
+      </div>
+
+      <div class="filter-block">
+        <h2>Filter</h2>
+        <label for="beFilter">BE</label>
+        <select id="beFilter" disabled>
+          <option value="__all__">All BE</option>
+        </select>
+      </div>
+      <div class="filter-block">
+        <label for="subBeFilter">Sub BE</label>
+        <select id="subBeFilter" disabled>
+          <option value="__all__">All Sub BE</option>
+        </select>
+      </div>
+      <div class="filter-block">
+        <label for="rfProductIdFilter">RF in Product ID</label>
+        <select id="rfProductIdFilter" disabled>
+          <option value="__rf_pid_all__">All</option>
+          <option value="__rf_pid_exclude__">Exclude RF</option>
+          <option value="__rf_pid_only__">RF only</option>
+        </select>
+      </div>
+      <div class="filter-block">
+        <label for="productIdSearchInput">Product ID</label>
+        <input
+          type="text"
+          id="productIdSearchInput"
+          autocomplete="off"
+          spellcheck="false"
+          placeholder="Search product ID (2+ characters)…"
+          disabled
+          aria-describedby="productIdSearchHint"
+        />
+        <p class="field-hint" id="productIdSearchHint">
+          Matches anywhere in the ID (hyphens OK); add characters to narrow results.
+        </p>
+      </div>
+
+      <div class="legend-rf">
+        <span aria-hidden="true"></span>
+        Product IDs containing <strong style="color: var(--text)">RF</strong> are highlighted
+      </div>
+    </aside>
+
+    <main>
+      <div class="main-toolbar">
+        <p class="status" id="status">Load a file to view list price changes in the table.</p>
+        <button type="button" class="btn-export-csv" id="exportCsvBtn" disabled>
+          Export CSV
+        </button>
+      </div>
+      <div class="table-wrap" id="tableWrap">
+        <div class="empty-table" id="emptyTableHint">No data loaded yet.</div>
+        <table class="data-table" id="dataTable" hidden>
+          <thead>
+            <tr>
+              <th scope="col" aria-sort="none">
+                <button type="button" class="sort-btn" data-sort-key="productId" title="Sort by Product ID">
+                  <span class="th-text">Product ID</span><span class="sort-arrow" aria-hidden="true"></span>
+                </button>
+              </th>
+              <th scope="col" aria-sort="none">
+                <button type="button" class="sort-btn" data-sort-key="be" title="Sort by BE">
+                  <span class="th-text">BE</span><span class="sort-arrow" aria-hidden="true"></span>
+                </button>
+              </th>
+              <th scope="col" aria-sort="none">
+                <button type="button" class="sort-btn" data-sort-key="subBe" title="Sort by Sub BE">
+                  <span class="th-text">Sub BE</span><span class="sort-arrow" aria-hidden="true"></span>
+                </button>
+              </th>
+              <th scope="col" aria-sort="none">
+                <button type="button" class="sort-btn" data-sort-key="currentFamily" title="Sort by product family">
+                  <span class="th-text">Current product family</span><span class="sort-arrow" aria-hidden="true"></span>
+                </button>
+              </th>
+              <th scope="col" class="num" aria-sort="none">
+                <button type="button" class="sort-btn" data-sort-key="usCurrentGpl" title="Sort by US Current GPL">
+                  <span class="th-text">US Current GPL</span><span class="sort-arrow" aria-hidden="true"></span>
+                </button>
+              </th>
+              <th scope="col" class="num" aria-sort="none">
+                <button type="button" class="sort-btn" data-sort-key="usFutureGpl" title="Sort by US Future GPL">
+                  <span class="th-text">US Future GPL</span><span class="sort-arrow" aria-hidden="true"></span>
+                </button>
+              </th>
+              <th scope="col" class="num" aria-sort="none">
+                <button type="button" class="sort-btn" data-sort-key="pct" title="Sort by percent change">
+                  <span class="th-text">% change</span><span class="sort-arrow" aria-hidden="true"></span>
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody id="dataTableBody"></tbody>
+        </table>
+      </div>
+    </main>
+    </div>
+  </div>
+
+  <div id="viewQuoteEstimate" class="view view-quote" hidden>
+    <div class="quote-shell">
+      <button type="button" class="btn-text-back" id="quoteBackBtn">Back to home</button>
+      <h2 class="quote-heading">Estimate new quote cost</h2>
+      <p class="quote-intro">
+        The <strong>list price change</strong> file is shared with the review tool (upload or change it here or on the home or list-price pages). Upload a <strong>CCW “Price Quotation”</strong> export in .xlsx format.
+        The tool finds the line-items header row (columns such as <strong>#</strong>, Part Number, Unit List Price, Quantity, Discount %, optional Credits), usually near <strong>row 31</strong>.
+        Part numbers are matched to <strong>Product ID</strong> on the price-change file (case-insensitive, Unicode hyphens normalized). <strong>Lines with unit list price $0 are omitted.</strong> With a match, <strong>unit list</strong> becomes <strong>US Future GPL</strong>; without a match, the quote’s existing unit list is kept.
+        <strong>Extended list</strong> = unit list × Quantity (Quantity defaults to 1). <strong>Before credits</strong> = extended list × (100% − Discount %). <strong>Line total</strong> = before credits − Credits when a Credits column is present (otherwise credits = 0). KPI totals are the sum of line totals (was vs new unit list).
+      </p>
+      <div class="quote-uploads">
+        <div class="quote-upload-col">
+          <label class="upload-zone" id="quoteLpcUploadZone">
+            <input
+              type="file"
+              id="quoteLpcFileInput"
+              accept=".csv,.txt,.tsv,.xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/csv"
+            />
+            <p><strong>List price change</strong><br />Excel</p>
+            <span class="upload-file-name" id="quoteLpcFileLabel"></span>
+          </label>
+          <p class="quote-upload-hint">
+            Prefer the <strong>.xlsx</strong> downloaded straight from <strong>LPC.Cisco.com</strong>. Same file as home / list-price upload.
+          </p>
+        </div>
+        <div class="quote-upload-col">
+          <label class="upload-zone" id="quoteCcwUploadZone">
+            <input
+              type="file"
+              id="quoteCcwFileInput"
+              accept=".xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
+            />
+            <p><strong>CCW quote export</strong><br />.xlsx or .xls</p>
+            <span class="upload-file-name" id="quoteCcwFileLabel"></span>
+          </label>
+          <p class="quote-upload-hint">
+            Export an existing quote as <strong>XLSX — CCW Standard Format</strong> and ensure <strong>Line Level Discounts</strong> is checked in the export options.
+          </p>
+        </div>
+      </div>
+      <div class="quote-actions">
+        <button type="button" class="btn-export-csv" id="quoteCalcBtn" disabled>Calculate estimate</button>
+      </div>
+      <p class="status quote-status" id="quoteEstimateStatus"></p>
+      <div id="quoteResultPanel" class="quote-result-panel" hidden>
+        <div class="quote-result-grid">
+          <div class="kpi-card">
+            <p class="kpi-label">Previous total (sum of line costs)</p>
+            <p class="kpi-value" id="quotePriorTotal">—</p>
+          </div>
+          <div class="kpi-card">
+            <p class="kpi-label">New estimated total (sum of line costs)</p>
+            <p class="kpi-value" id="quoteNewTotal">—</p>
+          </div>
+          <div class="kpi-card">
+            <p class="kpi-label">Total % change</p>
+            <p class="kpi-value" id="quoteTotalPct">—</p>
+          </div>
+        </div>
+        <p class="quote-result-note" id="quoteResultNote"></p>
+        <div class="quote-table-wrap" id="quoteTableWrap">
+          <h3 class="quote-table-title">Estimated line updates</h3>
+          <p class="quote-table-legend" id="quoteHighIncreaseLegend">
+            Rows in <span class="legend-red">red</span> are lines where estimated <strong>line total (new)</strong> is more than
+            <strong>15%</strong> higher than <strong>line total (was)</strong> (same basis as overall % change).
+          </p>
+          <table class="data-table quote-detail-table" id="quoteDetailTable">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Part number</th>
+                <th scope="col" class="num">Qty</th>
+                <th scope="col">Match</th>
+                <th scope="col" class="num">Unit list (was)</th>
+                <th scope="col" class="num">Unit list (new)</th>
+                <th scope="col" class="num">Ext list (was)</th>
+                <th scope="col" class="num">Ext list (new)</th>
+                <th scope="col" class="num">Disc %</th>
+                <th scope="col" class="num">Disc $ (new)</th>
+                <th scope="col" class="num">Before credits (was)</th>
+                <th scope="col" class="num">Before credits (new)</th>
+                <th scope="col" class="num">Credits</th>
+                <th scope="col" class="num">Line total (was)</th>
+                <th scope="col" class="num">Line total (new)</th>
+              </tr>
+            </thead>
+            <tbody id="quoteDetailTableBody"></tbody>
+            <tfoot id="quoteDetailTableFoot"></tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const THEME_KEY = "cisco-lpc-dashboard-theme";
+      /**
+       * Shown in `#headerVersion` next to “Created by…”.
+       *
+       * **Bump rule:** increase `APP_VERSION_DECIMAL` by **0.1** on every edit to this HTML file
+       * (see `.cursor/rules/lpc-dashboard-html-version.mdc`). Display = `Beta` + one decimal.
+       *
+       * Current value is advanced by +0.1 per edit to this file (see workspace rule).
+       */
+      const APP_VERSION_DECIMAL = 6.6;
+      const APP_VERSION = "Beta " + APP_VERSION_DECIMAL.toFixed(1);
+      const root = document.documentElement;
+      const themeSwitch = document.getElementById("themeSwitch");
+      const saved = localStorage.getItem(THEME_KEY);
+      const initialLight = saved === "light";
+      if (initialLight) {
+        root.setAttribute("data-theme", "light");
+        themeSwitch.setAttribute("aria-checked", "false");
+      } else {
+        root.setAttribute("data-theme", "dark");
+        themeSwitch.setAttribute("aria-checked", "true");
+      }
+
+      function setTheme(light) {
+        if (light) {
+          root.setAttribute("data-theme", "light");
+          localStorage.setItem(THEME_KEY, "light");
+          themeSwitch.setAttribute("aria-checked", "false");
+        } else {
+          root.setAttribute("data-theme", "dark");
+          localStorage.setItem(THEME_KEY, "dark");
+          themeSwitch.setAttribute("aria-checked", "true");
+        }
+      }
+
+      const headerVersionEl = document.getElementById("headerVersion");
+      if (headerVersionEl) headerVersionEl.textContent = APP_VERSION;
+
+      themeSwitch.addEventListener("click", function () {
+        setTheme(root.getAttribute("data-theme") !== "light");
+      });
+      themeSwitch.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setTheme(root.getAttribute("data-theme") !== "light");
+        }
+      });
+
+      const FILTER_ALL = "__all__";
+      const UNMAPPED = "__unmapped__";
+      const PRODUCT_ID_SEARCH_MIN_LEN = 2;
+      const RF_PID_ALL = "__rf_pid_all__";
+      const RF_PID_EXCLUDE = "__rf_pid_exclude__";
+      const RF_PID_ONLY = "__rf_pid_only__";
+      const PRODUCT_ID_RF = /rf/i;
+
+      function productIdContainsRf(row) {
+        const pid = row.productId == null ? "" : String(row.productId);
+        return PRODUCT_ID_RF.test(pid);
+      }
+
+      const PRODUCT_FAMILY_BE_MAP = (function () {
+        const el = document.getElementById("productFamilyBeMap");
+        if (!el) return {};
+        try {
+          const o = JSON.parse(el.textContent);
+          return o && typeof o === "object" ? o : {};
+        } catch (e) {
+          return {};
+        }
+      })();
+
+      function enrichRows(rows) {
+        return rows.map(function (r) {
+          const fam = r.currentFamily || "";
+          const m = PRODUCT_FAMILY_BE_MAP[fam];
+          return {
+            productId: r.productId,
+            currentFamily: fam,
+            usCurrentGpl: r.usCurrentGpl,
+            usFutureGpl: r.usFutureGpl,
+            be: m && m.be != null ? String(m.be).trim() : "",
+            subBe: m && m.subBe != null ? String(m.subBe).trim() : "",
+          };
+        });
+      }
+
+      function rowBeKey(r) {
+        return r.be ? r.be : UNMAPPED;
+      }
+
+      function dashLabel(s) {
+        return s ? s : "—";
+      }
+
+      const COL = {
+        productId: "Product ID",
+        currentFamily: "Current Product Family",
+        usCurrent: "US Current GPL",
+        usFuture: "US Future GPL",
+      };
+
+      function detectDelimiter(line) {
+        const tabs = (line.match(/\t/g) || []).length;
+        const commas = (line.match(/,/g) || []).length;
+        return tabs >= commas ? "\t" : ",";
+      }
+
+      function parseRow(line, delimiter) {
+        const out = [];
+        let cur = "";
+        let inQuotes = false;
+        for (let i = 0; i < line.length; i++) {
+          const c = line[i];
+          if (c === '"') {
+            inQuotes = !inQuotes;
+          } else if (!inQuotes && c === delimiter) {
+            out.push(cur.trim());
+            cur = "";
+          } else {
+            cur += c;
+          }
+        }
+        out.push(cur.trim());
+        return out;
+      }
+
+      function parseNumber(val) {
+        if (val == null || val === "") return null;
+        if (typeof val === "number" && Number.isFinite(val)) return val;
+        const n = parseFloat(String(val).replace(/,/g, "").trim());
+        return Number.isFinite(n) ? n : null;
+      }
+
+      /** Map Unicode hyphens/dashes to ASCII '-'; strip soft hyphen (often invisible in Excel). */
+      function foldUnicodeDashesToAscii(s) {
+        let t = String(s == null ? "" : s);
+        t = t.replace(/\u00ad/g, "");
+        return t
+          .replace(/\u2010/g, "-")
+          .replace(/\u2011/g, "-")
+          .replace(/\u2012/g, "-")
+          .replace(/\u2013/g, "-")
+          .replace(/\u2014/g, "-")
+          .replace(/\u2015/g, "-")
+          .replace(/\u2212/g, "-")
+          .replace(/\u2e3a/g, "-")
+          .replace(/\u2e3b/g, "-")
+          .replace(/\ufe58/g, "-")
+          .replace(/\ufe63/g, "-")
+          .replace(/\uff0d/g, "-");
+      }
+
+      function buildRowsFromGrid(grid) {
+        if (!grid || grid.length < 2) {
+          throw new Error("File needs at least a header row and one data row (after any disclaimer).");
+        }
+        const headers = (grid[1] || []).map(function (h) {
+          return String(h == null ? "" : h).trim();
+        });
+
+        function idx(name) {
+          const i = headers.indexOf(name);
+          if (i < 0) throw new Error('Missing column: "' + name + '"');
+          return i;
+        }
+
+        const iPid = idx(COL.productId);
+        const iFam = idx(COL.currentFamily);
+        const iCur = idx(COL.usCurrent);
+        const iFut = idx(COL.usFuture);
+
+        const rows = [];
+        for (let r = 2; r < grid.length; r++) {
+          const cells = grid[r] || [];
+          function cell(i) {
+            const v = cells[i];
+            if (v == null || v === "") return "";
+            return String(v).trim();
+          }
+          const productId = cell(iPid);
+          if (!productId) continue;
+          const family = cell(iFam);
+          const currentGpl = parseNumber(cells[iCur]);
+          const futureGpl = parseNumber(cells[iFut]);
+          rows.push({
+            productId: productId,
+            currentFamily: family,
+            usCurrentGpl: currentGpl,
+            usFutureGpl: futureGpl,
+          });
+        }
+        return rows;
+      }
+
+      function parseCSV(text) {
+        const lines = text.split(/\r?\n/).filter(function (l) {
+          return l.trim().length > 0;
+        });
+        if (lines.length < 2) {
+          throw new Error("File needs at least a header row and one data row (after any disclaimer).");
+        }
+        const delimiter = detectDelimiter(lines[1]);
+        const grid = lines.map(function (line) {
+          return parseRow(line, delimiter).map(function (c) {
+            return c.replace(/^"|"$/g, "").trim();
+          });
+        });
+        return buildRowsFromGrid(grid);
+      }
+
+      function parseXLSX(arrayBuffer) {
+        if (typeof XLSX === "undefined") {
+          throw new Error("Excel library did not load. Check your network and refresh.");
+        }
+        const wb = XLSX.read(arrayBuffer, { type: "array" });
+        if (!wb.SheetNames || !wb.SheetNames.length) {
+          throw new Error("Workbook has no sheets.");
+        }
+        const sheet = wb.Sheets[wb.SheetNames[0]];
+        const grid = XLSX.utils.sheet_to_json(sheet, {
+          header: 1,
+          defval: "",
+          raw: true,
+        });
+        return buildRowsFromGrid(grid);
+      }
+
+      /** 1-based row 31 in typical CCW “Price Quotation” export (0-based index 30). */
+      const CCW_HEADER_ROW_PRIMARY = 30;
+
+      function readFirstSheetGridFromArrayBuffer(arrayBuffer) {
+        if (typeof XLSX === "undefined") {
+          throw new Error("Excel library did not load. Check your network and refresh.");
+        }
+        const wb = XLSX.read(arrayBuffer, { type: "array" });
+        if (!wb.SheetNames || !wb.SheetNames.length) {
+          throw new Error("Workbook has no sheets.");
+        }
+        const sheet = wb.Sheets[wb.SheetNames[0]];
+        return XLSX.utils.sheet_to_json(sheet, {
+          header: 1,
+          defval: "",
+          raw: true,
+        });
+      }
+
+      function normalizeHeaderLabel(h) {
+        return String(h == null ? "" : h)
+          .trim()
+          .toLowerCase()
+          .replace(/\u00a0/g, " ")
+          .replace(/\s+/g, " ");
+      }
+
+      function findPartNumberColumnIndex(headers) {
+        const norm = headers.map(normalizeHeaderLabel);
+        var i;
+        for (i = 0; i < norm.length; i++) {
+          if (norm[i] === "part number" || norm[i] === "part #" || norm[i] === "part no.") return i;
+        }
+        for (i = 0; i < norm.length; i++) {
+          if (norm[i].indexOf("part number") !== -1) return i;
+        }
+        for (i = 0; i < norm.length; i++) {
+          if (norm[i].indexOf("material") !== -1 && norm[i].indexOf("number") !== -1) return i;
+        }
+        return -1;
+      }
+
+      /** Base list column — not “Unit List Price (With Duration)” used on some CCW rows. */
+      function findUnitListPriceColumnIndex(headers) {
+        const norm = headers.map(normalizeHeaderLabel);
+        var i;
+        for (i = 0; i < norm.length; i++) {
+          if (norm[i] === "unit list price") return i;
+        }
+        for (i = 0; i < norm.length; i++) {
+          if (norm[i].indexOf("unit list price") === -1) continue;
+          if (norm[i].indexOf("duration") !== -1 || norm[i].indexOf("with duration") !== -1) continue;
+          return i;
+        }
+        return -1;
+      }
+
+      function findExtendedListPriceColumnIndex(headers) {
+        const norm = headers.map(normalizeHeaderLabel);
+        var i;
+        for (i = 0; i < norm.length; i++) {
+          if (norm[i] === "extended list price") return i;
+        }
+        for (i = 0; i < norm.length; i++) {
+          if (norm[i].indexOf("extended list price") !== -1) return i;
+        }
+        return -1;
+      }
+
+      function findQuantityColumnIndex(headers) {
+        const norm = headers.map(normalizeHeaderLabel);
+        var i;
+        for (i = 0; i < norm.length; i++) {
+          if (norm[i] === "quantity" || norm[i] === "qty") return i;
+        }
+        for (i = 0; i < norm.length; i++) {
+          if (norm[i].indexOf("quantity") !== -1) return i;
+        }
+        return -1;
+      }
+
+      /** Prefer “Discount %”, not “Effective Discount %”. Parsed value = fraction off list (e.g. 15% → 0.15); after-discount = ext × (1 − value). */
+      function findDiscountPercentColumnIndex(headers) {
+        const norm = headers.map(normalizeHeaderLabel);
+        var i;
+        for (i = 0; i < norm.length; i++) {
+          if (norm[i] === "discount %") return i;
+        }
+        for (i = 0; i < norm.length; i++) {
+          if (norm[i].indexOf("effective discount") !== -1) continue;
+          if (norm[i].indexOf("discount") !== -1 && norm[i].indexOf("%") !== -1) return i;
+        }
+        for (i = 0; i < norm.length; i++) {
+          if (norm[i].indexOf("disc") !== -1 && norm[i].indexOf("%") !== -1) return i;
+        }
+        return -1;
+      }
+
+      function findUnitNetBeforeCreditsColumnIndex(headers) {
+        const norm = headers.map(normalizeHeaderLabel);
+        var i;
+        for (i = 0; i < norm.length; i++) {
+          if (norm[i] === "unit net price before credits") return i;
+        }
+        for (i = 0; i < norm.length; i++) {
+          if (norm[i].indexOf("unit net price") !== -1 && norm[i].indexOf("before credit") !== -1) return i;
+        }
+        for (i = 0; i < norm.length; i++) {
+          if (norm[i].indexOf("net price") !== -1 && norm[i].indexOf("before credit") !== -1) return i;
+        }
+        return -1;
+      }
+
+      /** Line-level credits (optional). */
+      function findCreditsColumnIndex(headers) {
+        const norm = headers.map(normalizeHeaderLabel);
+        const prefer = ["line credits", "credits", "total credits", "unit credits", "credit"];
+        var p;
+        var i;
+        for (p = 0; p < prefer.length; p++) {
+          for (i = 0; i < norm.length; i++) {
+            if (norm[i] === prefer[p]) return i;
+          }
+        }
+        for (i = 0; i < norm.length; i++) {
+          if (norm[i].indexOf("letter of credit") !== -1) continue;
+          if (norm[i].indexOf("credit") === -1) continue;
+          if (norm[i].indexOf("discount") !== -1 || norm[i].indexOf("card") !== -1) continue;
+          return i;
+        }
+        return -1;
+      }
+
+      function ccwLineItemsHeaderScore(headers) {
+        if (findPartNumberColumnIndex(headers) < 0) return 0;
+        if (findUnitListPriceColumnIndex(headers) < 0) return 0;
+        if (findDiscountPercentColumnIndex(headers) < 0) return 0;
+        var score = 5;
+        if (findExtendedListPriceColumnIndex(headers) >= 0) score += 1;
+        if (findQuantityColumnIndex(headers) >= 0) score += 1;
+        if (findUnitNetBeforeCreditsColumnIndex(headers) >= 0) score += 1;
+        if (findCreditsColumnIndex(headers) >= 0) score += 1;
+        const c0 = normalizeHeaderLabel(headers[0]);
+        if (c0 === "#" || c0 === "line" || c0 === "# line") score += 2;
+        return score;
+      }
+
+      function resolveCcwHeaderRowIndex(grid) {
+        if (!grid || grid.length < 2) {
+          throw new Error("CCW sheet is empty or too small.");
+        }
+        var bestR = -1;
+        var bestScore = 0;
+        var r;
+        const scanMax = Math.min(150, grid.length);
+        for (r = 0; r < scanMax; r++) {
+          const headers = (grid[r] || []).map(function (h) {
+            return String(h == null ? "" : h).trim();
+          });
+          const sc = ccwLineItemsHeaderScore(headers);
+          if (sc > bestScore) {
+            bestScore = sc;
+            bestR = r;
+          }
+        }
+        if (bestR >= 0 && bestScore >= 5) {
+          return bestR;
+        }
+        function tryRow(rowIndex) {
+          const headers = (grid[rowIndex] || []).map(function (h) {
+            return String(h == null ? "" : h).trim();
+          });
+          return findPartNumberColumnIndex(headers) >= 0 ? rowIndex : -1;
+        }
+        if (grid.length > CCW_HEADER_ROW_PRIMARY) {
+          var hit = tryRow(CCW_HEADER_ROW_PRIMARY);
+          if (hit >= 0) return hit;
+        }
+        for (r = 15; r < scanMax; r++) {
+          const headers = (grid[r] || []).map(function (h) {
+            return String(h == null ? "" : h).trim();
+          });
+          if (
+            findPartNumberColumnIndex(headers) >= 0 &&
+            findUnitListPriceColumnIndex(headers) >= 0 &&
+            findDiscountPercentColumnIndex(headers) >= 0
+          ) {
+            return r;
+          }
+        }
+        throw new Error(
+          "Could not find the CCW line-items header row (look for #, Part Number, Unit List Price, Discount %, Quantity; Credits optional). Typical location is around row 31."
+        );
+      }
+
+      function parsePercentFraction(val) {
+        if (val == null || val === "") return 0;
+        if (typeof val === "number" && Number.isFinite(val)) {
+          if (val >= 0 && val <= 1) return val;
+          if (val > 1 && val <= 100) return val / 100;
+          return 0;
+        }
+        const s = String(val).trim().replace(/,/g, "");
+        if (/%/.test(s)) {
+          const n = parseFloat(s.replace(/%/g, "").trim());
+          return Number.isFinite(n) ? n / 100 : 0;
+        }
+        const n = parseFloat(s);
+        if (!Number.isFinite(n)) return 0;
+        if (n > 1 && n <= 100) return n / 100;
+        if (n >= 0 && n <= 1) return n;
+        return 0;
+      }
+
+      /** Discount % as fraction off extended list (0–1), clamped. */
+      function discountOffFractionClamped(sheetDiscFraction) {
+        if (!Number.isFinite(sheetDiscFraction) || sheetDiscFraction < 0) return 0;
+        if (sheetDiscFraction > 1) return 1;
+        return sheetDiscFraction;
+      }
+
+      function normalizePartKeyForMatch(s) {
+        return foldUnicodeDashesToAscii(String(s == null ? "" : s).trim()).toLowerCase();
+      }
+
+      function buildFutureGplMapFromLpcRows(rows) {
+        const m = new Map();
+        rows.forEach(function (r) {
+          const k = normalizePartKeyForMatch(r.productId);
+          if (!k) return;
+          if (r.usFutureGpl != null && Number.isFinite(r.usFutureGpl)) {
+            m.set(k, r.usFutureGpl);
+          }
+        });
+        return m;
+      }
+
+      function computeQuoteCostEstimate(lpcRows, ccwGrid) {
+        const headerRow = resolveCcwHeaderRowIndex(ccwGrid);
+        const headers = (ccwGrid[headerRow] || []).map(function (h) {
+          return String(h == null ? "" : h).trim();
+        });
+        const iPart = findPartNumberColumnIndex(headers);
+        const iDiscPct = findDiscountPercentColumnIndex(headers);
+        const iQty = findQuantityColumnIndex(headers);
+        const iUnitList = findUnitListPriceColumnIndex(headers);
+        const iExtList = findExtendedListPriceColumnIndex(headers);
+        const iCredits = findCreditsColumnIndex(headers);
+        if (iPart < 0) throw new Error("CCW sheet: could not find Part Number column.");
+        if (iUnitList < 0) {
+          throw new Error("CCW sheet: could not find Unit List Price column. Check the export column titles.");
+        }
+        const futureMap = buildFutureGplMapFromLpcRows(lpcRows);
+        var originalTotal = 0;
+        var newTotal = 0;
+        var matchedLines = 0;
+        const detailRows = [];
+        var r;
+        for (r = headerRow + 1; r < ccwGrid.length; r++) {
+          const cells = ccwGrid[r] || [];
+          const partRaw = cells[iPart] == null ? "" : String(cells[iPart]).trim();
+          if (!partRaw) continue;
+          const partKey = normalizePartKeyForMatch(partRaw);
+          if (partKey === "part number" || partKey.indexOf("total") === 0 || partKey.indexOf("subtotal") === 0) {
+            continue;
+          }
+          var qty = 1;
+          if (iQty >= 0) {
+            const qParsed = parseNumber(cells[iQty]);
+            if (qParsed != null && Number.isFinite(qParsed) && qParsed > 0) {
+              qty = qParsed;
+            }
+          }
+          const origUnitList = parseNumber(cells[iUnitList]);
+          if (origUnitList == null || !Number.isFinite(origUnitList) || origUnitList === 0) {
+            continue;
+          }
+          var origExtList = iExtList >= 0 ? parseNumber(cells[iExtList]) : null;
+          if (Number.isFinite(origUnitList) && Number.isFinite(qty)) {
+            origExtList = origUnitList * qty;
+          }
+          const discPctRaw = iDiscPct >= 0 ? parsePercentFraction(cells[iDiscPct]) : 0;
+          const discOff = discountOffFractionClamped(discPctRaw);
+          const creditsParsed = iCredits >= 0 ? parseNumber(cells[iCredits]) : null;
+          var creditsAmt = 0;
+          if (creditsParsed != null && Number.isFinite(creditsParsed)) {
+            creditsAmt = creditsParsed;
+          }
+          const lineRef = cells[0] == null ? "" : String(cells[0]).trim();
+          const futureGpl = partKey ? futureMap.get(partKey) : null;
+          var matched = futureGpl != null && Number.isFinite(futureGpl);
+          var newUnitList = matched ? futureGpl : origUnitList;
+          var newExtList = newUnitList * qty;
+          var origDiscDollar = origExtList * discOff;
+          var newDiscAmt = newExtList * discOff;
+          var origNetBefCredits = origExtList * (1 - discOff);
+          var newNetBefCredits = newExtList * (1 - discOff);
+          var origLineTotal = origNetBefCredits - creditsAmt;
+          var newLineTotal = newNetBefCredits - creditsAmt;
+          if (matched) {
+            matchedLines += 1;
+          }
+          if (Number.isFinite(origLineTotal)) {
+            originalTotal += origLineTotal;
+          }
+          if (Number.isFinite(newLineTotal)) {
+            newTotal += newLineTotal;
+          }
+          var linePctChange = null;
+          var lineHighIncrease = false;
+          if (
+            origLineTotal != null &&
+            Number.isFinite(origLineTotal) &&
+            origLineTotal > 0 &&
+            newLineTotal != null &&
+            Number.isFinite(newLineTotal)
+          ) {
+            linePctChange = ((newLineTotal - origLineTotal) / origLineTotal) * 100;
+            lineHighIncrease = linePctChange > 15;
+          }
+          detailRows.push({
+            lineRef: lineRef,
+            partNumber: partRaw,
+            qty: qty,
+            matched: matched,
+            origUnitList: origUnitList,
+            newUnitList: newUnitList,
+            origExtList: origExtList,
+            newExtList: newExtList,
+            discPctFraction: discPctRaw,
+            origDiscDollar: origDiscDollar,
+            newDiscAmt: newDiscAmt,
+            origNetBefCredits: origNetBefCredits,
+            newNetBefCredits: newNetBefCredits,
+            credits: creditsAmt,
+            origLineTotal: origLineTotal,
+            newLineTotal: newLineTotal,
+            linePctChange: linePctChange,
+            lineHighIncrease: lineHighIncrease,
+          });
+        }
+        var pctTotal = null;
+        if (originalTotal !== 0 && Number.isFinite(originalTotal)) {
+          pctTotal = ((newTotal - originalTotal) / originalTotal) * 100;
+        }
+        return {
+          originalTotal: originalTotal,
+          newTotal: newTotal,
+          pctTotal: pctTotal,
+          matchedLines: matchedLines,
+          headerRowUsed: headerRow + 1,
+          detailRows: detailRows,
+        };
+      }
+
+      function formatMoneyOrDash(n) {
+        if (n == null || !Number.isFinite(n)) return "—";
+        return formatMoney(n);
+      }
+
+      function formatPercentFromFraction(f) {
+        if (f == null || !Number.isFinite(f)) return "—";
+        return (f * 100).toFixed(2) + "%";
+      }
+
+      function renderQuoteDetailTable(detailRows) {
+        const tbody = document.getElementById("quoteDetailTableBody");
+        const tfoot = document.getElementById("quoteDetailTableFoot");
+        if (!tbody) return;
+        tbody.innerHTML = "";
+        if (tfoot) tfoot.innerHTML = "";
+        detailRows.forEach(function (row) {
+          const tr = document.createElement("tr");
+          if (row.lineHighIncrease) {
+            tr.classList.add("quote-line-high-increase");
+          }
+          const tdLine = document.createElement("td");
+          tdLine.textContent = row.lineRef || "—";
+          const tdPart = document.createElement("td");
+          tdPart.className = "text-wrap";
+          tdPart.textContent = row.partNumber;
+          const tdQty = document.createElement("td");
+          tdQty.className = "num";
+          tdQty.textContent = String(row.qty);
+          const tdMatch = document.createElement("td");
+          tdMatch.textContent = row.matched ? "Yes" : "No";
+          const tdOUL = document.createElement("td");
+          tdOUL.className = "num";
+          tdOUL.textContent = formatMoneyOrDash(row.origUnitList);
+          const tdNUL = document.createElement("td");
+          tdNUL.className = "num";
+          tdNUL.textContent = formatMoneyOrDash(row.newUnitList);
+          const tdOEL = document.createElement("td");
+          tdOEL.className = "num";
+          tdOEL.textContent = formatMoneyOrDash(row.origExtList);
+          const tdNEL = document.createElement("td");
+          tdNEL.className = "num";
+          tdNEL.textContent = formatMoneyOrDash(row.newExtList);
+          const tdDP = document.createElement("td");
+          tdDP.className = "num";
+          tdDP.textContent = formatPercentFromFraction(row.discPctFraction);
+          const tdND = document.createElement("td");
+          tdND.className = "num";
+          tdND.textContent = formatMoneyOrDash(row.newDiscAmt);
+          const tdONb = document.createElement("td");
+          tdONb.className = "num";
+          tdONb.textContent = formatMoneyOrDash(row.origNetBefCredits);
+          const tdNNb = document.createElement("td");
+          tdNNb.className = "num";
+          tdNNb.textContent = formatMoneyOrDash(row.newNetBefCredits);
+          const tdCr = document.createElement("td");
+          tdCr.className = "num";
+          tdCr.textContent = formatMoneyOrDash(row.credits);
+          const tdOLt = document.createElement("td");
+          tdOLt.className = "num";
+          tdOLt.textContent = formatMoneyOrDash(row.origLineTotal);
+          const tdNLt = document.createElement("td");
+          tdNLt.className = "num";
+          tdNLt.textContent = formatMoneyOrDash(row.newLineTotal);
+          tr.appendChild(tdLine);
+          tr.appendChild(tdPart);
+          tr.appendChild(tdQty);
+          tr.appendChild(tdMatch);
+          tr.appendChild(tdOUL);
+          tr.appendChild(tdNUL);
+          tr.appendChild(tdOEL);
+          tr.appendChild(tdNEL);
+          tr.appendChild(tdDP);
+          tr.appendChild(tdND);
+          tr.appendChild(tdONb);
+          tr.appendChild(tdNNb);
+          tr.appendChild(tdCr);
+          tr.appendChild(tdOLt);
+          tr.appendChild(tdNLt);
+          tbody.appendChild(tr);
+        });
+
+        if (!tfoot || !detailRows.length) return;
+
+        var sumQty = 0;
+        var sumOrigUL = 0;
+        var hasOrigUL = false;
+        var sumNewUL = 0;
+        var hasNewUL = false;
+        var sumOrigExt = 0;
+        var hasOrigExt = false;
+        var sumNewExt = 0;
+        var hasNewExt = false;
+        var sumNewDisc = 0;
+        var hasNewDisc = false;
+        var sumOrigBef = 0;
+        var hasOrigBef = false;
+        var sumNewBef = 0;
+        var hasNewBef = false;
+        var sumCredits = 0;
+        var hasCredits = false;
+        var sumOrigLine = 0;
+        var hasOrigLine = false;
+        var sumNewLine = 0;
+        var hasNewLine = false;
+
+        detailRows.forEach(function (row) {
+          var q = row.qty;
+          if (q != null && Number.isFinite(q)) sumQty += q;
+          if (row.origUnitList != null && Number.isFinite(row.origUnitList)) {
+            sumOrigUL += row.origUnitList;
+            hasOrigUL = true;
+          }
+          if (row.newUnitList != null && Number.isFinite(row.newUnitList)) {
+            sumNewUL += row.newUnitList;
+            hasNewUL = true;
+          }
+          if (row.origExtList != null && Number.isFinite(row.origExtList)) {
+            sumOrigExt += row.origExtList;
+            hasOrigExt = true;
+          }
+          if (row.newExtList != null && Number.isFinite(row.newExtList)) {
+            sumNewExt += row.newExtList;
+            hasNewExt = true;
+          }
+          if (row.newDiscAmt != null && Number.isFinite(row.newDiscAmt)) {
+            sumNewDisc += row.newDiscAmt;
+            hasNewDisc = true;
+          }
+          if (row.origNetBefCredits != null && Number.isFinite(row.origNetBefCredits)) {
+            sumOrigBef += row.origNetBefCredits;
+            hasOrigBef = true;
+          }
+          if (row.newNetBefCredits != null && Number.isFinite(row.newNetBefCredits)) {
+            sumNewBef += row.newNetBefCredits;
+            hasNewBef = true;
+          }
+          if (row.credits != null && Number.isFinite(row.credits)) {
+            sumCredits += row.credits;
+            hasCredits = true;
+          }
+          if (row.origLineTotal != null && Number.isFinite(row.origLineTotal)) {
+            sumOrigLine += row.origLineTotal;
+            hasOrigLine = true;
+          }
+          if (row.newLineTotal != null && Number.isFinite(row.newLineTotal)) {
+            sumNewLine += row.newLineTotal;
+            hasNewLine = true;
+          }
+        });
+
+        var effDiscFrac = null;
+        if (hasNewExt && sumNewExt > 0 && hasNewDisc) {
+          effDiscFrac = sumNewDisc / sumNewExt;
+        }
+
+        const trTot = document.createElement("tr");
+        const tdLab = document.createElement("td");
+        tdLab.className = "quote-detail-total-label";
+        tdLab.textContent = "Total";
+        const tdPartE = document.createElement("td");
+        tdPartE.textContent = "";
+        const tdQtyT = document.createElement("td");
+        tdQtyT.className = "num";
+        tdQtyT.textContent = Number.isFinite(sumQty) ? String(sumQty) : "—";
+        const tdMatchE = document.createElement("td");
+        tdMatchE.textContent = "";
+        const tdOULT = document.createElement("td");
+        tdOULT.className = "num";
+        tdOULT.textContent = hasOrigUL ? formatMoney(sumOrigUL) : "—";
+        const tdNULT = document.createElement("td");
+        tdNULT.className = "num";
+        tdNULT.textContent = hasNewUL ? formatMoney(sumNewUL) : "—";
+        const tdOELT = document.createElement("td");
+        tdOELT.className = "num";
+        tdOELT.textContent = hasOrigExt ? formatMoney(sumOrigExt) : "—";
+        const tdNELT = document.createElement("td");
+        tdNELT.className = "num";
+        tdNELT.textContent = hasNewExt ? formatMoney(sumNewExt) : "—";
+        const tdDPT = document.createElement("td");
+        tdDPT.className = "num";
+        tdDPT.textContent = formatPercentFromFraction(effDiscFrac);
+        const tdNDT = document.createElement("td");
+        tdNDT.className = "num";
+        tdNDT.textContent = hasNewDisc ? formatMoney(sumNewDisc) : "—";
+        const tdOBT = document.createElement("td");
+        tdOBT.className = "num";
+        tdOBT.textContent = hasOrigBef ? formatMoney(sumOrigBef) : "—";
+        const tdNBT = document.createElement("td");
+        tdNBT.className = "num";
+        tdNBT.textContent = hasNewBef ? formatMoney(sumNewBef) : "—";
+        const tdCrT = document.createElement("td");
+        tdCrT.className = "num";
+        tdCrT.textContent = hasCredits ? formatMoney(sumCredits) : "—";
+        const tdOLT = document.createElement("td");
+        tdOLT.className = "num";
+        tdOLT.textContent = hasOrigLine ? formatMoney(sumOrigLine) : "—";
+        const tdNLT = document.createElement("td");
+        tdNLT.className = "num";
+        tdNLT.textContent = hasNewLine ? formatMoney(sumNewLine) : "—";
+
+        trTot.appendChild(tdLab);
+        trTot.appendChild(tdPartE);
+        trTot.appendChild(tdQtyT);
+        trTot.appendChild(tdMatchE);
+        trTot.appendChild(tdOULT);
+        trTot.appendChild(tdNULT);
+        trTot.appendChild(tdOELT);
+        trTot.appendChild(tdNELT);
+        trTot.appendChild(tdDPT);
+        trTot.appendChild(tdNDT);
+        trTot.appendChild(tdOBT);
+        trTot.appendChild(tdNBT);
+        trTot.appendChild(tdCrT);
+        trTot.appendChild(tdOLT);
+        trTot.appendChild(tdNLT);
+        tfoot.appendChild(trTot);
+      }
+
+      function loadLpcRowsFromFile(file) {
+        return new Promise(function (resolve, reject) {
+          if (!file) {
+            reject(new Error("No file selected."));
+            return;
+          }
+          if (isExcelFile(file)) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              try {
+                resolve(parseXLSX(e.target.result));
+              } catch (err) {
+                reject(err);
+              }
+            };
+            reader.onerror = function () {
+              reject(new Error("Could not read file."));
+            };
+            reader.readAsArrayBuffer(file);
+            return;
+          }
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            try {
+              resolve(parseCSV(e.target.result));
+            } catch (err) {
+              reject(err);
+            }
+          };
+          reader.onerror = function () {
+            reject(new Error("Could not read file."));
+          };
+          reader.readAsText(file);
+        });
+      }
+
+      function loadCcwGridFromFile(file) {
+        return new Promise(function (resolve, reject) {
+          if (!file) {
+            reject(new Error("No file selected."));
+            return;
+          }
+          if (!isExcelFile(file)) {
+            reject(new Error("CCW quote must be an Excel file (.xlsx or .xls)."));
+            return;
+          }
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            try {
+              resolve(readFirstSheetGridFromArrayBuffer(e.target.result));
+            } catch (err) {
+              reject(err);
+            }
+          };
+          reader.onerror = function () {
+            reject(new Error("Could not read file."));
+          };
+          reader.readAsArrayBuffer(file);
+        });
+      }
+
+      function formatMoney(n) {
+        if (n == null) return "—";
+        return n.toLocaleString("en-US", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        });
+      }
+
+      function pctChange(current, future) {
+        if (current == null || future == null || current === 0) return null;
+        return ((future - current) / current) * 100;
+      }
+
+      let allRows = [];
+      let sortState = { key: null, dir: "asc" };
+      const beFilter = document.getElementById("beFilter");
+      const subBeFilter = document.getElementById("subBeFilter");
+      const productIdSearchInput = document.getElementById("productIdSearchInput");
+      const statusEl = document.getElementById("status");
+      const dataTable = document.getElementById("dataTable");
+      const dataTableBody = document.getElementById("dataTableBody");
+      const emptyTableHint = document.getElementById("emptyTableHint");
+      const kpiAvgPctEl = document.getElementById("kpiAvgPct");
+      const rfProductIdFilter = document.getElementById("rfProductIdFilter");
+
+      function updateKpiAvgPct() {
+        if (!kpiAvgPctEl) return;
+        kpiAvgPctEl.classList.remove("pct-pos", "pct-neg");
+        const rows = filteredRows();
+        if (allRows.length === 0 || rows.length === 0) {
+          kpiAvgPctEl.textContent = "—";
+          return;
+        }
+        let sum = 0;
+        let n = 0;
+        rows.forEach(function (row) {
+          const p = pctChange(row.usCurrentGpl, row.usFutureGpl);
+          if (p != null && Number.isFinite(p)) {
+            sum += p;
+            n += 1;
+          }
+        });
+        if (n === 0) {
+          kpiAvgPctEl.textContent = "N/A";
+          return;
+        }
+        const avg = sum / n;
+        const sign = avg >= 0 ? "+" : "";
+        kpiAvgPctEl.textContent = sign + avg.toFixed(2) + "%";
+        kpiAvgPctEl.classList.add(avg >= 0 ? "pct-pos" : "pct-neg");
+      }
+
+      function optionValueExists(selectEl, v) {
+        for (let i = 0; i < selectEl.options.length; i++) {
+          if (selectEl.options[i].value === v) return true;
+        }
+        return false;
+      }
+
+      function getBeFilterValue() {
+        const v = beFilter.value;
+        if (v === FILTER_ALL) return FILTER_ALL;
+        return optionValueExists(beFilter, v) ? v : FILTER_ALL;
+      }
+
+      function getSubBeFilterValue() {
+        const v = subBeFilter.value;
+        if (v === FILTER_ALL) return FILTER_ALL;
+        return optionValueExists(subBeFilter, v) ? v : FILTER_ALL;
+      }
+
+      function getRfProductIdFilterValue() {
+        const v = rfProductIdFilter.value;
+        if (v === RF_PID_EXCLUDE || v === RF_PID_ONLY) return v;
+        return RF_PID_ALL;
+      }
+
+      function optionLabelForValue(selectEl, v) {
+        for (let i = 0; i < selectEl.options.length; i++) {
+          if (selectEl.options[i].value === v) return selectEl.options[i].textContent;
+        }
+        return String(v);
+      }
+
+      function sortValue(row, key) {
+        switch (key) {
+          case "productId":
+            return row.productId || "";
+          case "be":
+            return row.be || "";
+          case "subBe":
+            return row.subBe || "";
+          case "currentFamily":
+            return row.currentFamily || "";
+          case "usCurrentGpl":
+            return row.usCurrentGpl;
+          case "usFutureGpl":
+            return row.usFutureGpl;
+          case "pct":
+            return pctChange(row.usCurrentGpl, row.usFutureGpl);
+          default:
+            return "";
+        }
+      }
+
+      function isNumericSortKey(key) {
+        return key === "usCurrentGpl" || key === "usFutureGpl" || key === "pct";
+      }
+
+      function compareNullableNumbers(va, vb) {
+        const aNull = va == null || !Number.isFinite(va);
+        const bNull = vb == null || !Number.isFinite(vb);
+        if (aNull && bNull) return 0;
+        if (aNull) return 1;
+        if (bNull) return -1;
+        return va - vb;
+      }
+
+      function compareRowsForSort(a, b, key, dir) {
+        const flip = dir === "desc" ? -1 : 1;
+        if (isNumericSortKey(key)) {
+          const cmpN = compareNullableNumbers(sortValue(a, key), sortValue(b, key));
+          if (cmpN !== 0) return flip * cmpN;
+        } else {
+          const sa = String(sortValue(a, key)).toLowerCase();
+          const sb = String(sortValue(b, key)).toLowerCase();
+          const cmpS = sa.localeCompare(sb, undefined, { numeric: true });
+          if (cmpS !== 0) return flip * cmpS;
+        }
+        return (a.productId || "").localeCompare(b.productId || "");
+      }
+
+      function applySort(data) {
+        if (!sortState.key) return data;
+        const key = sortState.key;
+        const dir = sortState.dir;
+        const copy = data.slice();
+        copy.sort(function (a, b) {
+          return compareRowsForSort(a, b, key, dir);
+        });
+        return copy;
+      }
+
+      function updateSortHeaders() {
+        document.querySelectorAll("#dataTable .sort-btn").forEach(function (btn) {
+          const th = btn.closest("th");
+          const k = btn.getAttribute("data-sort-key");
+          btn.classList.remove("sorted-asc", "sorted-desc");
+          th.setAttribute("aria-sort", "none");
+          if (sortState.key && k === sortState.key) {
+            btn.classList.add(sortState.dir === "asc" ? "sorted-asc" : "sorted-desc");
+            th.setAttribute("aria-sort", sortState.dir === "asc" ? "ascending" : "descending");
+          }
+        });
+      }
+
+      /** Raw lowercase query + folded copy; match tries raw hay first so ASCII "-" never depends on fold. */
+      function productIdSearchNeedles() {
+        const q = (productIdSearchInput.value || "").trim();
+        if (q.length < PRODUCT_ID_SEARCH_MIN_LEN) return null;
+        const rawLc = q.toLowerCase();
+        const foldedLc = foldUnicodeDashesToAscii(q).toLowerCase();
+        if (foldedLc.length === 0) return null;
+        return { rawLc: rawLc, foldedLc: foldedLc };
+      }
+
+      function rowMatchesProductIdSearch(row, needles) {
+        if (needles == null) return true;
+        const pid = row.productId == null ? "" : String(row.productId);
+        const hayRaw = pid.toLowerCase();
+        if (hayRaw.indexOf(needles.rawLc) !== -1) return true;
+        const hayFold = foldUnicodeDashesToAscii(pid).toLowerCase();
+        return hayFold.indexOf(needles.foldedLc) !== -1;
+      }
+
+      /** Sub BE choices follow BE only — not product ID search — so typing in the search box never rebuilds this list. */
+      function rowsForSubBePool() {
+        let pool = allRows;
+        const beVal = getBeFilterValue();
+        if (beVal !== FILTER_ALL) {
+          pool = pool.filter(function (r) {
+            return rowBeKey(r) === beVal;
+          });
+        }
+        return pool;
+      }
+
+      function filteredRows() {
+        let data = allRows;
+        const beVal = getBeFilterValue();
+        const subVal = getSubBeFilterValue();
+        const pidNeedles = productIdSearchNeedles();
+        if (beVal !== FILTER_ALL) {
+          data = data.filter(function (r) {
+            return rowBeKey(r) === beVal;
+          });
+        }
+        if (subVal !== FILTER_ALL) {
+          data = data.filter(function (r) {
+            const sk = r.subBe ? r.subBe : UNMAPPED;
+            return sk === subVal;
+          });
+        }
+        if (pidNeedles != null) {
+          data = data.filter(function (r) {
+            return rowMatchesProductIdSearch(r, pidNeedles);
+          });
+        }
+        const rfPid = getRfProductIdFilterValue();
+        if (rfPid === RF_PID_EXCLUDE) {
+          data = data.filter(function (r) {
+            return !productIdContainsRf(r);
+          });
+        } else if (rfPid === RF_PID_ONLY) {
+          data = data.filter(function (r) {
+            return productIdContainsRf(r);
+          });
+        }
+        return data;
+      }
+
+      function currentViewRows() {
+        return applySort(filteredRows());
+      }
+
+      function csvEscapeCell(val) {
+        const s = val == null ? "" : String(val);
+        if (/[",\r\n]/.test(s)) {
+          return '"' + s.replace(/"/g, '""') + '"';
+        }
+        return s;
+      }
+
+      function buildCsvFromRows(rows) {
+        const headerLine = [
+          "Product ID",
+          "BE",
+          "Sub BE",
+          "Current product family",
+          "US Current GPL",
+          "US Future GPL",
+          "% change",
+        ]
+          .map(csvEscapeCell)
+          .join(",");
+        const lines = [headerLine];
+        rows.forEach(function (row) {
+          const p = pctChange(row.usCurrentGpl, row.usFutureGpl);
+          let pctStr;
+          if (p == null) {
+            pctStr = "N/A";
+          } else {
+            pctStr = (p >= 0 ? "+" : "") + p.toFixed(2) + "%";
+          }
+          const cells = [
+            row.productId,
+            dashLabel(row.be),
+            dashLabel(row.subBe),
+            dashLabel(row.currentFamily),
+            formatMoney(row.usCurrentGpl),
+            formatMoney(row.usFutureGpl),
+            pctStr,
+          ];
+          lines.push(cells.map(csvEscapeCell).join(","));
+        });
+        return lines.join("\r\n");
+      }
+
+      function exportCurrentTableCsv() {
+        const rows = currentViewRows();
+        if (rows.length === 0) return;
+        const csv = "\uFEFF" + buildCsvFromRows(rows);
+        const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        const d = new Date();
+        const pad = function (n) {
+          return String(n).padStart(2, "0");
+        };
+        a.download =
+          "cisco-lpc-export-" +
+          d.getFullYear() +
+          "-" +
+          pad(d.getMonth() + 1) +
+          "-" +
+          pad(d.getDate()) +
+          "-" +
+          pad(d.getHours()) +
+          pad(d.getMinutes()) +
+          ".csv";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      }
+
+      const exportCsvBtn = document.getElementById("exportCsvBtn");
+
+      function updateExportButtonState() {
+        exportCsvBtn.disabled = currentViewRows().length === 0;
+      }
+
+      function clearTableUi() {
+        dataTableBody.innerHTML = "";
+        dataTable.hidden = true;
+        emptyTableHint.hidden = false;
+        updateExportButtonState();
+        updateKpiAvgPct();
+      }
+
+      function clearAllLpcDataAcrossViews() {
+        allRows = [];
+        quoteLpcRows = null;
+        sortState = { key: null, dir: "asc" };
+        productIdSearchInput.value = "";
+        beFilter.innerHTML = '<option value="' + FILTER_ALL + '">All BE</option>';
+        subBeFilter.innerHTML = '<option value="' + FILTER_ALL + '">All Sub BE</option>';
+        beFilter.disabled = true;
+        subBeFilter.disabled = true;
+        productIdSearchInput.disabled = true;
+        rfProductIdFilter.value = RF_PID_ALL;
+        rfProductIdFilter.disabled = true;
+        clearTableUi();
+        var ll = document.getElementById("landingLpcFileLabel");
+        if (ll) ll.textContent = "";
+        var ql = document.getElementById("quoteLpcFileLabel");
+        if (ql) ql.textContent = "";
+        var fi = document.getElementById("fileInput");
+        if (fi) fi.value = "";
+        var li = document.getElementById("landingLpcFileInput");
+        if (li) li.value = "";
+        var qi = document.getElementById("quoteLpcFileInput");
+        if (qi) qi.value = "";
+        invalidateQuoteCalcOutput();
+        updateQuoteCalcButtonState();
+      }
+
+      function buildTable() {
+        const data = currentViewRows();
+        dataTableBody.innerHTML = "";
+
+        if (data.length === 0) {
+          clearTableUi();
+          statusEl.textContent = allRows.length
+            ? "No rows match the current filters."
+            : "Load a file to view list price changes in the table.";
+          statusEl.classList.toggle("error", false);
+          updateSortHeaders();
+          return;
+        }
+
+        emptyTableHint.hidden = true;
+        dataTable.hidden = false;
+
+        data.forEach(function (row) {
+          const tr = document.createElement("tr");
+          if (productIdContainsRf(row)) tr.classList.add("rf-row");
+
+          const tdId = document.createElement("td");
+          tdId.textContent = row.productId;
+
+          const tdBe = document.createElement("td");
+          tdBe.textContent = dashLabel(row.be);
+
+          const tdSub = document.createElement("td");
+          tdSub.textContent = dashLabel(row.subBe);
+
+          const tdFam = document.createElement("td");
+          tdFam.textContent = dashLabel(row.currentFamily);
+
+          const tdCur = document.createElement("td");
+          tdCur.className = "num";
+          tdCur.textContent = formatMoney(row.usCurrentGpl);
+
+          const tdFut = document.createElement("td");
+          tdFut.className = "num";
+          tdFut.textContent = formatMoney(row.usFutureGpl);
+
+          const tdPct = document.createElement("td");
+          tdPct.className = "num";
+          const p = pctChange(row.usCurrentGpl, row.usFutureGpl);
+          if (p == null) {
+            tdPct.textContent = "N/A";
+          } else {
+            const sign = p >= 0 ? "+" : "";
+            tdPct.textContent = sign + p.toFixed(2) + "%";
+            tdPct.classList.add(p >= 0 ? "pct-pos" : "pct-neg");
+          }
+
+          tr.appendChild(tdId);
+          tr.appendChild(tdBe);
+          tr.appendChild(tdSub);
+          tr.appendChild(tdFam);
+          tr.appendChild(tdCur);
+          tr.appendChild(tdFut);
+          tr.appendChild(tdPct);
+          dataTableBody.appendChild(tr);
+        });
+
+        statusEl.textContent =
+          "Showing " + data.length + " product" + (data.length === 1 ? "" : "s") + filterSummary() + ".";
+        statusEl.classList.remove("error");
+        updateSortHeaders();
+        updateExportButtonState();
+        updateKpiAvgPct();
+      }
+
+      function filterSummary() {
+        const parts = [];
+        const beVal = getBeFilterValue();
+        if (beVal !== FILTER_ALL) {
+          parts.push("BE: " + (beVal === UNMAPPED ? "Unmapped" : optionLabelForValue(beFilter, beVal)));
+        }
+        const subVal = getSubBeFilterValue();
+        if (subVal !== FILTER_ALL) {
+          parts.push(
+            "Sub BE: " + (subVal === UNMAPPED ? "Unmapped" : optionLabelForValue(subBeFilter, subVal))
+          );
+        }
+        const pidTrim = (productIdSearchInput.value || "").trim();
+        if (pidTrim.length >= PRODUCT_ID_SEARCH_MIN_LEN) {
+          parts.push('Product ID contains "' + pidTrim + '"');
+        }
+        const rfPid = getRfProductIdFilterValue();
+        if (rfPid === RF_PID_EXCLUDE) {
+          parts.push("excluding Product IDs containing RF");
+        } else if (rfPid === RF_PID_ONLY) {
+          parts.push("Product IDs containing RF only");
+        }
+        return parts.length ? " (" + parts.join("; ") + ")" : "";
+      }
+
+      function populateBeFilter() {
+        const beSet = new Set();
+        allRows.forEach(function (r) {
+          beSet.add(rowBeKey(r));
+        });
+        const prevBe = beFilter.value;
+        beFilter.innerHTML = "";
+        const optAll = document.createElement("option");
+        optAll.value = FILTER_ALL;
+        optAll.textContent = "All BE";
+        beFilter.appendChild(optAll);
+        const sorted = Array.from(beSet)
+          .filter(function (b) {
+            return b !== UNMAPPED;
+          })
+          .sort();
+        if (beSet.has(UNMAPPED)) sorted.push(UNMAPPED);
+        sorted.forEach(function (b) {
+          const o = document.createElement("option");
+          o.value = b;
+          o.textContent = b === UNMAPPED ? "(Unmapped)" : b;
+          beFilter.appendChild(o);
+        });
+        beFilter.disabled = allRows.length === 0;
+        productIdSearchInput.disabled = allRows.length === 0;
+        rfProductIdFilter.disabled = allRows.length === 0;
+        if (prevBe === FILTER_ALL || beSet.has(prevBe)) beFilter.value = prevBe;
+        else beFilter.value = FILTER_ALL;
+        if (!optionValueExists(beFilter, beFilter.value)) beFilter.value = FILTER_ALL;
+      }
+
+      function populateSubBeFilter() {
+        const pool = rowsForSubBePool();
+        const subSet = new Set();
+        pool.forEach(function (r) {
+          subSet.add(r.subBe ? r.subBe : UNMAPPED);
+        });
+        const prevSub = subBeFilter.value;
+        subBeFilter.innerHTML = "";
+        const optAll = document.createElement("option");
+        optAll.value = FILTER_ALL;
+        optAll.textContent = "All Sub BE";
+        subBeFilter.appendChild(optAll);
+        const sorted = Array.from(subSet)
+          .filter(function (s) {
+            return s !== UNMAPPED;
+          })
+          .sort();
+        if (subSet.has(UNMAPPED)) sorted.push(UNMAPPED);
+        sorted.forEach(function (s) {
+          const o = document.createElement("option");
+          o.value = s;
+          o.textContent = s === UNMAPPED ? "(Unmapped)" : s;
+          subBeFilter.appendChild(o);
+        });
+        subBeFilter.disabled = allRows.length === 0;
+        if (prevSub === FILTER_ALL || subSet.has(prevSub)) subBeFilter.value = prevSub;
+        else subBeFilter.value = FILTER_ALL;
+        if (!optionValueExists(subBeFilter, subBeFilter.value)) subBeFilter.value = FILTER_ALL;
+      }
+
+      function refreshFilters() {
+        populateBeFilter();
+        populateSubBeFilter();
+      }
+
+      function invalidateQuoteCalcOutput() {
+        var rp = document.getElementById("quoteResultPanel");
+        if (rp) rp.hidden = true;
+        var qtb = document.getElementById("quoteDetailTableBody");
+        if (qtb) qtb.innerHTML = "";
+        var qtf = document.getElementById("quoteDetailTableFoot");
+        if (qtf) qtf.innerHTML = "";
+        var pt = document.getElementById("quotePriorTotal");
+        if (pt) pt.textContent = "—";
+        var nt = document.getElementById("quoteNewTotal");
+        if (nt) nt.textContent = "—";
+        var tp = document.getElementById("quoteTotalPct");
+        if (tp) {
+          tp.textContent = "—";
+          tp.classList.remove("pct-pos", "pct-neg");
+        }
+        var rn = document.getElementById("quoteResultNote");
+        if (rn) rn.textContent = "";
+      }
+
+      function onDataLoaded(rows, displayName) {
+        allRows = enrichRows(rows);
+        quoteLpcRows = allRows.length ? allRows : null;
+        sortState = { key: null, dir: "asc" };
+        productIdSearchInput.value = "";
+        refreshFilters();
+        buildTable();
+        var dn = displayName || "";
+        var ll = document.getElementById("landingLpcFileLabel");
+        if (ll) ll.textContent = dn;
+        var ql = document.getElementById("quoteLpcFileLabel");
+        if (ql) ql.textContent = dn;
+        invalidateQuoteCalcOutput();
+        updateQuoteCalcButtonState();
+      }
+
+      function isExcelFile(file) {
+        const n = (file.name || "").toLowerCase();
+        return n.endsWith(".xlsx") || n.endsWith(".xls");
+      }
+
+      function handleFile(file) {
+        if (!file) return;
+
+        function onError(err) {
+          statusEl.textContent = err.message || String(err);
+          statusEl.classList.add("error");
+          clearAllLpcDataAcrossViews();
+        }
+
+        if (isExcelFile(file)) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            try {
+              const rows = parseXLSX(e.target.result);
+              onDataLoaded(rows, file.name);
+            } catch (err) {
+              onError(err);
+            }
+          };
+          reader.onerror = function () {
+            onError(new Error("Could not read file."));
+          };
+          reader.readAsArrayBuffer(file);
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          try {
+            const rows = parseCSV(e.target.result);
+            onDataLoaded(rows, file.name);
+          } catch (err) {
+            onError(err);
+          }
+        };
+        reader.onerror = function () {
+          onError(new Error("Could not read file."));
+        };
+        reader.readAsText(file);
+      }
+
+      document.getElementById("fileInput").addEventListener("change", function (e) {
+        const f = e.target.files && e.target.files[0];
+        handleFile(f);
+      });
+
+      const uploadZone = document.getElementById("uploadZone");
+      uploadZone.addEventListener("dragover", function (e) {
+        e.preventDefault();
+        uploadZone.classList.add("dragover");
+      });
+      uploadZone.addEventListener("dragleave", function () {
+        uploadZone.classList.remove("dragover");
+      });
+      uploadZone.addEventListener("drop", function (e) {
+        e.preventDefault();
+        uploadZone.classList.remove("dragover");
+        const f = e.dataTransfer.files && e.dataTransfer.files[0];
+        if (f) handleFile(f);
+      });
+
+      exportCsvBtn.addEventListener("click", exportCurrentTableCsv);
+
+      productIdSearchInput.addEventListener("input", function () {
+        buildTable();
+      });
+
+      document.querySelector("#dataTable thead").addEventListener("click", function (e) {
+        const btn = e.target.closest(".sort-btn");
+        if (!btn) return;
+        const key = btn.getAttribute("data-sort-key");
+        if (!key) return;
+        if (sortState.key === key) {
+          sortState.dir = sortState.dir === "asc" ? "desc" : "asc";
+        } else {
+          sortState.key = key;
+          sortState.dir = "asc";
+        }
+        buildTable();
+      });
+
+      beFilter.addEventListener("change", function () {
+        populateSubBeFilter();
+        buildTable();
+      });
+      subBeFilter.addEventListener("change", buildTable);
+
+      rfProductIdFilter.addEventListener("change", buildTable);
+
+      const viewLanding = document.getElementById("viewLanding");
+      const viewListPrice = document.getElementById("viewListPrice");
+      const viewQuoteEstimate = document.getElementById("viewQuoteEstimate");
+      const headerTitle = document.getElementById("headerTitle");
+      const landingChooseListPrice = document.getElementById("landingChooseListPrice");
+      const landingChooseQuote = document.getElementById("landingChooseQuote");
+      const listPriceBackBtn = document.getElementById("listPriceBackBtn");
+      const quoteBackBtn = document.getElementById("quoteBackBtn");
+      const quoteLpcFileInput = document.getElementById("quoteLpcFileInput");
+      const quoteCcwFileInput = document.getElementById("quoteCcwFileInput");
+      const quoteLpcFileLabel = document.getElementById("quoteLpcFileLabel");
+      const quoteCcwFileLabel = document.getElementById("quoteCcwFileLabel");
+      const quoteLpcUploadZone = document.getElementById("quoteLpcUploadZone");
+      const quoteCcwUploadZone = document.getElementById("quoteCcwUploadZone");
+      const quoteCalcBtn = document.getElementById("quoteCalcBtn");
+      const quoteEstimateStatus = document.getElementById("quoteEstimateStatus");
+      const quoteResultPanel = document.getElementById("quoteResultPanel");
+      const quotePriorTotal = document.getElementById("quotePriorTotal");
+      const quoteNewTotal = document.getElementById("quoteNewTotal");
+      const quoteTotalPct = document.getElementById("quoteTotalPct");
+      const quoteResultNote = document.getElementById("quoteResultNote");
+      const landingLpcFileInput = document.getElementById("landingLpcFileInput");
+      const landingLpcFileLabel = document.getElementById("landingLpcFileLabel");
+      const landingLpcUploadZone = document.getElementById("landingLpcUploadZone");
+
+      let quoteLpcRows = null;
+      let quoteCcwGrid = null;
+
+      function setView(view) {
+        viewLanding.hidden = view !== "landing";
+        viewListPrice.hidden = view !== "listPrice";
+        viewQuoteEstimate.hidden = view !== "quote";
+        if (view === "landing") {
+          headerTitle.textContent = "Cisco pricing tools";
+        } else if (view === "listPrice") {
+          headerTitle.textContent = "List price change review";
+        } else {
+          headerTitle.textContent = "Quote cost estimate";
+        }
+      }
+
+      function clearQuoteDetailTable() {
+        const qtb = document.getElementById("quoteDetailTableBody");
+        if (qtb) qtb.innerHTML = "";
+        const qtf = document.getElementById("quoteDetailTableFoot");
+        if (qtf) qtf.innerHTML = "";
+      }
+
+      function updateQuoteCalcButtonState() {
+        quoteCalcBtn.disabled = !(quoteLpcRows && quoteLpcRows.length && quoteCcwGrid && quoteCcwGrid.length);
+      }
+
+      function wireQuoteDropZone(zone, onDropFile) {
+        zone.addEventListener("dragover", function (e) {
+          e.preventDefault();
+          zone.classList.add("dragover");
+        });
+        zone.addEventListener("dragleave", function () {
+          zone.classList.remove("dragover");
+        });
+        zone.addEventListener("drop", function (e) {
+          e.preventDefault();
+          zone.classList.remove("dragover");
+          const f = e.dataTransfer.files && e.dataTransfer.files[0];
+          if (f) onDropFile(f);
+        });
+      }
+
+      landingChooseListPrice.addEventListener("click", function () {
+        setView("listPrice");
+      });
+      landingChooseQuote.addEventListener("click", function () {
+        setView("quote");
+      });
+      listPriceBackBtn.addEventListener("click", function () {
+        setView("landing");
+      });
+      quoteBackBtn.addEventListener("click", function () {
+        setView("landing");
+      });
+
+      function handleQuoteLpcChosen(f) {
+        quoteEstimateStatus.textContent = "";
+        quoteEstimateStatus.classList.remove("error");
+        quoteResultPanel.hidden = true;
+        clearQuoteDetailTable();
+        if (!f) {
+          clearAllLpcDataAcrossViews();
+          statusEl.classList.remove("error");
+          statusEl.textContent = "Load a file to view list price changes in the table.";
+          return;
+        }
+        loadLpcRowsFromFile(f)
+          .then(function (rows) {
+            onDataLoaded(rows, f.name);
+            quoteEstimateStatus.textContent =
+              "Loaded list price file (" + quoteLpcRows.length + " product row" + (quoteLpcRows.length === 1 ? "" : "s") + ").";
+          })
+          .catch(function (err) {
+            clearAllLpcDataAcrossViews();
+            quoteEstimateStatus.textContent = err.message || String(err);
+            quoteEstimateStatus.classList.add("error");
+            statusEl.textContent = err.message || String(err);
+            statusEl.classList.add("error");
+          });
+      }
+
+      function handleLandingLpcChosen(f) {
+        quoteEstimateStatus.textContent = "";
+        quoteEstimateStatus.classList.remove("error");
+        quoteResultPanel.hidden = true;
+        clearQuoteDetailTable();
+        if (!f) {
+          clearAllLpcDataAcrossViews();
+          statusEl.classList.remove("error");
+          statusEl.textContent = "Load a file to view list price changes in the table.";
+          return;
+        }
+        loadLpcRowsFromFile(f)
+          .then(function (rows) {
+            onDataLoaded(rows, f.name);
+            statusEl.classList.remove("error");
+            statusEl.textContent =
+              "Loaded list price file (" + quoteLpcRows.length + " product row" + (quoteLpcRows.length === 1 ? "" : "s") + ").";
+          })
+          .catch(function (err) {
+            clearAllLpcDataAcrossViews();
+            statusEl.textContent = err.message || String(err);
+            statusEl.classList.add("error");
+            quoteEstimateStatus.textContent = err.message || String(err);
+            quoteEstimateStatus.classList.add("error");
+          });
+      }
+
+      function handleQuoteCcwChosen(f) {
+        quoteCcwFileLabel.textContent = f ? f.name : "";
+        quoteEstimateStatus.textContent = "";
+        quoteEstimateStatus.classList.remove("error");
+        quoteResultPanel.hidden = true;
+        clearQuoteDetailTable();
+        if (!f) {
+          quoteCcwGrid = null;
+          updateQuoteCalcButtonState();
+          return;
+        }
+        loadCcwGridFromFile(f)
+          .then(function (grid) {
+            quoteCcwGrid = grid;
+            quoteEstimateStatus.textContent =
+              "Loaded CCW workbook (" + grid.length + " row" + (grid.length === 1 ? "" : "s") + ").";
+            updateQuoteCalcButtonState();
+          })
+          .catch(function (err) {
+            quoteCcwGrid = null;
+            quoteEstimateStatus.textContent = err.message || String(err);
+            quoteEstimateStatus.classList.add("error");
+            updateQuoteCalcButtonState();
+          });
+      }
+
+      quoteLpcFileInput.addEventListener("change", function (e) {
+        handleQuoteLpcChosen(e.target.files && e.target.files[0]);
+      });
+
+      quoteCcwFileInput.addEventListener("change", function (e) {
+        handleQuoteCcwChosen(e.target.files && e.target.files[0]);
+      });
+
+      wireQuoteDropZone(quoteLpcUploadZone, handleQuoteLpcChosen);
+      wireQuoteDropZone(quoteCcwUploadZone, handleQuoteCcwChosen);
+      if (landingLpcFileInput) {
+        landingLpcFileInput.addEventListener("change", function (e) {
+          handleLandingLpcChosen(e.target.files && e.target.files[0]);
+        });
+      }
+      if (landingLpcUploadZone) {
+        wireQuoteDropZone(landingLpcUploadZone, handleLandingLpcChosen);
+      }
+
+      quoteCalcBtn.addEventListener("click", function () {
+        quoteEstimateStatus.classList.remove("error");
+        try {
+          if (!quoteLpcRows || !quoteLpcRows.length || !quoteCcwGrid || !quoteCcwGrid.length) {
+            throw new Error("Load both files before calculating.");
+          }
+          const res = computeQuoteCostEstimate(quoteLpcRows, quoteCcwGrid);
+          quotePriorTotal.textContent = formatMoney(res.originalTotal);
+          quoteNewTotal.textContent = formatMoney(res.newTotal);
+          if (res.pctTotal == null || !Number.isFinite(res.pctTotal)) {
+            quoteTotalPct.textContent = "N/A";
+            quoteTotalPct.classList.remove("pct-pos", "pct-neg");
+          } else {
+            const s = res.pctTotal >= 0 ? "+" : "";
+            quoteTotalPct.textContent = s + res.pctTotal.toFixed(2) + "%";
+            quoteTotalPct.classList.remove("pct-pos", "pct-neg");
+            quoteTotalPct.classList.add(res.pctTotal >= 0 ? "pct-pos" : "pct-neg");
+          }
+          quoteResultNote.textContent =
+            "Used header row " +
+            res.headerRowUsed +
+            " (1-based). Matched " +
+            res.matchedLines +
+            " quote line(s) to a Product ID with a future GPL. Lines with $0 unit list are omitted. Extended list = unit list × Quantity; before credits = extended × (100% − Discount %); line total = before credits − Credits (if a Credits column exists). KPI totals sum line totals (was vs new unit list).";
+          renderQuoteDetailTable(res.detailRows || []);
+          quoteResultPanel.hidden = false;
+          quoteEstimateStatus.textContent = "Estimate complete.";
+        } catch (err) {
+          quoteEstimateStatus.textContent = err.message || String(err);
+          quoteEstimateStatus.classList.add("error");
+          quoteResultPanel.hidden = true;
+          clearQuoteDetailTable();
+        }
+      });
+
+      window.addEventListener("storage", function (e) {
+        if (e.key === THEME_KEY && e.newValue) {
+          setTheme(e.newValue === "light");
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
