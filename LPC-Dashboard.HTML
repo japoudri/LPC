@@ -835,6 +835,15 @@
       color: #c03428;
     }
 
+    .quote-table-legend .legend-yellow {
+      color: #e6c84a;
+      font-weight: 600;
+    }
+
+    [data-theme="light"] .quote-table-legend .legend-yellow {
+      color: #b8860b;
+    }
+
     .quote-detail-table tbody tr.quote-line-high-increase td {
       color: #e85d4c;
       font-weight: 600;
@@ -842,6 +851,15 @@
 
     [data-theme="light"] .quote-detail-table tbody tr.quote-line-high-increase td {
       color: #c03428;
+    }
+
+    .quote-detail-table tbody tr.quote-line-moderate-increase td {
+      color: #e6c84a;
+      font-weight: 600;
+    }
+
+    [data-theme="light"] .quote-detail-table tbody tr.quote-line-moderate-increase td {
+      color: #b8860b;
     }
 
     .quote-detail-table {
@@ -1065,10 +1083,11 @@
       <button type="button" class="btn-text-back" id="quoteBackBtn">Back to home</button>
       <h2 class="quote-heading">Estimate new quote cost</h2>
       <p class="quote-intro">
-        The <strong>list price change</strong> file is shared with the review tool (upload or change it here or on the home or list-price pages). Upload a <strong>CCW “Price Quotation”</strong> export in .xlsx format.
-        The tool finds the line-items header row (columns such as <strong>#</strong>, Part Number, Unit List Price, Quantity, Discount %, optional Credits), usually near <strong>row 31</strong>.
-        Part numbers are matched to <strong>Product ID</strong> on the price-change file (case-insensitive, Unicode hyphens normalized). <strong>Lines with unit list price $0 are omitted.</strong> With a match, <strong>unit list</strong> becomes <strong>US Future GPL</strong>; without a match, the quote’s existing unit list is kept.
-        <strong>Extended list</strong> = unit list × Quantity (Quantity defaults to 1). <strong>Before credits</strong> = extended list × (100% − Discount %). <strong>Line total</strong> = before credits − Credits when a Credits column is present (otherwise credits = 0). KPI totals are the sum of line totals (was vs new unit list).
+        This tool can be used to estimate how a quote is going to change in price after the price change date of the file you uploaded.
+        The tool only recognizes US GPL.
+        For lines that change in price by more than 15% they will be in red text.
+        For lines that change in price by less than 15% they will be in yellow text.
+        Support costs do not appear to be recalculating so keep that in mind when using this.
       </p>
       <div class="quote-uploads">
         <div class="quote-upload-col">
@@ -1102,9 +1121,6 @@
             </p>
             <span class="upload-file-name" id="quoteCcwFileLabel"></span>
           </label>
-          <p class="quote-upload-hint">
-            Export an existing quote as <strong>XLSX — CCW Standard Format</strong> and ensure <strong>Line Level Discounts</strong> is checked in the export options.
-          </p>
           <p class="quote-upload-hint hint-vidcast">
             Review a quick video on how to access this export on Vidcast:
             <a href="https://app.vidcast.io/share/09baffb5-a936-46c6-af0d-e88a40053923" target="_blank" rel="noopener noreferrer">open the walkthrough</a>.
@@ -1134,8 +1150,8 @@
         <div class="quote-table-wrap" id="quoteTableWrap">
           <h3 class="quote-table-title">Estimated line updates</h3>
           <p class="quote-table-legend" id="quoteHighIncreaseLegend">
-            Rows in <span class="legend-red">red</span> are lines where estimated <strong>line total (new)</strong> is more than
-            <strong>15%</strong> higher than <strong>line total (was)</strong> (same basis as overall % change).
+            Rows in <span class="legend-red">red</span> are lines whose estimated line total changed by more than <strong>15%</strong> from the prior line total.
+            Rows in <span class="legend-yellow">yellow</span> are lines whose change is more than <strong>0%</strong> and less than <strong>15%</strong>.
           </p>
           <table class="data-table quote-detail-table" id="quoteDetailTable">
             <thead>
@@ -1705,6 +1721,7 @@
           }
           var linePctChange = null;
           var lineHighIncrease = false;
+          var lineModerateIncrease = false;
           if (
             origLineTotal != null &&
             Number.isFinite(origLineTotal) &&
@@ -1713,7 +1730,9 @@
             Number.isFinite(newLineTotal)
           ) {
             linePctChange = ((newLineTotal - origLineTotal) / origLineTotal) * 100;
-            lineHighIncrease = linePctChange > 15;
+            var absLinePct = Math.abs(linePctChange);
+            lineHighIncrease = absLinePct > 15;
+            lineModerateIncrease = absLinePct > 0 && absLinePct < 15;
           }
           detailRows.push({
             lineRef: lineRef,
@@ -1734,6 +1753,7 @@
             newLineTotal: newLineTotal,
             linePctChange: linePctChange,
             lineHighIncrease: lineHighIncrease,
+            lineModerateIncrease: lineModerateIncrease,
           });
         }
         var pctTotal = null;
@@ -1770,6 +1790,8 @@
           const tr = document.createElement("tr");
           if (row.lineHighIncrease) {
             tr.classList.add("quote-line-high-increase");
+          } else if (row.lineModerateIncrease) {
+            tr.classList.add("quote-line-moderate-increase");
           }
           const tdLine = document.createElement("td");
           tdLine.textContent = row.lineRef || "—";
