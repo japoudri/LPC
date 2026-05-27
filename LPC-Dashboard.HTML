@@ -1210,7 +1210,7 @@
        *
        * Current value is advanced by +0.1 per edit to this file (see workspace rule).
        */
-      const APP_VERSION_DECIMAL = 6.7;
+      const APP_VERSION_DECIMAL = 6.8;
       const APP_VERSION = "Beta " + APP_VERSION_DECIMAL.toFixed(1);
       const root = document.documentElement;
       const themeSwitch = document.getElementById("themeSwitch");
@@ -1666,6 +1666,53 @@
         return m;
       }
 
+      /** CCW # column prefix before the dot (e.g. "1.0" / "1.2" → "1"). */
+      function parseLineRefPrefix(lineRef) {
+        const m = String(lineRef == null ? "" : lineRef).trim().match(/^(\d+)\./);
+        return m ? m[1] : null;
+      }
+
+      /** Top-level quote line (e.g. "1.0", "2.0"). */
+      function isTopLevelLineRef(lineRef) {
+        return /^(\d+)\.0$/.test(String(lineRef == null ? "" : lineRef).trim());
+      }
+
+      /** Subscription term detail row in Part Number (Requested Start Date …). */
+      function isSubscriptionTermLine(partRaw) {
+        return /^requested\s+start\s+date/i.test(String(partRaw == null ? "" : partRaw).trim());
+      }
+
+      /** Months from "Requested For : 36.00 Months From …". */
+      function parseSubscriptionTermMonths(partRaw) {
+        const s = String(partRaw == null ? "" : partRaw);
+        const m = s.match(/requested\s+for\s*:\s*([\d,.]+)\s*months/i);
+        if (!m) return null;
+        const n = parseFloat(String(m[1]).replace(/,/g, ""));
+        return Number.isFinite(n) && n > 0 ? n : null;
+      }
+
+      /** Map quote group prefix (# before ".") → subscription term months. */
+      function buildSubscriptionTermMap(ccwGrid, headerRow, iPart) {
+        const termMap = new Map();
+        var activePrefix = null;
+        var r;
+        for (r = headerRow + 1; r < ccwGrid.length; r++) {
+          const cells = ccwGrid[r] || [];
+          const lineRef = cells[0] == null ? "" : String(cells[0]).trim();
+          const partRaw = cells[iPart] == null ? "" : String(cells[iPart]).trim();
+          if (lineRef && isTopLevelLineRef(lineRef)) {
+            activePrefix = parseLineRefPrefix(lineRef);
+          }
+          if (partRaw && isSubscriptionTermLine(partRaw) && activePrefix) {
+            const months = parseSubscriptionTermMonths(partRaw);
+            if (months != null) {
+              termMap.set(activePrefix, months);
+            }
+          }
+        }
+        return termMap;
+      }
+
       function computeQuoteCostEstimate(lpcRows, ccwGrid) {
         const headerRow = resolveCcwHeaderRowIndex(ccwGrid);
         const headers = (ccwGrid[headerRow] || []).map(function (h) {
@@ -1682,6 +1729,7 @@
           throw new Error("CCW sheet: could not find Unit List Price column. Check the export column titles.");
         }
         const futureMap = buildFutureGplMapFromLpcRows(lpcRows);
+        const subscriptionTermMap = buildSubscriptionTermMap(ccwGrid, headerRow, iPart);
         var originalTotal = 0;
         var newTotal = 0;
         var matchedLines = 0;
@@ -1691,6 +1739,7 @@
           const cells = ccwGrid[r] || [];
           const partRaw = cells[iPart] == null ? "" : String(cells[iPart]).trim();
           if (!partRaw) continue;
+          if (isSubscriptionTermLine(partRaw)) continue;
           const partKey = normalizePartKeyForMatch(partRaw);
           if (partKey === "part number" || partKey.indexOf("total") === 0 || partKey.indexOf("subtotal") === 0) {
             continue;
@@ -1718,10 +1767,20 @@
             creditsAmt = creditsParsed;
           }
           const lineRef = cells[0] == null ? "" : String(cells[0]).trim();
+          const linePrefix = parseLineRefPrefix(lineRef);
+          var termMonths = 1;
+          if (linePrefix && subscriptionTermMap.has(linePrefix)) {
+            termMonths = subscriptionTermMap.get(linePrefix);
+          }
           const futureGpl = partKey ? futureMap.get(partKey) : null;
           var matched = futureGpl != null && Number.isFinite(futureGpl);
           var newUnitList = matched ? futureGpl : origUnitList;
           var newExtList = newUnitList * qty;
+          if (termMonths !== 1) {
+            origExtList = origExtList * termMonths;
+            newExtList = newExtList * termMonths;
+            creditsAmt = creditsAmt * termMonths;
+          }
           var origDiscDollar = origExtList * discOff;
           var newDiscAmt = newExtList * discOff;
           var origNetBefCredits = origExtList * (1 - discOff);
@@ -1756,6 +1815,7 @@
             lineRef: lineRef,
             partNumber: partRaw,
             qty: qty,
+            termMonths: termMonths !== 1 ? termMonths : null,
             matched: matched,
             origUnitList: origUnitList,
             newUnitList: newUnitList,
@@ -2905,7 +2965,7 @@
             res.headerRowUsed +
             " (1-based). Matched " +
             res.matchedLines +
-            " quote line(s) to a Product ID with a future GPL. Lines with $0 unit list are omitted. Extended list = unit list × Quantity; before credits = extended × (100% − Discount %); line total = before credits − Credits (if a Credits column exists). KPI totals sum line totals (was vs new unit list).";
+            " quote line(s) to a Product ID with a future GPL. Lines with $0 unit list are omitted. Extended list = unit list × Quantity; for subscription groups (Requested Start Date / Requested For … Months), extended list and credits are multiplied by the quoted term months for all # lines sharing the same group prefix. Before credits = extended × (100% − Discount %); line total = before credits − Credits (if a Credits column exists). KPI totals sum line totals (was vs new unit list).";
           renderQuoteDetailTable(res.detailRows || []);
           quoteResultPanel.hidden = false;
           quoteEstimateStatus.textContent = "Estimate complete.";
