@@ -1105,7 +1105,6 @@
         The tool only recognizes US GPL.
         For lines that change in price by more than 15% they will be in red text.
         For lines that change in price by less than 15% they will be in yellow text.
-        Support costs do not appear to be recalculating so keep that in mind when using this.
       </p>
       <div class="quote-uploads">
         <div class="quote-upload-col">
@@ -1210,7 +1209,7 @@
        *
        * Current value is advanced by +0.1 per edit to this file (see workspace rule).
        */
-      const APP_VERSION_DECIMAL = 6.8;
+      const APP_VERSION_DECIMAL = 7.2;
       const APP_VERSION = "Beta " + APP_VERSION_DECIMAL.toFixed(1);
       const root = document.documentElement;
       const themeSwitch = document.getElementById("themeSwitch");
@@ -1252,14 +1251,22 @@
       const FILTER_ALL = "__all__";
       const UNMAPPED = "__unmapped__";
       const PRODUCT_ID_SEARCH_MIN_LEN = 2;
+      const TABLE_RENDER_MAX = 1500;
+      const SEARCH_DEBOUNCE_MS = 200;
+      const XLSX_READ_OPTS = {
+        type: "array",
+        cellDates: false,
+        cellNF: false,
+        cellStyles: false,
+        sheetStubs: false,
+      };
       const RF_PID_ALL = "__rf_pid_all__";
       const RF_PID_EXCLUDE = "__rf_pid_exclude__";
       const RF_PID_ONLY = "__rf_pid_only__";
       const PRODUCT_ID_RF = /rf/i;
 
       function productIdContainsRf(row) {
-        const pid = row.productId == null ? "" : String(row.productId);
-        return PRODUCT_ID_RF.test(pid);
+        return !!row._hasRf;
       }
 
       const PRODUCT_FAMILY_BE_MAP = (function () {
@@ -1275,21 +1282,46 @@
 
       function enrichRows(rows) {
         return rows.map(function (r) {
+          const isService = r.lpcSource === "service";
           const fam = r.currentFamily || "";
-          const m = PRODUCT_FAMILY_BE_MAP[fam];
+          const m = isService ? null : PRODUCT_FAMILY_BE_MAP[fam];
+          const be = isService
+            ? LPC_SERVICE_BE_LABEL
+            : m && m.be != null
+              ? String(m.be).trim()
+              : "";
+          const subBe = isService
+            ? LPC_SERVICE_BE_LABEL
+            : m && m.subBe != null
+              ? String(m.subBe).trim()
+              : "";
+          const pidStr = r.productId == null ? "" : String(r.productId);
+          const usCurrentGpl = r.usCurrentGpl;
+          const usFutureGpl = r.usFutureGpl;
+          var pct = null;
+          if (usCurrentGpl != null && usFutureGpl != null && usCurrentGpl !== 0) {
+            pct = ((usFutureGpl - usCurrentGpl) / usCurrentGpl) * 100;
+          }
           return {
             productId: r.productId,
             currentFamily: fam,
-            usCurrentGpl: r.usCurrentGpl,
-            usFutureGpl: r.usFutureGpl,
-            be: m && m.be != null ? String(m.be).trim() : "",
-            subBe: m && m.subBe != null ? String(m.subBe).trim() : "",
+            usCurrentGpl: usCurrentGpl,
+            usFutureGpl: usFutureGpl,
+            lpcSource: isService ? "service" : "product",
+            be: be,
+            subBe: subBe,
+            beKey: be ? be : UNMAPPED,
+            subBeKey: subBe ? subBe : UNMAPPED,
+            _pidLc: pidStr.toLowerCase(),
+            _pidFoldLc: foldUnicodeDashesToAscii(pidStr).toLowerCase(),
+            _hasRf: PRODUCT_ID_RF.test(pidStr),
+            _pct: pct,
           };
         });
       }
 
       function rowBeKey(r) {
-        return r.be ? r.be : UNMAPPED;
+        return r.beKey != null ? r.beKey : r.be ? r.be : UNMAPPED;
       }
 
       function dashLabel(s) {
@@ -1299,6 +1331,16 @@
       const COL = {
         productId: "Product ID",
         currentFamily: "Current Product Family",
+        usCurrent: "US Current GPL",
+        usFuture: "US Future GPL",
+      };
+
+      const LPC_SHEET_PRODUCTS = "Products";
+      const LPC_SHEET_SERVICES = "Services";
+      const LPC_SERVICE_BE_LABEL = "Services";
+
+      const COL_SVC = {
+        serviceSku: "Service SKU",
         usCurrent: "US Current GPL",
         usFuture: "US Future GPL",
       };
@@ -1354,7 +1396,7 @@
           .replace(/\uff0d/g, "-");
       }
 
-      function buildRowsFromGrid(grid) {
+      function buildProductRowsFromGrid(grid) {
         if (!grid || grid.length < 2) {
           throw new Error("File needs at least a header row and one data row (after any disclaimer).");
         }
@@ -1391,6 +1433,50 @@
             currentFamily: family,
             usCurrentGpl: currentGpl,
             usFutureGpl: futureGpl,
+            lpcSource: "product",
+          });
+        }
+        return rows;
+      }
+
+      function buildServiceRowsFromGrid(grid) {
+        if (!grid || grid.length < 2) {
+          throw new Error(
+            'Services sheet needs at least a header row and one data row (after any disclaimer).'
+          );
+        }
+        const headers = (grid[1] || []).map(function (h) {
+          return String(h == null ? "" : h).trim();
+        });
+
+        function idx(name) {
+          const i = headers.indexOf(name);
+          if (i < 0) throw new Error('Services sheet missing column: "' + name + '"');
+          return i;
+        }
+
+        const iSku = idx(COL_SVC.serviceSku);
+        const iCur = idx(COL_SVC.usCurrent);
+        const iFut = idx(COL_SVC.usFuture);
+
+        const rows = [];
+        for (let r = 2; r < grid.length; r++) {
+          const cells = grid[r] || [];
+          function cell(i) {
+            const v = cells[i];
+            if (v == null || v === "") return "";
+            return String(v).trim();
+          }
+          const serviceSku = cell(iSku);
+          if (!serviceSku) continue;
+          const currentGpl = parseNumber(cells[iCur]);
+          const futureGpl = parseNumber(cells[iFut]);
+          rows.push({
+            productId: serviceSku,
+            currentFamily: "",
+            usCurrentGpl: currentGpl,
+            usFutureGpl: futureGpl,
+            lpcSource: "service",
           });
         }
         return rows;
@@ -1409,24 +1495,102 @@
             return c.replace(/^"|"$/g, "").trim();
           });
         });
-        return buildRowsFromGrid(grid);
+        return buildProductRowsFromGrid(grid);
+      }
+
+      function findWorkbookSheetName(wb, targetName) {
+        const want = String(targetName == null ? "" : targetName)
+          .trim()
+          .toLowerCase();
+        if (!want || !wb.SheetNames) return null;
+        var i;
+        for (i = 0; i < wb.SheetNames.length; i++) {
+          const name = wb.SheetNames[i];
+          if (String(name == null ? "" : name).trim().toLowerCase() === want) {
+            return name;
+          }
+        }
+        return null;
+      }
+
+      function readNamedSheetGrid(wb, sheetName) {
+        const resolved = findWorkbookSheetName(wb, sheetName);
+        if (!resolved) return null;
+        return XLSX.utils.sheet_to_json(wb.Sheets[resolved], {
+          header: 1,
+          defval: "",
+          raw: true,
+        });
+      }
+
+      function formatLpcLoadStatusMessage(rows) {
+        var productCount = 0;
+        var serviceCount = 0;
+        (rows || []).forEach(function (r) {
+          if (r.lpcSource === "service") {
+            serviceCount += 1;
+          } else {
+            productCount += 1;
+          }
+        });
+        if (serviceCount > 0) {
+          return (
+            "Loaded list price file (" +
+            productCount +
+            " product row" +
+            (productCount === 1 ? "" : "s") +
+            ", " +
+            serviceCount +
+            " service row" +
+            (serviceCount === 1 ? "" : "s") +
+            ")."
+          );
+        }
+        return (
+          "Loaded list price file (" +
+          productCount +
+          " product row" +
+          (productCount === 1 ? "" : "s") +
+          ")."
+        );
       }
 
       function parseXLSX(arrayBuffer) {
         if (typeof XLSX === "undefined") {
           throw new Error("Excel library did not load. Check your network and refresh.");
         }
-        const wb = XLSX.read(arrayBuffer, { type: "array" });
+        const wb = XLSX.read(arrayBuffer, XLSX_READ_OPTS);
         if (!wb.SheetNames || !wb.SheetNames.length) {
           throw new Error("Workbook has no sheets.");
         }
-        const sheet = wb.Sheets[wb.SheetNames[0]];
-        const grid = XLSX.utils.sheet_to_json(sheet, {
-          header: 1,
-          defval: "",
-          raw: true,
-        });
-        return buildRowsFromGrid(grid);
+        var allRows = [];
+        var productsGrid = readNamedSheetGrid(wb, LPC_SHEET_PRODUCTS);
+        if (!productsGrid) {
+          const firstName = wb.SheetNames[0];
+          if (
+            firstName &&
+            String(firstName).trim().toLowerCase() !== LPC_SHEET_SERVICES.toLowerCase()
+          ) {
+            productsGrid = XLSX.utils.sheet_to_json(wb.Sheets[firstName], {
+              header: 1,
+              defval: "",
+              raw: true,
+            });
+          }
+        }
+        if (productsGrid) {
+          allRows = allRows.concat(buildProductRowsFromGrid(productsGrid));
+        }
+        const servicesGrid = readNamedSheetGrid(wb, LPC_SHEET_SERVICES);
+        if (servicesGrid) {
+          allRows = allRows.concat(buildServiceRowsFromGrid(servicesGrid));
+        }
+        if (!allRows.length) {
+          throw new Error(
+            'Workbook has no product or service rows. Expected a "Products" sheet (or a first sheet with Product ID columns) and/or a "Services" sheet with Service SKU columns.'
+          );
+        }
+        return allRows;
       }
 
       /** 1-based row 31 in typical CCW “Price Quotation” export (0-based index 30). */
@@ -1436,7 +1600,7 @@
         if (typeof XLSX === "undefined") {
           throw new Error("Excel library did not load. Check your network and refresh.");
         }
-        const wb = XLSX.read(arrayBuffer, { type: "array" });
+        const wb = XLSX.read(arrayBuffer, XLSX_READ_OPTS);
         if (!wb.SheetNames || !wb.SheetNames.length) {
           throw new Error("Workbook has no sheets.");
         }
@@ -2078,11 +2242,13 @@
           if (isExcelFile(file)) {
             const reader = new FileReader();
             reader.onload = function (e) {
-              try {
-                resolve(parseXLSX(e.target.result));
-              } catch (err) {
-                reject(err);
-              }
+              setTimeout(function () {
+                try {
+                  resolve(parseXLSX(e.target.result));
+                } catch (err) {
+                  reject(err);
+                }
+              }, 0);
             };
             reader.onerror = function () {
               reject(new Error("Could not read file."));
@@ -2092,11 +2258,13 @@
           }
           const reader = new FileReader();
           reader.onload = function (e) {
-            try {
-              resolve(parseCSV(e.target.result));
-            } catch (err) {
-              reject(err);
-            }
+            setTimeout(function () {
+              try {
+                resolve(parseCSV(e.target.result));
+              } catch (err) {
+                reject(err);
+              }
+            }, 0);
           };
           reader.onerror = function () {
             reject(new Error("Could not read file."));
@@ -2145,6 +2313,10 @@
 
       let allRows = [];
       let sortState = { key: null, dir: "asc" };
+      let viewRowsCache = null;
+      let viewRowsCacheKey = "";
+      let buildTableScheduled = false;
+      let searchDebounceTimer = null;
       const beFilter = document.getElementById("beFilter");
       const subBeFilter = document.getElementById("subBeFilter");
       const productIdSearchInput = document.getElementById("productIdSearchInput");
@@ -2155,23 +2327,40 @@
       const kpiAvgPctEl = document.getElementById("kpiAvgPct");
       const rfProductIdFilter = document.getElementById("rfProductIdFilter");
 
-      function updateKpiAvgPct() {
+      function invalidateViewRowsCache() {
+        viewRowsCache = null;
+        viewRowsCacheKey = "";
+      }
+
+      function viewRowsCacheSignature() {
+        return [
+          allRows.length,
+          getBeFilterValue(),
+          getSubBeFilterValue(),
+          (productIdSearchInput.value || "").trim(),
+          getRfProductIdFilterValue(),
+          sortState.key || "",
+          sortState.dir,
+        ].join("\u0001");
+      }
+
+      function updateKpiAvgPctFromRows(rows) {
         if (!kpiAvgPctEl) return;
         kpiAvgPctEl.classList.remove("pct-pos", "pct-neg");
-        const rows = filteredRows();
         if (allRows.length === 0 || rows.length === 0) {
           kpiAvgPctEl.textContent = "—";
           return;
         }
         let sum = 0;
         let n = 0;
-        rows.forEach(function (row) {
-          const p = pctChange(row.usCurrentGpl, row.usFutureGpl);
+        var i;
+        for (i = 0; i < rows.length; i++) {
+          const p = rows[i]._pct;
           if (p != null && Number.isFinite(p)) {
             sum += p;
             n += 1;
           }
-        });
+        }
         if (n === 0) {
           kpiAvgPctEl.textContent = "N/A";
           return;
@@ -2180,6 +2369,10 @@
         const sign = avg >= 0 ? "+" : "";
         kpiAvgPctEl.textContent = sign + avg.toFixed(2) + "%";
         kpiAvgPctEl.classList.add(avg >= 0 ? "pct-pos" : "pct-neg");
+      }
+
+      function updateKpiAvgPct() {
+        updateKpiAvgPctFromRows(currentViewRows());
       }
 
       function optionValueExists(selectEl, v) {
@@ -2229,7 +2422,7 @@
           case "usFutureGpl":
             return row.usFutureGpl;
           case "pct":
-            return pctChange(row.usCurrentGpl, row.usFutureGpl);
+            return row._pct != null ? row._pct : pctChange(row.usCurrentGpl, row.usFutureGpl);
           default:
             return "";
         }
@@ -2298,11 +2491,8 @@
 
       function rowMatchesProductIdSearch(row, needles) {
         if (needles == null) return true;
-        const pid = row.productId == null ? "" : String(row.productId);
-        const hayRaw = pid.toLowerCase();
-        if (hayRaw.indexOf(needles.rawLc) !== -1) return true;
-        const hayFold = foldUnicodeDashesToAscii(pid).toLowerCase();
-        return hayFold.indexOf(needles.foldedLc) !== -1;
+        if (row._pidLc.indexOf(needles.rawLc) !== -1) return true;
+        return row._pidFoldLc.indexOf(needles.foldedLc) !== -1;
       }
 
       /** Sub BE choices follow BE only — not product ID search — so typing in the search box never rebuilds this list. */
@@ -2318,41 +2508,32 @@
       }
 
       function filteredRows() {
-        let data = allRows;
         const beVal = getBeFilterValue();
         const subVal = getSubBeFilterValue();
         const pidNeedles = productIdSearchNeedles();
-        if (beVal !== FILTER_ALL) {
-          data = data.filter(function (r) {
-            return rowBeKey(r) === beVal;
-          });
-        }
-        if (subVal !== FILTER_ALL) {
-          data = data.filter(function (r) {
-            const sk = r.subBe ? r.subBe : UNMAPPED;
-            return sk === subVal;
-          });
-        }
-        if (pidNeedles != null) {
-          data = data.filter(function (r) {
-            return rowMatchesProductIdSearch(r, pidNeedles);
-          });
-        }
         const rfPid = getRfProductIdFilterValue();
-        if (rfPid === RF_PID_EXCLUDE) {
-          data = data.filter(function (r) {
-            return !productIdContainsRf(r);
-          });
-        } else if (rfPid === RF_PID_ONLY) {
-          data = data.filter(function (r) {
-            return productIdContainsRf(r);
-          });
+        const out = [];
+        var i;
+        for (i = 0; i < allRows.length; i++) {
+          const r = allRows[i];
+          if (beVal !== FILTER_ALL && r.beKey !== beVal) continue;
+          if (subVal !== FILTER_ALL && r.subBeKey !== subVal) continue;
+          if (pidNeedles != null && !rowMatchesProductIdSearch(r, pidNeedles)) continue;
+          if (rfPid === RF_PID_EXCLUDE && r._hasRf) continue;
+          if (rfPid === RF_PID_ONLY && !r._hasRf) continue;
+          out.push(r);
         }
-        return data;
+        return out;
       }
 
       function currentViewRows() {
-        return applySort(filteredRows());
+        const sig = viewRowsCacheSignature();
+        if (viewRowsCache && viewRowsCacheKey === sig) {
+          return viewRowsCache;
+        }
+        viewRowsCache = applySort(filteredRows());
+        viewRowsCacheKey = sig;
+        return viewRowsCache;
       }
 
       function csvEscapeCell(val) {
@@ -2445,6 +2626,7 @@
         allRows = [];
         quoteLpcRows = null;
         sortState = { key: null, dir: "asc" };
+        invalidateViewRowsCache();
         productIdSearchInput.value = "";
         beFilter.innerHTML = '<option value="' + FILTER_ALL + '">All BE</option>';
         subBeFilter.innerHTML = '<option value="' + FILTER_ALL + '">All Sub BE</option>';
@@ -2470,6 +2652,47 @@
         updateQuoteCalcButtonState();
       }
 
+      function escapeHtml(s) {
+        return String(s == null ? "" : s)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function rowToTableHtml(row) {
+        const p = row._pct;
+        var pctHtml;
+        if (p == null || !Number.isFinite(p)) {
+          pctHtml = "<td class=\"num\">N/A</td>";
+        } else {
+          const sign = p >= 0 ? "+" : "";
+          const cls = p >= 0 ? "pct-pos" : "pct-neg";
+          pctHtml =
+            '<td class="num ' + cls + '">' + sign + p.toFixed(2) + "%</td>";
+        }
+        const trClass = row._hasRf ? ' class="rf-row"' : "";
+        return (
+          "<tr" +
+          trClass +
+          "><td>" +
+          escapeHtml(row.productId) +
+          "</td><td>" +
+          escapeHtml(dashLabel(row.be)) +
+          "</td><td>" +
+          escapeHtml(dashLabel(row.subBe)) +
+          "</td><td>" +
+          escapeHtml(dashLabel(row.currentFamily)) +
+          '</td><td class="num">' +
+          formatMoney(row.usCurrentGpl) +
+          '</td><td class="num">' +
+          formatMoney(row.usFutureGpl) +
+          "</td>" +
+          pctHtml +
+          "</tr>"
+        );
+      }
+
       function buildTable() {
         const data = currentViewRows();
         dataTableBody.innerHTML = "";
@@ -2487,57 +2710,54 @@
         emptyTableHint.hidden = true;
         dataTable.hidden = false;
 
-        data.forEach(function (row) {
-          const tr = document.createElement("tr");
-          if (productIdContainsRf(row)) tr.classList.add("rf-row");
+        const renderCount = Math.min(data.length, TABLE_RENDER_MAX);
+        const htmlParts = new Array(renderCount);
+        var i;
+        for (i = 0; i < renderCount; i++) {
+          htmlParts[i] = rowToTableHtml(data[i]);
+        }
+        dataTableBody.innerHTML = htmlParts.join("");
 
-          const tdId = document.createElement("td");
-          tdId.textContent = row.productId;
-
-          const tdBe = document.createElement("td");
-          tdBe.textContent = dashLabel(row.be);
-
-          const tdSub = document.createElement("td");
-          tdSub.textContent = dashLabel(row.subBe);
-
-          const tdFam = document.createElement("td");
-          tdFam.textContent = dashLabel(row.currentFamily);
-
-          const tdCur = document.createElement("td");
-          tdCur.className = "num";
-          tdCur.textContent = formatMoney(row.usCurrentGpl);
-
-          const tdFut = document.createElement("td");
-          tdFut.className = "num";
-          tdFut.textContent = formatMoney(row.usFutureGpl);
-
-          const tdPct = document.createElement("td");
-          tdPct.className = "num";
-          const p = pctChange(row.usCurrentGpl, row.usFutureGpl);
-          if (p == null) {
-            tdPct.textContent = "N/A";
-          } else {
-            const sign = p >= 0 ? "+" : "";
-            tdPct.textContent = sign + p.toFixed(2) + "%";
-            tdPct.classList.add(p >= 0 ? "pct-pos" : "pct-neg");
-          }
-
-          tr.appendChild(tdId);
-          tr.appendChild(tdBe);
-          tr.appendChild(tdSub);
-          tr.appendChild(tdFam);
-          tr.appendChild(tdCur);
-          tr.appendChild(tdFut);
-          tr.appendChild(tdPct);
-          dataTableBody.appendChild(tr);
-        });
-
-        statusEl.textContent =
-          "Showing " + data.length + " product" + (data.length === 1 ? "" : "s") + filterSummary() + ".";
+        var statusMsg =
+          "Showing " +
+          renderCount +
+          " of " +
+          data.length +
+          " product" +
+          (data.length === 1 ? "" : "s") +
+          filterSummary() +
+          ".";
+        if (data.length > TABLE_RENDER_MAX) {
+          statusMsg +=
+            " Narrow filters to see fewer rows (table display is capped at " +
+            TABLE_RENDER_MAX +
+            ").";
+        }
+        statusEl.textContent = statusMsg;
         statusEl.classList.remove("error");
         updateSortHeaders();
-        updateExportButtonState();
-        updateKpiAvgPct();
+        exportCsvBtn.disabled = data.length === 0;
+        updateKpiAvgPctFromRows(data);
+      }
+
+      function scheduleBuildTable() {
+        if (buildTableScheduled) return;
+        buildTableScheduled = true;
+        requestAnimationFrame(function () {
+          buildTableScheduled = false;
+          buildTable();
+        });
+      }
+
+      function scheduleBuildTableDebounced() {
+        if (searchDebounceTimer != null) {
+          clearTimeout(searchDebounceTimer);
+        }
+        searchDebounceTimer = setTimeout(function () {
+          searchDebounceTimer = null;
+          invalidateViewRowsCache();
+          scheduleBuildTable();
+        }, SEARCH_DEBOUNCE_MS);
       }
 
       function filterSummary() {
@@ -2651,22 +2871,27 @@
         if (rn) rn.textContent = "";
       }
 
-      function onDataLoaded(rows, displayName) {
-        allRows = enrichRows(rows);
-        quoteLpcRows = allRows.length ? allRows : null;
-        sortState = { key: null, dir: "asc" };
-        productIdSearchInput.value = "";
-        refreshFilters();
-        buildTable();
-        var dn = displayName || "";
-        var ll = document.getElementById("landingLpcFileLabel");
-        if (ll) ll.textContent = dn;
-        var ql = document.getElementById("quoteLpcFileLabel");
-        if (ql) ql.textContent = dn;
-        var lp = document.getElementById("listPriceFileLabel");
-        if (lp) lp.textContent = dn;
-        invalidateQuoteCalcOutput();
-        updateQuoteCalcButtonState();
+      function onDataLoaded(rows, displayName, onReady) {
+        statusEl.textContent = "Preparing table…";
+        setTimeout(function () {
+          allRows = enrichRows(rows);
+          quoteLpcRows = allRows.length ? allRows : null;
+          sortState = { key: null, dir: "asc" };
+          invalidateViewRowsCache();
+          productIdSearchInput.value = "";
+          refreshFilters();
+          buildTable();
+          var dn = displayName || "";
+          var ll = document.getElementById("landingLpcFileLabel");
+          if (ll) ll.textContent = dn;
+          var ql = document.getElementById("quoteLpcFileLabel");
+          if (ql) ql.textContent = dn;
+          var lp = document.getElementById("listPriceFileLabel");
+          if (lp) lp.textContent = dn;
+          invalidateQuoteCalcOutput();
+          updateQuoteCalcButtonState();
+          if (typeof onReady === "function") onReady();
+        }, 0);
       }
 
       function isExcelFile(file) {
@@ -2683,36 +2908,14 @@
           clearAllLpcDataAcrossViews();
         }
 
-        if (isExcelFile(file)) {
-          const reader = new FileReader();
-          reader.onload = function (e) {
-            try {
-              const rows = parseXLSX(e.target.result);
-              onDataLoaded(rows, file.name);
-            } catch (err) {
-              onError(err);
-            }
-          };
-          reader.onerror = function () {
-            onError(new Error("Could not read file."));
-          };
-          reader.readAsArrayBuffer(file);
-          return;
-        }
+        statusEl.textContent = "Parsing file…";
+        statusEl.classList.remove("error");
 
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          try {
-            const rows = parseCSV(e.target.result);
+        loadLpcRowsFromFile(file)
+          .then(function (rows) {
             onDataLoaded(rows, file.name);
-          } catch (err) {
-            onError(err);
-          }
-        };
-        reader.onerror = function () {
-          onError(new Error("Could not read file."));
-        };
-        reader.readAsText(file);
+          })
+          .catch(onError);
       }
 
       document.getElementById("fileInput").addEventListener("change", function (e) {
@@ -2738,7 +2941,8 @@
       exportCsvBtn.addEventListener("click", exportCurrentTableCsv);
 
       productIdSearchInput.addEventListener("input", function () {
-        buildTable();
+        invalidateViewRowsCache();
+        scheduleBuildTableDebounced();
       });
 
       document.querySelector("#dataTable thead").addEventListener("click", function (e) {
@@ -2752,16 +2956,24 @@
           sortState.key = key;
           sortState.dir = "asc";
         }
-        buildTable();
+        invalidateViewRowsCache();
+        scheduleBuildTable();
       });
 
       beFilter.addEventListener("change", function () {
         populateSubBeFilter();
-        buildTable();
+        invalidateViewRowsCache();
+        scheduleBuildTable();
       });
-      subBeFilter.addEventListener("change", buildTable);
+      subBeFilter.addEventListener("change", function () {
+        invalidateViewRowsCache();
+        scheduleBuildTable();
+      });
 
-      rfProductIdFilter.addEventListener("change", buildTable);
+      rfProductIdFilter.addEventListener("change", function () {
+        invalidateViewRowsCache();
+        scheduleBuildTable();
+      });
 
       const viewLanding = document.getElementById("viewLanding");
       const viewListPrice = document.getElementById("viewListPrice");
@@ -2855,11 +3067,14 @@
           statusEl.textContent = "Load a file to view list price changes in the table.";
           return;
         }
+        quoteEstimateStatus.textContent = "Parsing file…";
+        statusEl.textContent = "Parsing file…";
+        statusEl.classList.remove("error");
         loadLpcRowsFromFile(f)
           .then(function (rows) {
-            onDataLoaded(rows, f.name);
-            quoteEstimateStatus.textContent =
-              "Loaded list price file (" + quoteLpcRows.length + " product row" + (quoteLpcRows.length === 1 ? "" : "s") + ").";
+            onDataLoaded(rows, f.name, function () {
+              quoteEstimateStatus.textContent = formatLpcLoadStatusMessage(quoteLpcRows);
+            });
           })
           .catch(function (err) {
             clearAllLpcDataAcrossViews();
@@ -2881,12 +3096,14 @@
           statusEl.textContent = "Load a file to view list price changes in the table.";
           return;
         }
+        statusEl.textContent = "Parsing file…";
+        statusEl.classList.remove("error");
         loadLpcRowsFromFile(f)
           .then(function (rows) {
-            onDataLoaded(rows, f.name);
-            statusEl.classList.remove("error");
-            statusEl.textContent =
-              "Loaded list price file (" + quoteLpcRows.length + " product row" + (quoteLpcRows.length === 1 ? "" : "s") + ").";
+            onDataLoaded(rows, f.name, function () {
+              statusEl.classList.remove("error");
+              statusEl.textContent = formatLpcLoadStatusMessage(quoteLpcRows);
+            });
           })
           .catch(function (err) {
             clearAllLpcDataAcrossViews();
